@@ -5,14 +5,14 @@ def readme():
         return f.read()
 
 setup(name='IPFML',
-      version='0.0.1',
+      version='0.0.4',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
-        'Topic :: Image Processing :: Machine Learning',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence'
       ],
       url='https://gogs.univ-littoral.fr/jerome.buisine/IPFML',
       author='Jérôme BUISINE',
