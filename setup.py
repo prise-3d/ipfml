@@ -1,11 +1,11 @@
 from setuptools import setup
 
 def readme():
-    with open('README.md') as f:
+    with open('README.rst') as f:
         return f.read()
 
 setup(name='IPFML',
-      version='0.0.2',
+      version='0.0.4',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[

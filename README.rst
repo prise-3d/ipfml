@@ -9,7 +9,7 @@ How to use ?
 To use, simply do::
 
     >>> from PIL import Image
-    >>> import IPFML as iml
+    >>> import ipfml as iml
     >>> img = Image.open('path/to/image.png')
     >>> s = iml.metrics.get_SVD_s(img)
 
