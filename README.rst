@@ -29,6 +29,16 @@ This project contains modules.
     - get_SVD_U(image): *Transforms PIL Image into SVD and returns only 'U' part*
     - get_SVD_V(image): *Transforms PIL Image into SVD and returns only 'V' part*
 
+    - get_LAB(image): *Transforms PIL Image into LAB*
+    - get_LAB_L(image): *Transforms PIL Image into LAB and returns only 'L' part*
+    - get_LAB_A(image): *Transforms PIL Image into LAB and returns only 'A' part*
+    - get_LAB_B(image): *Transforms PIL Image into LAB and returns only 'B' part*
+
+    - get_XYZ(image): *Transforms PIL Image into XYZ*
+    - get_XYZ_X(image): *Transforms PIL Image into XYZ and returns only 'X' part*
+    - get_XYZ_Y(image): *Transforms PIL Image into XYZ and returns only 'Y' part*
+    - get_XYZ_Z(image): *Transforms PIL Image into XYZ and returns only 'Z' part*
+
 - **ts_model_helper** : *contains helpful function to save or display model information and performance of tensorflow model*
     - save(history, filename): *Function which saves data from neural network model*
     - show(history, filename): *Function which shows data from neural network model*
