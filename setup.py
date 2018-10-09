@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='IPFML',
-      version='0.0.4',
+      version='0.0.5',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[
