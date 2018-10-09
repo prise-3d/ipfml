@@ -24,6 +24,7 @@ setup(name='IPFML',
           'numpy',
           'Pillow',
           'sklearn',
+          'skimage',
           'scipy'
       ],
       zip_safe=False)
