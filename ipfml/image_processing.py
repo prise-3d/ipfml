@@ -1,6 +1,7 @@
 from PIL import Image
 
 import numpy as np
+import ipfml.metrics as metrics
 
 def fig2data(fig):
     """
@@ -30,3 +31,39 @@ def fig2img(fig):
     buf = fig2data(fig)
     w, h, d = buf.shape
     return Image.frombytes("RGB", (w, h), buf.tostring())
+
+def get_LAB_L_SVD(image):
+    """
+    @brief Returns Singular values from LAB L Image information
+    @param fig a matplotlib figure
+    @return a Python Imaging Library (PIL) image : default size (480,640,3)
+    """
+    L = metrics.get_LAB_L(image)
+    return metrics.get_SVD(L)
+
+def get_LAB_L_SVD_s(image):
+    """
+    @brief Returns s (Singular values) SVD from L of LAB Image information
+    @param PIL Image
+    @return vector of singular values
+    """
+    L = metrics.get_LAB_L(image)
+    return metrics.get_SVD_s(L)
+
+def get_LAB_L_SVD_U(image):
+    """
+    @brief Returns U SVD from L of LAB Image information
+    @param PIL Image
+    @return vector of singular values
+    """
+    L = metrics.get_LAB_L(image)
+    return metrics.get_SVD_U(L)
+
+def get_LAB_L_SVD_V(image):
+    """
+    @brief Returns V SVD from L of LAB Image information
+    @param PIL Image
+    @return vector of singular values
+    """
+    L = metrics.get_LAB_L(image)
+    return metrics.get_SVD_V(L)
