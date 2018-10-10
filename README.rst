@@ -9,9 +9,9 @@ How to use ?
 To use, simply do::
 
     >>> from PIL import Image
-    >>> import ipfml as iml
+    >>> from ipfml import image_processing
     >>> img = Image.open('path/to/image.png')
-    >>> s = iml.metrics.get_SVD_s(img)
+    >>> s = image_processing.get_LAB_L_SVD_s(img)
 
 
 Modules
@@ -22,11 +22,14 @@ This project contains modules.
 - **img_processing** : *PIL image processing part*
     - fig2data(fig): *Convert a Matplotlib figure to a 3D numpy array with RGB channels and return it*
     - fig2img(fig): *Convert a Matplotlib figure to a PIL Image in RGB format and return it*
+    - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
+    - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
+    - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*
-    - get_SVD_s(image): *Transforms PIL Image into SVD and returns only 's' part*
     - get_SVD_U(image): *Transforms PIL Image into SVD and returns only 'U' part*
+    - get_SVD_s(image): *Transforms PIL Image into SVD and returns only 's' part*
     - get_SVD_V(image): *Transforms PIL Image into SVD and returns only 'V' part*
 
     - get_LAB(image): *Transforms PIL Image into LAB*
