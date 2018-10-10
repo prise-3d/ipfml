@@ -25,6 +25,7 @@ This project contains modules.
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
+    - divide_in_blocks(image, block_size): Divide image into equal size blocks
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*

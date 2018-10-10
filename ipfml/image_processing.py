@@ -1,7 +1,9 @@
 from PIL import Image
+from matplotlib import cm
 
 import numpy as np
 import ipfml.metrics as metrics
+
 
 def fig2data(fig):
     """
@@ -67,3 +69,56 @@ def get_LAB_L_SVD_V(image):
     """
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_V(L)
+
+def divide_in_blocks(image, block_size):
+    '''
+    @brief Divide image into equal size blocks
+    @param img - PIL Image
+    @param block - tuple (width, height) representing the size of each dimension of the block
+    @return list containing all PIL Image block (in RGB)
+
+    Usage :
+
+    >>> import numpy as np
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> image_values = np.random.randint(255, size=(800, 800, 3))
+    >>> img = Image.fromarray(image_values.astype('uint8'), 'RGB')
+    >>> blocks = divide_in_blocks(img, (20, 20))
+    >>> len(blocks)
+    1600
+    >>> blocks[0].width
+    20
+    >>> blocks[0].height
+    20
+    '''
+
+    blocks = []
+
+    # check size compatibility
+    width, height = block_size
+
+    if(image.width % width != 0):
+        raise "Width size issue, block size not compatible"
+    
+    if(image.height % height != 0):
+        raise "Height size issue, block size not compatible"
+
+    nb_block_width = image.width / width
+    nb_block_height = image.height / height
+
+    image_array = np.array(image)
+
+    for i in range(int(nb_block_width)):
+
+        begin_x = i * width
+
+        for j in range(int(nb_block_height)): 
+
+            begin_y = j * height
+
+            # getting subblock information
+            current_block = image_array[begin_x:(begin_x + width), begin_y:(begin_y + height)]
+            blocks.append(Image.fromarray(current_block.astype('uint8'), 'RGB'))
+
+    return blocks
