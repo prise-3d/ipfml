@@ -8,10 +8,12 @@ How to use ?
 
 To use, simply do::
 
-    >>> from PIL import Image
-    >>> from ipfml import image_processing
-    >>> img = Image.open('path/to/image.png')
-    >>> s = image_processing.get_LAB_L_SVD_s(img)
+```python
+from PIL import Image
+from ipfml import image_processing
+img = Image.open('path/to/image.png')
+s = image_processing.get_LAB_L_SVD_s(img)
+```
 
 
 Modules
@@ -52,6 +54,4 @@ All these modules will be enhanced during development of the project
 How to contribute
 -----------------
 
-This git project uses git-flow_ implementation. You are free to contribute to it.
-
-.. _git-flow : https://danielkummer.github.io/git-flow-cheatsheet/
+This git project uses [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/) implementation. You are free to contribute to it.
