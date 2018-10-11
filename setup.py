@@ -1,11 +1,29 @@
 from setuptools import setup
+import setuptools.command.build_py
 
 def readme():
     with open('README.rst') as f:
         return f.read()
 
+class BuildTestCommand(setuptools.command.build_py.build_py):
+  """Custom build command."""
+
+  def run(self):
+
+    # run tests using doctest
+    import doctest
+    from ipfml import image_processing
+    from ipfml import metrics
+    from ipfml import tf_model_helper
+
+    doctest.testmod(image_processing)
+    doctest.testmod(metrics)
+    doctest.testmod(tf_model_helper)
+
+    setuptools.command.build_py.build_py.run(self)
+
 setup(name='IPFML',
-      version='0.0.6',
+      version='0.0.7',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[
@@ -25,6 +43,9 @@ setup(name='IPFML',
           'Pillow',
           'sklearn',
           'scikit-image',
-          'scipy'
+          'scipy',
       ],
+      cmdclass={
+        'build_py': BuildTestCommand,
+      },
       zip_safe=False)
