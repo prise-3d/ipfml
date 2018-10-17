@@ -144,19 +144,18 @@ def divide_in_blocks(image, block_size):
     blocks = []
     mode = 'RGB'
 
-    # check input type (PIL Image or numpy array)
-    if type(image) is Image:
+    # check input type (PIL Image or numpy array) and convert it if necessary
+    if hasattr(image, 'filename'):
         image_array = np.array(image)
-        image_width = image.width
-        image_height = image.height
     else:
         image_array = image
 
-        if image.ndim != 3:
-            mode = 'L'
-            image_width, image_height = image.shape
-        else:
-            image_width, image_height, _ = image.shape
+    # check dimension of input image
+    if image_array.ndim != 3:
+        mode = 'L'
+        image_width, image_height = image_array.shape
+    else:
+        image_width, image_height, _ = image_array.shape
         
     # check size compatibility
     width, height = block_size

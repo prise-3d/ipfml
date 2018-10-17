@@ -6,7 +6,7 @@ Image Processing For Machine Learning package.
 How to use ?
 ------------
 
-To use, simply do::
+To use, simply do :
 
 ```python
 from PIL import Image
@@ -14,7 +14,6 @@ from ipfml import image_processing
 img = Image.open('path/to/image.png')
 s = image_processing.get_LAB_L_SVD_s(img)
 ```
-
 
 Modules
 -------
@@ -27,7 +26,7 @@ This project contains modules.
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
-    - divide_in_blocks(image, block_size): Divide image into equal size blocks
+    - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*
