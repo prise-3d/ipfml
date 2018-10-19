@@ -27,6 +27,8 @@ This project contains modules.
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
     - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
+    - normalize_arr(arr): *Normalize array values*
+    - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*

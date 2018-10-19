@@ -182,3 +182,51 @@ def divide_in_blocks(image, block_size):
             blocks.append(Image.fromarray(current_block.astype('uint8'), mode))
 
     return blocks
+
+    
+def normalize_arr(arr):
+    '''
+    @brief Normalize data of 1D array shape
+    @param array - array data of 1D shape
+
+    Usage :
+
+    >>> from ipfml import image_processing
+    >>> import numpy as np
+    >>> arr = np.arange(11)
+    >>> arr_normalized = image_processing.normalize_arr(arr)
+    >>> arr_normalized[1]
+    0.1
+    '''
+
+    output_arr = []
+    max_value = max(arr)
+    min_value = min(arr)
+
+    for v in arr:
+         output_arr.append((v - min_value) / (max_value - min_value))
+    
+    return output_arr
+
+
+def normalize_arr_with_range(arr, min, max):
+    '''
+    @brief Normalize data of 1D array shape
+    @param array - array data of 1D shape
+
+    Usage :
+
+    >>> from ipfml import image_processing
+    >>> import numpy as np
+    >>> arr = np.arange(11)
+    >>> arr_normalized = image_processing.normalize_arr_with_range(arr, 0, 20)
+    >>> arr_normalized[1]
+    0.05
+    '''
+    
+    output_arr = []
+
+    for v in arr:
+        output_arr.append((v - min) / (max - min))
+    
+    return output_arr
