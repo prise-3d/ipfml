@@ -23,7 +23,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
     setuptools.command.build_py.build_py.run(self)
 
 setup(name='IPFML',
-      version='0.0.9',
+      version='0.1.0',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[
@@ -44,6 +44,7 @@ setup(name='IPFML',
           'sklearn',
           'scikit-image',
           'scipy',
+          'opencv-python'
       ],
       cmdclass={
         'build_py': BuildTestCommand,

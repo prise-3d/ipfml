@@ -1,8 +1,10 @@
 from PIL import Image
 from matplotlib import cm
 
+from skimage import color
 import numpy as np
 import ipfml.metrics as metrics
+import cv2
 
 
 def fig2data(fig):
@@ -230,3 +232,67 @@ def normalize_arr_with_range(arr, min, max):
         output_arr.append((v - min) / (max - min))
     
     return output_arr
+
+
+def rgb_to_mscn(image):
+    """
+    @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
+    @param 3D RGB image numpy array or PIL RGB image 
+    """
+
+    # check if PIL image or not
+    if hasattr(image, 'filename'):
+        img_arr = np.array(image)
+    else:
+        img_arr = image
+    
+    im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+    #im = cv2.imread(image.filename, 0) # read as gray scale
+    blurred = cv2.GaussianBlur(im, (-3, 3), 1.166) # apply gaussian blur to the image
+    blurred_sq = blurred * blurred 
+    sigma = cv2.GaussianBlur(im * im, (-3, 3), 1.166)  # switch to -3, 3 (7, 7) before..
+    sigma = (sigma - blurred_sq) ** 0.5
+    sigma = sigma + 1.0/255 # to make sure the denominator doesn't give DivideByZero Exception
+    structdis = (im - blurred)/sigma # final MSCN(i, j) image
+
+    return structdis
+
+
+def segment_relation_in_block(block):   
+    """
+    @brief Return betâ value to quantity relation between central segment and surrouding regions into block
+    @param 2D numpy array
+    """
+
+    if block.ndim != 2:
+        raise "Numpy array dimension is incorrect, expected 2."
+
+
+    # getting middle information of numpy array
+    x, y = block.shape
+
+    if y < 4:
+        raise "Block size too small needed at least (x, 4) shape"
+
+    middle = int(y / 2)
+    print(middle)
+
+    # get central segments
+    central_segments = block[:, middle-1:middle+1]
+
+    # getting surrouding parts
+    left_part = block[:, 0:middle-1]
+    right_part = block[:, middle+1:]
+    surrounding_parts = np.concatenate([left_part, right_part])
+
+    std_cen = np.std(np.sort(central_segments.flatten()))
+    std_sur = np.std(np.sort(surrounding_parts.flatten()))
+    std_block = np.std(np.sort(block.flatten()))
+
+    std_q = std_cen / std_sur
+
+    # from article, it says that block if affected with noise if (std_block > 2 * beta)
+    beta = abs(std_q - std_block) / max(std_q, std_block)
+
+    return beta
+
