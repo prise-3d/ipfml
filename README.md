@@ -29,6 +29,7 @@ This project contains modules.
     - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
+    - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*

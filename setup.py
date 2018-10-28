@@ -44,7 +44,8 @@ setup(name='IPFML',
           'sklearn',
           'scikit-image',
           'scipy',
-          'opencv-python'
+          'opencv-python',
+          'scipy'
       ],
       cmdclass={
         'build_py': BuildTestCommand,
