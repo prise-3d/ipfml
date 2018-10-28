@@ -29,18 +29,17 @@ This project contains modules.
     - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
+    - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
 
 - **metrics** : *Metrics computation of PIL image*
     - get_SVD(image): *Transforms PIL Image into SVD*
     - get_SVD_U(image): *Transforms PIL Image into SVD and returns only 'U' part*
     - get_SVD_s(image): *Transforms PIL Image into SVD and returns only 's' part*
     - get_SVD_V(image): *Transforms PIL Image into SVD and returns only 'V' part*
-
     - get_LAB(image): *Transforms PIL Image into LAB*
     - get_LAB_L(image): *Transforms PIL Image into LAB and returns only 'L' part*
     - get_LAB_A(image): *Transforms PIL Image into LAB and returns only 'A' part*
     - get_LAB_B(image): *Transforms PIL Image into LAB and returns only 'B' part*
-
     - get_XYZ(image): *Transforms PIL Image into XYZ*
     - get_XYZ_X(image): *Transforms PIL Image into XYZ and returns only 'X' part*
     - get_XYZ_Y(image): *Transforms PIL Image into XYZ and returns only 'Y' part*

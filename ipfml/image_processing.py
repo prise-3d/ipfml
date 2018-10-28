@@ -1,9 +1,13 @@
 from PIL import Image
 from matplotlib import cm
+import random
 
+from skimage import color
 import numpy as np
 import ipfml.metrics as metrics
+import cv2
 
+from scipy import signal
 
 def fig2data(fig):
     """
@@ -111,12 +115,13 @@ def get_LAB_L_SVD_V(image):
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_V(L)
 
-def divide_in_blocks(image, block_size):
+def divide_in_blocks(image, block_size, pil=True):
     '''
     @brief Divide image into equal size blocks
     @param img - PIL Image or numpy array
     @param block - tuple (width, height) representing the size of each dimension of the block
-    @return list containing all PIL Image block (in RGB)
+    @param pil - kind block type (PIL by default or Numpy array)
+    @return list containing all 2D numpy blocks (in RGB or not)
 
     Usage :
 
@@ -125,7 +130,7 @@ def divide_in_blocks(image, block_size):
     >>> from ipfml import image_processing
     >>> from ipfml import metrics
     >>> image_values = np.random.randint(255, size=(800, 800, 3))
-    >>> blocks = divide_in_blocks(image_values, (20, 20))
+    >>> blocks = divide_img_in_blocks(image_values, (20, 20))
     >>> len(blocks)
     1600
     >>> blocks[0].width
@@ -179,7 +184,11 @@ def divide_in_blocks(image, block_size):
 
             # getting sub block information
             current_block = image_array[begin_x:(begin_x + width), begin_y:(begin_y + height)]
-            blocks.append(Image.fromarray(current_block.astype('uint8'), mode))
+
+            if pil:
+                blocks.append(Image.fromarray(current_block.astype('uint8'), mode))
+            else:
+                blocks.append(current_block)
 
     return blocks
 
@@ -230,3 +239,146 @@ def normalize_arr_with_range(arr, min, max):
         output_arr.append((v - min) / (max - min))
     
     return output_arr
+
+
+# TODO : add test to this method
+def rgb_to_mscn(image):
+    """
+    @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
+    @param 3D RGB image numpy array or PIL RGB image 
+    """
+
+    # check if PIL image or not
+    img_arr = np.array(image)
+
+    # convert rgb image to gray
+    im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+
+    s = 7/6
+    blurred = cv2.GaussianBlur(im, (7, 7), s) # apply gaussian blur to the image
+    blurred_sq = blurred * blurred 
+    sigma = cv2.GaussianBlur(im * im, (7, 7), s)  # switch to -3, 3 (7, 7) before..
+    sigma = abs(sigma - blurred_sq) ** 0.5
+    sigma = sigma + 1.0/255 # to make sure the denominator doesn't give DivideByZero Exception
+    structdis = (im - blurred)/sigma # final MSCN(i, j) image
+
+    return structdis
+
+# TODO : Check this method too...
+def get_random_active_block(blocks, threshold = 0.1):
+    """
+    @brief Find an active block from blocks and return it (randomly way)
+    @param 2D numpy array
+    @param threshold 0.1 by default
+    """
+
+    active_blocks = []
+
+    for id, block in enumerate(blocks):
+
+        arr = np.asarray(block)
+        variance = np.var(arr.flatten())
+
+        if variance >= threshold:
+            active_blocks.append(id)
+
+    r_id = random.choice(active_blocks)
+
+    return np.asarray(blocks[r_id])
+
+
+# TODO : check this method and check how to use active block
+def segment_relation_in_block(block, active_block):   
+    """
+    @brief Return bêta value to quantity relation between central segment and surrouding regions into block
+    @param 2D numpy array
+    """
+
+    if block.ndim != 2:
+        raise "Numpy array dimension is incorrect, expected 2."
+
+
+    # getting middle information of numpy array
+    x, y = block.shape
+
+    if y < 4:
+        raise "Block size too small needed at least (x, 4) shape"
+
+    middle = int(y / 2)
+
+    # get central segments
+    central_segments = block[:, middle-1:middle+1]
+
+    # getting surrouding parts
+    left_part = block[:, 0:middle-1]
+    right_part = block[:, middle+1:]
+    surrounding_parts = np.concatenate([left_part, right_part])
+
+    std_sur = np.std(surrounding_parts.flatten())
+    std_cen = np.std(central_segments.flatten())
+    std_block = np.std(block.flatten())
+
+    print("CEN " + str(std_cen))
+    print("SUR " + str(std_sur))
+    print("BLOCK " + str(std_block))
+
+    std_q = std_cen / std_sur
+
+    # from article, it says that block if affected with noise if (std_block > 2 * beta)
+    beta = abs(std_q - std_block) / max(std_q, std_block)
+
+    return beta
+
+def normalize_2D_arr(arr):
+    """
+    @brief Return array normalize from its min and max values
+    @param 2D numpy array
+    """
+
+    # getting min and max value from 2D array
+    max_value = arr.max(axis=1).max()
+    min_value = arr.min(axis=1).min()
+    
+    # lambda computation to normalize
+    g = lambda x : (x - min_value) / (max_value - min_value)
+    f = np.vectorize(g)
+    
+    return f(arr)
+
+
+### other way to compute MSCN :
+# TODO : Temp code, check to remove or use it
+
+def normalize_kernel(kernel):
+    return kernel / np.sum(kernel)
+
+def gaussian_kernel2d(n, sigma):
+    Y, X = np.indices((n, n)) - int(n/2)
+    gaussian_kernel = 1 / (2 * np.pi * sigma ** 2) * np.exp(-(X ** 2 + Y ** 2) / (2 * sigma ** 2)) 
+    return normalize_kernel(gaussian_kernel)
+
+def local_mean(image, kernel):
+    return signal.convolve2d(image, kernel, 'same')
+
+def local_deviation(image, local_mean, kernel):
+    "Vectorized approximation of local deviation"
+    sigma = image ** 2
+    sigma = signal.convolve2d(sigma, kernel, 'same')
+    return np.sqrt(np.abs(local_mean ** 2 - sigma))
+
+def calculate_mscn_coefficients(image, kernel_size=6, sigma=7/6):
+
+    # check if PIL image or not
+    img_arr = np.array(image)
+
+    #im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+    #im = np.asarray(cv2.imread(image.filename, 0)) # read as gray scale
+    print(img_arr.shape)
+
+    C = 1/255
+    kernel = gaussian_kernel2d(kernel_size, sigma=sigma)
+    local_mean = signal.convolve2d(img_arr, kernel, 'same')
+    local_var = local_deviation(img_arr, local_mean, kernel)
+    
+    return (img_arr - local_mean) / (local_var + C)
+
