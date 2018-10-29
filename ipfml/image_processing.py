@@ -253,7 +253,7 @@ def rgb_to_mscn(image):
 
     # convert rgb image to gray
     im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
-
+    
     s = 7/6
     blurred = cv2.GaussianBlur(im, (7, 7), s) # apply gaussian blur to the image
     blurred_sq = blurred * blurred 
@@ -263,6 +263,18 @@ def rgb_to_mscn(image):
     structdis = (im - blurred)/sigma # final MSCN(i, j) image
 
     return structdis
+
+# TODO : add test to this method...
+def rgb_to_grey_low_bits(image, bind=15):
+    """
+    @brief Convert RGB Image into grey image using only 4 low bits values
+    @param 3D RGB image numpy array or PIL RGB image 
+    """
+
+    img_arr = np.array(image)
+    grey_block = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+    
+    return metrics.get_low_bits_img(grey_block, bind)
 
 # TODO : Check this method too...
 def get_random_active_block(blocks, threshold = 0.1):

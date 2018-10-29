@@ -267,3 +267,15 @@ def get_XYZ_Z(image):
     rgb = io.imread(file_path)
     xyz = color.rgb2xyz(rgb)
     return xyz[:, :, 2]
+
+def get_low_bits_img(image, bind=15):
+    """
+    @brief Returns Image or Numpy array with data information reduced using only low bits
+    @param image to convert
+    @bind optional : bits to keep using & Bitwise operator
+    @return Numpy array with reduced values
+    """
+    
+    img_arr = np.array(image)
+
+    return img_arr & bind
