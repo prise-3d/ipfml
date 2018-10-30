@@ -9,35 +9,6 @@ import cv2
 
 from scipy import signal
 
-def fig2data(fig):
-    """
-    @brief Convert a Matplotlib figure to a 3D numpy array with RGB channels and return it
-    @param fig a matplotlib figure
-    @return a numpy 3D array of RGB values
-    """
-    # draw the renderer
-    fig.canvas.draw()
- 
-    # Get the RGBA buffer from the figure
-    w,h = fig.canvas.get_width_height()
-    buf = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8)
-    buf.shape = (w, h, 3)
- 
-    # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
-    buf = np.roll(buf, 3, axis=2)
-    return buf
-    
-def fig2img(fig):
-    """
-    @brief Convert a Matplotlib figure to a PIL Image in RGB format and return it
-    @param fig a matplotlib figure
-    @return a Python Imaging Library (PIL) image : default size (480,640,3)
-    """
-    # put the figure pixmap into a numpy array
-    buf = fig2data(fig)
-    w, h, d = buf.shape
-    return Image.frombytes("RGB", (w, h), buf.tostring())
-
 def get_LAB_L_SVD(image):
     """
     @brief Returns Singular values from LAB L Image information
@@ -130,7 +101,7 @@ def divide_in_blocks(image, block_size, pil=True):
     >>> from ipfml import image_processing
     >>> from ipfml import metrics
     >>> image_values = np.random.randint(255, size=(800, 800, 3))
-    >>> blocks = divide_img_in_blocks(image_values, (20, 20))
+    >>> blocks = divide_in_blocks(image_values, (20, 20))
     >>> len(blocks)
     1600
     >>> blocks[0].width
@@ -240,12 +211,45 @@ def normalize_arr_with_range(arr, min, max):
     
     return output_arr
 
+def normalize_2D_arr(arr):
+    """
+    @brief Return array normalize from its min and max values
+    @param 2D numpy array
 
-# TODO : add test to this method
+    Usage :
+    
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> img_mscn = image_processing.rgb_to_mscn(img)
+    >>> img_normalized = image_processing.normalize_2D_arr(img_mscn)
+    >>> img_normalized.shape
+    (200, 200)
+    """
+
+    # getting min and max value from 2D array
+    max_value = arr.max(axis=1).max()
+    min_value = arr.min(axis=1).min()
+    
+    # lambda computation to normalize
+    g = lambda x : (x - min_value) / (max_value - min_value)
+    f = np.vectorize(g)
+    
+    return f(arr)
+
 def rgb_to_mscn(image):
     """
     @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
     @param 3D RGB image numpy array or PIL RGB image 
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> img_mscn = image_processing.rgb_to_mscn(img)
+    >>> img_mscn.shape
+    (200, 200)
     """
 
     # check if PIL image or not
@@ -264,11 +268,19 @@ def rgb_to_mscn(image):
 
     return structdis
 
-# TODO : add test to this method...
 def rgb_to_grey_low_bits(image, bind=15):
     """
     @brief Convert RGB Image into grey image using only 4 low bits values
     @param 3D RGB image numpy array or PIL RGB image 
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> low_bits_grey_img = image_processing.rgb_to_grey_low_bits(img)
+    >>> low_bits_grey_img.shape
+    (200, 200)
     """
 
     img_arr = np.array(image)
@@ -340,23 +352,6 @@ def segment_relation_in_block(block, active_block):
     beta = abs(std_q - std_block) / max(std_q, std_block)
 
     return beta
-
-def normalize_2D_arr(arr):
-    """
-    @brief Return array normalize from its min and max values
-    @param 2D numpy array
-    """
-
-    # getting min and max value from 2D array
-    max_value = arr.max(axis=1).max()
-    min_value = arr.min(axis=1).min()
-    
-    # lambda computation to normalize
-    g = lambda x : (x - min_value) / (max_value - min_value)
-    f = np.vectorize(g)
-    
-    return f(arr)
-
 
 ### other way to compute MSCN :
 # TODO : Temp code, check to remove or use it

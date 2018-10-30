@@ -19,18 +19,20 @@ Modules
 
 This project contains modules.
 
-- **img_processing** : *PIL image processing part*
+- **image_processing** : *Image processing module*
     - fig2data(fig): *Convert a Matplotlib figure to a 3D numpy array with RGB channels and return it*
     - fig2img(fig): *Convert a Matplotlib figure to a PIL Image in RGB format and return it*
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
     - divide_in_blocks(image, block_size): Divide image into equal size blocks
+    - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
+    - rgb_to_grey_low_bits(image, bind=15): *Convert RGB Image into grey image using only 4 low bits values by default*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
-    - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
-
-- **metrics** : *Metrics computation of PIL image*
+    - normalize_2D_arr(arr): *Return 2D array normalize from its min and max values*
+    
+- **metrics** : *Metrics computation of PIL or 2D numpy image*
     - get_SVD(image): *Transforms PIL Image into SVD*
     - get_SVD_U(image): *Transforms PIL Image into SVD and returns only 'U' part*
     - get_SVD_s(image): *Transforms PIL Image into SVD and returns only 's' part*
@@ -43,10 +45,7 @@ This project contains modules.
     - get_XYZ_X(image): *Transforms PIL Image into XYZ and returns only 'X' part*
     - get_XYZ_Y(image): *Transforms PIL Image into XYZ and returns only 'Y' part*
     - get_XYZ_Z(image): *Transforms PIL Image into XYZ and returns only 'Z' part*
-
-- **ts_model_helper** : *contains helpful function to save or display model information and performance of tensorflow model*
-    - save(history, filename): *Function which saves data from neural network model*
-    - show(history, filename): *Function which shows data from neural network model*
+    - get_low_bits_img(image, bind=15): *Returns Image or Numpy array with data information reduced using only low bits (by default 4)*
 
 All these modules will be enhanced during development of the project
 

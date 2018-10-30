@@ -14,16 +14,14 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
     import doctest
     from ipfml import image_processing
     from ipfml import metrics
-    from ipfml import tf_model_helper
 
     doctest.testmod(image_processing)
     doctest.testmod(metrics)
-    doctest.testmod(tf_model_helper)
 
     setuptools.command.build_py.build_py.run(self)
 
 setup(name='IPFML',
-      version='0.1.1',
+      version='0.1.2',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[

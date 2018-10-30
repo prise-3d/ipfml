@@ -274,6 +274,15 @@ def get_low_bits_img(image, bind=15):
     @param image to convert
     @bind optional : bits to keep using & Bitwise operator
     @return Numpy array with reduced values
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import metrics
+    >>> img = Image.open('./images/test_img.png')
+    >>> low_bits_img = metrics.get_low_bits_img(img)
+    >>> low_bits_img.shape
+    (200, 200, 3)
     """
     
     img_arr = np.array(image)
