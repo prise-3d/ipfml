@@ -19,7 +19,7 @@ Modules
 
 This project contains modules.
 
-- **img_processing** : *Image processing part*
+- **image_processing** : *Image processing module*
     - fig2data(fig): *Convert a Matplotlib figure to a 3D numpy array with RGB channels and return it*
     - fig2img(fig): *Convert a Matplotlib figure to a PIL Image in RGB format and return it*
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
