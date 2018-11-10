@@ -82,7 +82,7 @@ def get_SVD_U(image):
     >>> img = Image.open('./images/test_img.png')
     >>> U = metrics.get_SVD_U(img)
     >>> U.shape
-    (200, 200)
+    (200, 200, 3)
     """
 
     U, s, V = svd(image, full_matrices=False)
