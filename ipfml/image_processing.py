@@ -120,11 +120,8 @@ def divide_in_blocks(image, block_size, pil=True):
     blocks = []
     mode = 'RGB'
 
-    # check input type (PIL Image or numpy array) and convert it if necessary
-    if hasattr(image, 'filename'):
-        image_array = np.array(image)
-    else:
-        image_array = image
+    # convert in numpy array
+    image_array = np.array(image)
 
     # check dimension of input image
     if image_array.ndim != 3:
@@ -132,13 +129,13 @@ def divide_in_blocks(image, block_size, pil=True):
         image_width, image_height = image_array.shape
     else:
         image_width, image_height, _ = image_array.shape
-        
+
     # check size compatibility
     width, height = block_size
 
     if(image_width % width != 0):
         raise "Width size issue, block size not compatible"
-    
+
     if(image_height % height != 0):
         raise "Height size issue, block size not compatible"
 
@@ -149,7 +146,7 @@ def divide_in_blocks(image, block_size, pil=True):
 
         begin_x = i * width
 
-        for j in range(int(nb_block_height)): 
+        for j in range(int(nb_block_height)):
 
             begin_y = j * height
 
@@ -163,7 +160,7 @@ def divide_in_blocks(image, block_size, pil=True):
 
     return blocks
 
-    
+
 def normalize_arr(arr):
     '''
     @brief Normalize data of 1D array shape
@@ -185,7 +182,7 @@ def normalize_arr(arr):
 
     for v in arr:
          output_arr.append((v - min_value) / (max_value - min_value))
-    
+
     return output_arr
 
 
@@ -203,12 +200,12 @@ def normalize_arr_with_range(arr, min, max):
     >>> arr_normalized[1]
     0.05
     '''
-    
+
     output_arr = []
 
     for v in arr:
         output_arr.append((v - min) / (max - min))
-    
+
     return output_arr
 
 def normalize_2D_arr(arr):
@@ -217,7 +214,7 @@ def normalize_2D_arr(arr):
     @param 2D numpy array
 
     Usage :
-    
+
     >>> from PIL import Image
     >>> from ipfml import image_processing
     >>> img = Image.open('./images/test_img.png')
@@ -230,17 +227,17 @@ def normalize_2D_arr(arr):
     # getting min and max value from 2D array
     max_value = arr.max(axis=1).max()
     min_value = arr.min(axis=1).min()
-    
+
     # lambda computation to normalize
     g = lambda x : (x - min_value) / (max_value - min_value)
     f = np.vectorize(g)
-    
+
     return f(arr)
 
 def rgb_to_mscn(image):
     """
     @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
-    @param 3D RGB image numpy array or PIL RGB image 
+    @param 3D RGB image numpy array or PIL RGB image
 
     Usage :
 
@@ -257,21 +254,13 @@ def rgb_to_mscn(image):
 
     # convert rgb image to gray
     im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
-    
-    s = 7/6
-    blurred = cv2.GaussianBlur(im, (7, 7), s) # apply gaussian blur to the image
-    blurred_sq = blurred * blurred 
-    sigma = cv2.GaussianBlur(im * im, (7, 7), s)  # switch to -3, 3 (7, 7) before..
-    sigma = abs(sigma - blurred_sq) ** 0.5
-    sigma = sigma + 1.0/255 # to make sure the denominator doesn't give DivideByZero Exception
-    structdis = (im - blurred)/sigma # final MSCN(i, j) image
 
-    return structdis
+    return metrics.gray_to_mscn(im)
 
 def rgb_to_grey_low_bits(image, bind=15):
     """
     @brief Convert RGB Image into grey image using only 4 low bits values
-    @param 3D RGB image numpy array or PIL RGB image 
+    @param 3D RGB image numpy array or PIL RGB image
 
     Usage :
 
@@ -285,8 +274,28 @@ def rgb_to_grey_low_bits(image, bind=15):
 
     img_arr = np.array(image)
     grey_block = np.array(color.rgb2gray(img_arr)*255, 'uint8')
-    
+
     return metrics.get_low_bits_img(grey_block, bind)
+
+def rgb_to_LAB_L_low_bits(image, bind=15):
+    """
+    @brief Convert RGB Image into Lab L channel image using only 4 low bits values
+    @param 3D RGB image numpy array or PIL RGB image
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> low_bits_Lab_l_img = image_processing.rgb_to_Lab_L_low_bits(img)
+    >>> low_bits_Lab_l_img.shape
+    (200, 200)
+    """
+
+    L_block = np.asarray(metrics.get_LAB_L(image), 'uint8')
+
+    return metrics.get_low_bits_img(L_block, bind)
+
 
 # TODO : Check this method too...
 def get_random_active_block(blocks, threshold = 0.1):
@@ -312,7 +321,7 @@ def get_random_active_block(blocks, threshold = 0.1):
 
 
 # TODO : check this method and check how to use active block
-def segment_relation_in_block(block, active_block):   
+def segment_relation_in_block(block, active_block):
     """
     @brief Return bêta value to quantity relation between central segment and surrouding regions into block
     @param 2D numpy array
@@ -342,10 +351,6 @@ def segment_relation_in_block(block, active_block):
     std_cen = np.std(central_segments.flatten())
     std_block = np.std(block.flatten())
 
-    print("CEN " + str(std_cen))
-    print("SUR " + str(std_sur))
-    print("BLOCK " + str(std_block))
-
     std_q = std_cen / std_sur
 
     # from article, it says that block if affected with noise if (std_block > 2 * beta)
@@ -361,7 +366,7 @@ def normalize_kernel(kernel):
 
 def gaussian_kernel2d(n, sigma):
     Y, X = np.indices((n, n)) - int(n/2)
-    gaussian_kernel = 1 / (2 * np.pi * sigma ** 2) * np.exp(-(X ** 2 + Y ** 2) / (2 * sigma ** 2)) 
+    gaussian_kernel = 1 / (2 * np.pi * sigma ** 2) * np.exp(-(X ** 2 + Y ** 2) / (2 * sigma ** 2))
     return normalize_kernel(gaussian_kernel)
 
 def local_mean(image, kernel):
@@ -378,14 +383,10 @@ def calculate_mscn_coefficients(image, kernel_size=6, sigma=7/6):
     # check if PIL image or not
     img_arr = np.array(image)
 
-    #im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
-    #im = np.asarray(cv2.imread(image.filename, 0)) # read as gray scale
-    print(img_arr.shape)
-
     C = 1/255
     kernel = gaussian_kernel2d(kernel_size, sigma=sigma)
     local_mean = signal.convolve2d(img_arr, kernel, 'same')
     local_var = local_deviation(img_arr, local_mean, kernel)
-    
+
     return (img_arr - local_mean) / (local_var + C)
 

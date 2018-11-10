@@ -7,6 +7,8 @@ import numpy as np
 from sklearn import preprocessing
 from skimage import io, color
 
+import cv2
+
 def get_image_path(image):
     """
     @brief Returns file path of PIL Image
@@ -20,11 +22,11 @@ def get_image_path(image):
     >>> 'images/test_img.png' in path
     True
     """
-    
+
     if hasattr(image, 'filename'):
         file_path = image.filename
     else:
-        raise Exception("Image provided is not correct, required filename property...")    
+        raise Exception("Image provided is not correct, required filename property...")
 
     return file_path
 
@@ -33,8 +35,8 @@ def get_SVD(image):
     @brief Transforms Image into SVD
     @param image to convert
     @return U, s, V image decomposition
-    
-    Usage : 
+
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -55,7 +57,7 @@ def get_SVD_s(image):
     @param image to convert
     @return s
 
-    Usage : 
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -78,9 +80,9 @@ def get_SVD_U(image):
     >>> from PIL import Image
     >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
-    >>> Lab = metrics.get_LAB(img)
-    >>> Lab.shape
-    (200, 200, 3)
+    >>> U = metrics.get_SVD_U(img)
+    >>> U.shape
+    (200, 200)
     """
 
     U, s, V = svd(image, full_matrices=False)
@@ -91,8 +93,8 @@ def get_SVD_V(image):
     @brief Transforms Image into SVD and returns only 'V' part
     @param image to convert
     @return V
-    
-    Usage : 
+
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -107,11 +109,11 @@ def get_SVD_V(image):
 
 def get_LAB(image):
     """
-    @brief Transforms PIL RGB Image into LAB 
+    @brief Transforms PIL RGB Image into LAB
     @param image to convert
     @return Lab information
 
-    Usage : 
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -121,16 +123,14 @@ def get_LAB(image):
     (200, 200, 3)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    return color.rgb2lab(rgb)
+    return color.rgb2lab(image)
 
 def get_LAB_L(image):
     """
     @brief Transforms PIL RGB Image into LAB and returns L
     @param image to convert
     @return Lab information
-    
+
     >>> from PIL import Image
     >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
@@ -138,10 +138,8 @@ def get_LAB_L(image):
     >>> L.shape
     (200, 200)
     """
-    
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    lab = color.rgb2lab(rgb)
+
+    lab = get_LAB(image)
     return lab[:, :, 0]
 
 def get_LAB_A(image):
@@ -149,8 +147,8 @@ def get_LAB_A(image):
     @brief Transforms PIL RGB Image into LAB and returns A
     @param image to convert
     @return Lab information
-    
-    Usage : 
+
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -160,9 +158,7 @@ def get_LAB_A(image):
     (200, 200)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    lab = color.rgb2lab(rgb)
+    lab = get_LAB(image)
     return lab[:, :, 1]
 
 def get_LAB_B(image):
@@ -170,8 +166,8 @@ def get_LAB_B(image):
     @brief Transforms PIL RGB Image into LAB and returns B
     @param image to convert
     @return Lab information
-    
-    Usage : 
+
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -180,10 +176,8 @@ def get_LAB_B(image):
     >>> B.shape
     (200, 200)
     """
-   
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    lab = color.rgb2lab(rgb)
+
+    lab = get_LAB(image)
     return lab[:, :, 2]
 
 def get_XYZ(image):
@@ -191,8 +185,8 @@ def get_XYZ(image):
     @brief Transforms PIL RGB Image into XYZ
     @param image to convert
     @return Lab information
-    
-    Usage : 
+
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -201,9 +195,7 @@ def get_XYZ(image):
     (200, 200, 3)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    return color.rgb2xyz(rgb)
+    return color.rgb2xyz(image)
 
 def get_XYZ_X(image):
     """
@@ -211,7 +203,7 @@ def get_XYZ_X(image):
     @param image to convert
     @return Lab information
 
-    Usage : 
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -221,9 +213,7 @@ def get_XYZ_X(image):
     (200, 200)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    xyz = color.rgb2xyz(rgb)
+    xyz = color.rgb2xyz(image)
     return xyz[:, :, 0]
 
 def get_XYZ_Y(image):
@@ -242,9 +232,7 @@ def get_XYZ_Y(image):
     (200, 200)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    xyz = color.rgb2xyz(rgb)
+    xyz = color.rgb2xyz(image)
     return xyz[:, :, 1]
 
 def get_XYZ_Z(image):
@@ -253,7 +241,7 @@ def get_XYZ_Z(image):
     @param image to convert
     @return Lab information
 
-    Usage : 
+    Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -263,9 +251,7 @@ def get_XYZ_Z(image):
     (200, 200)
     """
 
-    file_path = get_image_path(image)
-    rgb = io.imread(file_path)
-    xyz = color.rgb2xyz(rgb)
+    xyz = color.rgb2xyz(image)
     return xyz[:, :, 2]
 
 def get_low_bits_img(image, bind=15):
@@ -284,7 +270,33 @@ def get_low_bits_img(image, bind=15):
     >>> low_bits_img.shape
     (200, 200, 3)
     """
-    
+
     img_arr = np.array(image)
 
     return img_arr & bind
+
+
+def gray_to_mscn(image):
+    """
+    @brief Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)
+    @param grayscale image numpy array or PIL RGB image
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> img_mscn = image_processing.rgb_to_mscn(img)
+    >>> img_mscn.shape
+    (200, 200)
+    """
+
+    s = 7/6
+    blurred = cv2.GaussianBlur(image, (7, 7), s) # apply gaussian blur to the image
+    blurred_sq = blurred * blurred
+    sigma = cv2.GaussianBlur(image * image, (7, 7), s)
+    sigma = abs(sigma - blurred_sq) ** 0.5
+    sigma = sigma + 1.0/255 # avoid DivideByZero Exception
+    mscn = (image - blurred)/sigma # MSCN(i, j) image
+
+    return mscn
