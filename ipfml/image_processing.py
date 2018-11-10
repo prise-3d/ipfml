@@ -287,7 +287,7 @@ def rgb_to_LAB_L_low_bits(image, bind=15):
     >>> from PIL import Image
     >>> from ipfml import image_processing
     >>> img = Image.open('./images/test_img.png')
-    >>> low_bits_Lab_l_img = image_processing.rgb_to_Lab_L_low_bits(img)
+    >>> low_bits_Lab_l_img = image_processing.rgb_to_LAB_L_low_bits(img)
     >>> low_bits_Lab_l_img.shape
     (200, 200)
     """
