@@ -296,6 +296,24 @@ def rgb_to_LAB_L_low_bits(image, bind=15):
 
     return metrics.get_low_bits_img(L_block, bind)
 
+def rgb_to_LAB_L_bits(image, interval):
+    """
+    @brief Returns only bits from LAB L canal specified into the interval
+    @param image to convert using this interval of bits value to keep
+    @param interval (begin, end) of bits values
+    @return Numpy array with reduced values
+
+    >>> from PIL import Image
+    >>> from ipfml import image_processing
+    >>> img = Image.open('./images/test_img.png')
+    >>> bits_Lab_l_img = image_processing.rgb_to_LAB_L_bits(img)
+    >>> bits_Lab_l_img.shape
+    (200, 200)
+    """
+
+    L_block = np.asarray(metrics.get_LAB_L(image), 'uint8')
+
+    return metrics.get_bits_img(L_block, interval)
 
 # TODO : Check this method too...
 def get_random_active_block(blocks, threshold = 0.1):

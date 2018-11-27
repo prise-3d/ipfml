@@ -275,6 +275,30 @@ def get_low_bits_img(image, bind=15):
 
     return img_arr & bind
 
+def get_bits_img(image, interval):
+    """
+    @brief Returns only bits specified into the interval
+    @param image to convert using this interval of bits value to keep
+    @param interval (begin, end) of bits values
+    @return Numpy array with reduced values
+
+    Usage :
+
+    >>> from PIL import Image
+    >>> from ipfml import metrics
+    >>> img = Image.open('./images/test_img.png')
+    >>> bits_img = metrics.get_bits_img(img, (2, 5))
+    >>> bits_img.shape
+    (200, 200, 3)
+    """
+
+    img_arr = np.array(image)
+    begin, end = interval
+
+    bits_values = sum([pow(2, i - 1) for i in range(begin, end + 1)])
+
+    return img_arr & bits_values
+
 
 def gray_to_mscn(image):
     """
