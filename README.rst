@@ -20,8 +20,6 @@ Modules
 This project contains modules.
 
 - **image_processing** : *Image processing module*
-    - fig2data(fig): *Convert a Matplotlib figure to a 3D numpy array with RGB channels and return it*
-    - fig2img(fig): *Convert a Matplotlib figure to a PIL Image in RGB format and return it*
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
@@ -29,6 +27,7 @@ This project contains modules.
     - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
     - rgb_to_grey_low_bits(image, bind=15): *Convert RGB Image into grey image using only 4 low bits values by default*
     - rgb_to_LAB_L_low_bits(image, bind=15): *Convert RGB Image into LAB L channel image using only 4 low bits values by default*
+    - rgb_to_LAB_L_bits(image, interval): *Convert RGB Image into LAB L channel image using specific interval of bits to keep (2, 5) such as example*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
     - normalize_2D_arr(arr): *Return 2D array normalize from its min and max values*

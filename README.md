@@ -28,6 +28,7 @@ This project contains modules.
     - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
     - rgb_to_grey_low_bits(image, bind=15): *Convert RGB Image into grey image using only 4 low bits values by default*
     - rgb_to_LAB_L_low_bits(image, bind=15): *Convert RGB Image into LAB L channel image using only 4 low bits values by default*
+    - rgb_to_LAB_L_bits(image, interval): *Convert RGB Image into LAB L channel image using specific interval of bits to keep (2, 5) such as example*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
     - normalize_2D_arr(arr): *Return 2D array normalize from its min and max values*

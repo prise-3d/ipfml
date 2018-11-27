@@ -21,7 +21,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
     setuptools.command.build_py.build_py.run(self)
 
 setup(name='IPFML',
-      version='0.1.4',
+      version='0.1.5',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[
