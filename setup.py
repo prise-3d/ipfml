@@ -12,16 +12,18 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
     # run tests using doctest
     import doctest
-    from ipfml import image_processing
+    from ipfml import processing
     from ipfml import metrics
+    from ipfml import filters
 
-    doctest.testmod(image_processing)
+    doctest.testmod(processing)
     doctest.testmod(metrics)
+    doctest.testmod(filters)
 
     setuptools.command.build_py.build_py.run(self)
 
 setup(name='IPFML',
-      version='0.1.5',
+      version='0.1.6',
       description='Image Processing For Machine Learning',
       long_description=readme(),
       classifiers=[

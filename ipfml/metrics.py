@@ -9,32 +9,11 @@ from skimage import io, color
 
 import cv2
 
-def get_image_path(image):
-    """
-    @brief Returns file path of PIL Image
-    @param PIL Image
-    @return image path
-
-    >>> from PIL import Image
-    >>> from ipfml import metrics
-    >>> img = Image.open('./images/test_img.png')
-    >>> path = metrics.get_image_path(img)
-    >>> 'images/test_img.png' in path
-    True
-    """
-
-    if hasattr(image, 'filename'):
-        file_path = image.filename
-    else:
-        raise Exception("Image provided is not correct, required filename property...")
-
-    return file_path
-
 def get_SVD(image):
     """
     @brief Transforms Image into SVD
     @param image to convert
-    @return U, s, V image decomposition
+    @return U, s, V obtained from SVD compression
 
     Usage :
 
@@ -54,8 +33,8 @@ def get_SVD(image):
 def get_SVD_s(image):
     """
     @brief Transforms Image into SVD and returns only 's' part
-    @param image to convert
-    @return s
+    @param image - image to convert
+    @return s obtained from SVD compression
 
     Usage :
 
@@ -72,8 +51,8 @@ def get_SVD_s(image):
 def get_SVD_U(image):
     """
     @brief Transforms Image into SVD and returns only 'U' part
-    @param image to convert
-    @return U
+    @param image - image to convert
+    @return U matrix from SVD compression
 
     Usage :
 
@@ -91,8 +70,8 @@ def get_SVD_U(image):
 def get_SVD_V(image):
     """
     @brief Transforms Image into SVD and returns only 'V' part
-    @param image to convert
-    @return V
+    @param image - image to convert
+    @return V matrix obtained from SVD compression
 
     Usage :
 
@@ -109,8 +88,8 @@ def get_SVD_V(image):
 
 def get_LAB(image):
     """
-    @brief Transforms PIL RGB Image into LAB
-    @param image to convert
+    @brief Transforms RGB  Image into Lab
+    @param image - image to convert
     @return Lab information
 
     Usage :
@@ -127,9 +106,9 @@ def get_LAB(image):
 
 def get_LAB_L(image):
     """
-    @brief Transforms PIL RGB Image into LAB and returns L
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into Lab and returns L
+    @param image - image to convert
+    @return L chanel from Lab information
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -142,38 +121,38 @@ def get_LAB_L(image):
     lab = get_LAB(image)
     return lab[:, :, 0]
 
-def get_LAB_A(image):
+def get_LAB_a(image):
     """
-    @brief Transforms PIL RGB Image into LAB and returns A
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into LAB and returns a
+    @param image - image to convert
+    @return a chanel from Lab information
 
     Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
-    >>> A = metrics.get_LAB_A(img)
-    >>> A.shape
+    >>> a = metrics.get_LAB_a(img)
+    >>> a.shape
     (200, 200)
     """
 
     lab = get_LAB(image)
     return lab[:, :, 1]
 
-def get_LAB_B(image):
+def get_LAB_b(image):
     """
-    @brief Transforms PIL RGB Image into LAB and returns B
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into LAB and returns b
+    @param image - image to convert
+    @return b chanel from Lab information
 
     Usage :
 
     >>> from PIL import Image
     >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
-    >>> B = metrics.get_LAB_B(img)
-    >>> B.shape
+    >>> b = metrics.get_LAB_b(img)
+    >>> b.shape
     (200, 200)
     """
 
@@ -182,9 +161,9 @@ def get_LAB_B(image):
 
 def get_XYZ(image):
     """
-    @brief Transforms PIL RGB Image into XYZ
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into XYZ
+    @param image - image to convert
+    @return XYZ information obtained from transformation
 
     Usage :
 
@@ -199,9 +178,9 @@ def get_XYZ(image):
 
 def get_XYZ_X(image):
     """
-    @brief Transforms PIL RGB Image into XYZ and returns X
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into XYZ and returns X
+    @param image - image to convert
+    @return X chanel from XYZ information
 
     Usage :
 
@@ -218,9 +197,9 @@ def get_XYZ_X(image):
 
 def get_XYZ_Y(image):
     """
-    @brief Transforms PIL RGB Image into XYZ and returns Y
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into XYZ and returns Y
+    @param image - image to convert
+    @return Y chanel from XYZ information
 
     Usage :
 
@@ -237,9 +216,9 @@ def get_XYZ_Y(image):
 
 def get_XYZ_Z(image):
     """
-    @brief Transforms PIL RGB Image into XYZ and returns Z
-    @param image to convert
-    @return Lab information
+    @brief Transforms RGB Image into XYZ and returns Z
+    @param image - image to convert
+    @return Z chanel from XYZ information
 
     Usage :
 
@@ -254,11 +233,11 @@ def get_XYZ_Z(image):
     xyz = color.rgb2xyz(image)
     return xyz[:, :, 2]
 
-def get_low_bits_img(image, bind=15):
+def get_low_bits_img(image, nb_bits=4):
     """
     @brief Returns Image or Numpy array with data information reduced using only low bits
-    @param image to convert
-    @bind optional : bits to keep using & Bitwise operator
+    @param image, image to convert
+    @param nb_bits, optional parameter which indicates the number of bits to keep
     @return Numpy array with reduced values
 
     Usage :
@@ -266,14 +245,22 @@ def get_low_bits_img(image, bind=15):
     >>> from PIL import Image
     >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
-    >>> low_bits_img = metrics.get_low_bits_img(img)
+    >>> low_bits_img = metrics.get_low_bits_img(img, 5)
     >>> low_bits_img.shape
     (200, 200, 3)
     """
 
+    if nb_bits <= 0:
+        raise ValueError("unexpected value of number of bits to keep. @nb_bits needs to be positive and greater than 0.")
+
+    if nb_bits > 8:
+        raise ValueError("Unexpected value of number of bits to keep. @nb_bits needs to be in interval [1, 8].")
+
     img_arr = np.array(image)
 
-    return img_arr & bind
+    bits_values = sum([pow(2, i - 1) for i in range(1, nb_bits + 1)])
+
+    return img_arr & bits_values
 
 def get_bits_img(image, interval):
     """
@@ -295,6 +282,15 @@ def get_bits_img(image, interval):
     img_arr = np.array(image)
     begin, end = interval
 
+    if begin < 1:
+        raise ValueError("Unexpected value of interval. Minimum value of interval needs to be >= 1.")
+
+    if end > 8:
+        raise ValueError("Unexpected value of interval. Maximum value of interval needs to be <= 8.")
+
+    if begin >= end:
+        raise ValueError("Unexpected interval values order.")
+
     bits_values = sum([pow(2, i - 1) for i in range(begin, end + 1)])
 
     return img_arr & bits_values
@@ -303,14 +299,15 @@ def get_bits_img(image, interval):
 def gray_to_mscn(image):
     """
     @brief Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)
-    @param grayscale image numpy array or PIL RGB image
+    @param image - grayscale image
+    @returns MSCN matrix obtained from transformation
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> img_mscn = image_processing.rgb_to_mscn(img)
+    >>> img_mscn = processing.rgb_to_mscn(img)
     >>> img_mscn.shape
     (200, 200)
     """

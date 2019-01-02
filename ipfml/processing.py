@@ -12,15 +12,15 @@ from scipy import signal
 def get_LAB_L_SVD(image):
     """
     @brief Returns Singular values from LAB L Image information
-    @param fig a matplotlib figure
-    @return a Python Imaging Library (PIL) image : default size (480,640,3)
+    @param image - PIL Image or Numpy array
+    @return U, s, V information obtained from SVD compression using Lab
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> U, s, V = image_processing.get_LAB_L_SVD(img)
+    >>> U, s, V = processing.get_LAB_L_SVD(img)
     >>> U.shape
     (200, 200)
     >>> len(s)
@@ -34,33 +34,34 @@ def get_LAB_L_SVD(image):
 def get_LAB_L_SVD_s(image):
     """
     @brief Returns s (Singular values) SVD from L of LAB Image information
-    @param PIL Image
+    @param image - PIL Image or numpy array
     @return vector of singular values
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> s = image_processing.get_LAB_L_SVD_s(img)
+    >>> s = processing.get_LAB_L_SVD_s(img)
     >>> len(s)
     200
     """
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_s(L)
 
+
 def get_LAB_L_SVD_U(image):
     """
     @brief Returns U SVD from L of LAB Image information
-    @param PIL Image
-    @return vector of singular values
+    @param image - PIL Image
+    @return U matrix of SVD compression
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> U = image_processing.get_LAB_L_SVD_U(img)
+    >>> U = processing.get_LAB_L_SVD_U(img)
     >>> U.shape
     (200, 200)
     """
@@ -70,15 +71,15 @@ def get_LAB_L_SVD_U(image):
 def get_LAB_L_SVD_V(image):
     """
     @brief Returns V SVD from L of LAB Image information
-    @param PIL Image
-    @return vector of singular values
+    @param image - PIL Image or numpy array
+    @return V matrix of SVD compression
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> V = image_processing.get_LAB_L_SVD_V(img)
+    >>> V = processing.get_LAB_L_SVD_V(img)
     >>> V.shape
     (200, 200)
     """
@@ -86,10 +87,11 @@ def get_LAB_L_SVD_V(image):
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_V(L)
 
+
 def divide_in_blocks(image, block_size, pil=True):
     '''
     @brief Divide image into equal size blocks
-    @param img - PIL Image or numpy array
+    @param image - PIL Image or numpy array
     @param block - tuple (width, height) representing the size of each dimension of the block
     @param pil - kind block type (PIL by default or Numpy array)
     @return list containing all 2D numpy blocks (in RGB or not)
@@ -98,7 +100,7 @@ def divide_in_blocks(image, block_size, pil=True):
 
     >>> import numpy as np
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> from ipfml import metrics
     >>> image_values = np.random.randint(255, size=(800, 800, 3))
     >>> blocks = divide_in_blocks(image_values, (20, 20))
@@ -164,14 +166,15 @@ def divide_in_blocks(image, block_size, pil=True):
 def normalize_arr(arr):
     '''
     @brief Normalize data of 1D array shape
-    @param array - array data of 1D shape
+    @param arr - array data of 1D shape
+    @return Normalized 1D array
 
     Usage :
 
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> import numpy as np
     >>> arr = np.arange(11)
-    >>> arr_normalized = image_processing.normalize_arr(arr)
+    >>> arr_normalized = processing.normalize_arr(arr)
     >>> arr_normalized[1]
     0.1
     '''
@@ -189,14 +192,14 @@ def normalize_arr(arr):
 def normalize_arr_with_range(arr, min, max):
     '''
     @brief Normalize data of 1D array shape
-    @param array - array data of 1D shape
+    @param arr - array data of 1D shape
 
     Usage :
 
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> import numpy as np
     >>> arr = np.arange(11)
-    >>> arr_normalized = image_processing.normalize_arr_with_range(arr, 0, 20)
+    >>> arr_normalized = processing.normalize_arr_with_range(arr, 0, 20)
     >>> arr_normalized[1]
     0.05
     '''
@@ -208,18 +211,20 @@ def normalize_arr_with_range(arr, min, max):
 
     return output_arr
 
+
 def normalize_2D_arr(arr):
     """
     @brief Return array normalize from its min and max values
-    @param 2D numpy array
+    @param arr - 2D numpy array
+    @return normalized 2D array
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> img_mscn = image_processing.rgb_to_mscn(img)
-    >>> img_normalized = image_processing.normalize_2D_arr(img_mscn)
+    >>> img_mscn = processing.rgb_to_mscn(img)
+    >>> img_normalized = processing.normalize_2D_arr(img_mscn)
     >>> img_normalized.shape
     (200, 200)
     """
@@ -234,6 +239,7 @@ def normalize_2D_arr(arr):
 
     return f(arr)
 
+
 def rgb_to_mscn(image):
     """
     @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
@@ -242,9 +248,9 @@ def rgb_to_mscn(image):
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> img_mscn = image_processing.rgb_to_mscn(img)
+    >>> img_mscn = processing.rgb_to_mscn(img)
     >>> img_mscn.shape
     (200, 200)
     """
@@ -257,17 +263,19 @@ def rgb_to_mscn(image):
 
     return metrics.gray_to_mscn(im)
 
-def rgb_to_grey_low_bits(image, bind=15):
+
+def rgb_to_grey_low_bits(image, nb_bits=4):
     """
     @brief Convert RGB Image into grey image using only 4 low bits values
     @param 3D RGB image numpy array or PIL RGB image
+    @param nb_bits, optional parameter which indicates the number of bits to keep
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> low_bits_grey_img = image_processing.rgb_to_grey_low_bits(img)
+    >>> low_bits_grey_img = processing.rgb_to_grey_low_bits(img, 5)
     >>> low_bits_grey_img.shape
     (200, 200)
     """
@@ -275,26 +283,28 @@ def rgb_to_grey_low_bits(image, bind=15):
     img_arr = np.array(image)
     grey_block = np.array(color.rgb2gray(img_arr)*255, 'uint8')
 
-    return metrics.get_low_bits_img(grey_block, bind)
+    return metrics.get_low_bits_img(grey_block, nb_bits)
 
-def rgb_to_LAB_L_low_bits(image, bind=15):
+
+def rgb_to_LAB_L_low_bits(image, nb_bits=4):
     """
     @brief Convert RGB Image into Lab L channel image using only 4 low bits values
     @param 3D RGB image numpy array or PIL RGB image
+    @param nb_bits, optional parameter which indicates the number of bits to keep
 
     Usage :
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> low_bits_Lab_l_img = image_processing.rgb_to_LAB_L_low_bits(img)
+    >>> low_bits_Lab_l_img = processing.rgb_to_LAB_L_low_bits(img, 5)
     >>> low_bits_Lab_l_img.shape
     (200, 200)
     """
 
     L_block = np.asarray(metrics.get_LAB_L(image), 'uint8')
 
-    return metrics.get_low_bits_img(L_block, bind)
+    return metrics.get_low_bits_img(L_block, nb_bits)
 
 def rgb_to_LAB_L_bits(image, interval):
     """
@@ -304,9 +314,9 @@ def rgb_to_LAB_L_bits(image, interval):
     @return Numpy array with reduced values
 
     >>> from PIL import Image
-    >>> from ipfml import image_processing
+    >>> from ipfml import processing
     >>> img = Image.open('./images/test_img.png')
-    >>> bits_Lab_l_img = image_processing.rgb_to_LAB_L_bits(img)
+    >>> bits_Lab_l_img = processing.rgb_to_LAB_L_bits(img, (2, 6))
     >>> bits_Lab_l_img.shape
     (200, 200)
     """
@@ -314,97 +324,3 @@ def rgb_to_LAB_L_bits(image, interval):
     L_block = np.asarray(metrics.get_LAB_L(image), 'uint8')
 
     return metrics.get_bits_img(L_block, interval)
-
-# TODO : Check this method too...
-def get_random_active_block(blocks, threshold = 0.1):
-    """
-    @brief Find an active block from blocks and return it (randomly way)
-    @param 2D numpy array
-    @param threshold 0.1 by default
-    """
-
-    active_blocks = []
-
-    for id, block in enumerate(blocks):
-
-        arr = np.asarray(block)
-        variance = np.var(arr.flatten())
-
-        if variance >= threshold:
-            active_blocks.append(id)
-
-    r_id = random.choice(active_blocks)
-
-    return np.asarray(blocks[r_id])
-
-
-# TODO : check this method and check how to use active block
-def segment_relation_in_block(block, active_block):
-    """
-    @brief Return bêta value to quantity relation between central segment and surrouding regions into block
-    @param 2D numpy array
-    """
-
-    if block.ndim != 2:
-        raise "Numpy array dimension is incorrect, expected 2."
-
-
-    # getting middle information of numpy array
-    x, y = block.shape
-
-    if y < 4:
-        raise "Block size too small needed at least (x, 4) shape"
-
-    middle = int(y / 2)
-
-    # get central segments
-    central_segments = block[:, middle-1:middle+1]
-
-    # getting surrouding parts
-    left_part = block[:, 0:middle-1]
-    right_part = block[:, middle+1:]
-    surrounding_parts = np.concatenate([left_part, right_part])
-
-    std_sur = np.std(surrounding_parts.flatten())
-    std_cen = np.std(central_segments.flatten())
-    std_block = np.std(block.flatten())
-
-    std_q = std_cen / std_sur
-
-    # from article, it says that block if affected with noise if (std_block > 2 * beta)
-    beta = abs(std_q - std_block) / max(std_q, std_block)
-
-    return beta
-
-### other way to compute MSCN :
-# TODO : Temp code, check to remove or use it
-
-def normalize_kernel(kernel):
-    return kernel / np.sum(kernel)
-
-def gaussian_kernel2d(n, sigma):
-    Y, X = np.indices((n, n)) - int(n/2)
-    gaussian_kernel = 1 / (2 * np.pi * sigma ** 2) * np.exp(-(X ** 2 + Y ** 2) / (2 * sigma ** 2))
-    return normalize_kernel(gaussian_kernel)
-
-def local_mean(image, kernel):
-    return signal.convolve2d(image, kernel, 'same')
-
-def local_deviation(image, local_mean, kernel):
-    "Vectorized approximation of local deviation"
-    sigma = image ** 2
-    sigma = signal.convolve2d(sigma, kernel, 'same')
-    return np.sqrt(np.abs(local_mean ** 2 - sigma))
-
-def calculate_mscn_coefficients(image, kernel_size=6, sigma=7/6):
-
-    # check if PIL image or not
-    img_arr = np.array(image)
-
-    C = 1/255
-    kernel = gaussian_kernel2d(kernel_size, sigma=sigma)
-    local_mean = signal.convolve2d(img_arr, kernel, 'same')
-    local_var = local_deviation(img_arr, local_mean, kernel)
-
-    return (img_arr - local_mean) / (local_var + C)
-
