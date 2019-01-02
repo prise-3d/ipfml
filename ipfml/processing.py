@@ -233,11 +233,15 @@ def normalize_2D_arr(arr):
     max_value = arr.max(axis=1).max()
     min_value = arr.min(axis=1).min()
 
-    # lambda computation to normalize
-    g = lambda x : (x - min_value) / (max_value - min_value)
-    f = np.vectorize(g)
+    # normalize each row
+    output_array = []
+    width, height = arr.shape
 
-    return f(arr)
+    for row_index in range(0, height):
+        values = arr[row_index, :]
+        output_array.append(normalize_arr_with_range(values, min_value, max_value))
+
+    return np.asarray(output_array)
 
 
 def rgb_to_mscn(image):
