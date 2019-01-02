@@ -14,11 +14,11 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
     import doctest
     from ipfml import processing
     from ipfml import metrics
-    from ipfml import filters
+    from ipfml.filters import noise as noise_filters
 
     doctest.testmod(processing)
     doctest.testmod(metrics)
-    doctest.testmod(filters)
+    doctest.testmod(noise_filters)
 
     setuptools.command.build_py.build_py.run(self)
 
