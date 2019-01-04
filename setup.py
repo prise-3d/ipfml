@@ -43,7 +43,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.1.7',
+    version='0.1.8',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
