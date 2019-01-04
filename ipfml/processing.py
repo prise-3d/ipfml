@@ -9,13 +9,17 @@ import cv2
 
 from scipy import signal
 
-def get_LAB_L_SVD(image):
-    """
-    @brief Returns Singular values from LAB L Image information
-    @param image - PIL Image or Numpy array
-    @return U, s, V information obtained from SVD compression using Lab
 
-    Usage :
+def get_LAB_L_SVD(image):
+    """Returns Singular values from LAB L Image information
+
+    Args:
+        image: PIL Image or Numpy array
+
+    Returns:
+        U, s, V information obtained from SVD compression using Lab
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -31,13 +35,17 @@ def get_LAB_L_SVD(image):
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD(L)
 
-def get_LAB_L_SVD_s(image):
-    """
-    @brief Returns s (Singular values) SVD from L of LAB Image information
-    @param image - PIL Image or numpy array
-    @return vector of singular values
 
-    Usage :
+def get_LAB_L_SVD_s(image):
+    """Returns s (Singular values) SVD from L of LAB Image information
+
+    Args:
+        image: PIL Image or Numpy array
+
+    Returns:
+        vector of singular values
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -51,12 +59,15 @@ def get_LAB_L_SVD_s(image):
 
 
 def get_LAB_L_SVD_U(image):
-    """
-    @brief Returns U SVD from L of LAB Image information
-    @param image - PIL Image
-    @return U matrix of SVD compression
+    """Returns U SVD from L of LAB Image information
 
-    Usage :
+    Args:
+        image: PIL Image or Numpy array
+
+    Returns:
+        U matrix of SVD compression
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -68,13 +79,17 @@ def get_LAB_L_SVD_U(image):
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_U(L)
 
-def get_LAB_L_SVD_V(image):
-    """
-    @brief Returns V SVD from L of LAB Image information
-    @param image - PIL Image or numpy array
-    @return V matrix of SVD compression
 
-    Usage :
+def get_LAB_L_SVD_V(image):
+    """Returns V SVD from L of LAB Image information
+
+    Args:
+        image: PIL Image or Numpy array
+
+    Returns:
+        V matrix of SVD compression
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -89,16 +104,19 @@ def get_LAB_L_SVD_V(image):
 
 
 def divide_in_blocks(image, block_size, pil=True):
-    '''
-    @brief Divide image into equal size blocks
-    @param image - PIL Image or numpy array
-    @param block - tuple (width, height) representing the size of each dimension of the block
-    @param pil - kind block type (PIL by default or Numpy array)
-    @return list containing all 2D numpy blocks (in RGB or not)
+    '''Divide image into equal size blocks
 
-    Usage :
+    Args:
+        image: PIL Image or Numpy array
+        block: tuple (width, height) representing the size of each dimension of the block
+        pil: block type returned (default True)
 
-    >>> import numpy as np
+    Returns:
+        list containing all 2D Numpy blocks (in RGB or not)
+
+    Usage:
+
+    >>> import Numpy as np
     >>> from PIL import Image
     >>> from ipfml import processing
     >>> from ipfml import metrics
@@ -122,7 +140,7 @@ def divide_in_blocks(image, block_size, pil=True):
     blocks = []
     mode = 'RGB'
 
-    # convert in numpy array
+    # convert in Numpy array
     image_array = np.array(image)
 
     # check dimension of input image
@@ -135,10 +153,10 @@ def divide_in_blocks(image, block_size, pil=True):
     # check size compatibility
     width, height = block_size
 
-    if(image_width % width != 0):
+    if (image_width % width != 0):
         raise "Width size issue, block size not compatible"
 
-    if(image_height % height != 0):
+    if (image_height % height != 0):
         raise "Height size issue, block size not compatible"
 
     nb_block_width = image_width / width
@@ -153,10 +171,12 @@ def divide_in_blocks(image, block_size, pil=True):
             begin_y = j * height
 
             # getting sub block information
-            current_block = image_array[begin_x:(begin_x + width), begin_y:(begin_y + height)]
+            current_block = image_array[begin_x:(begin_x + width), begin_y:(
+                begin_y + height)]
 
             if pil:
-                blocks.append(Image.fromarray(current_block.astype('uint8'), mode))
+                blocks.append(
+                    Image.fromarray(current_block.astype('uint8'), mode))
             else:
                 blocks.append(current_block)
 
@@ -164,15 +184,18 @@ def divide_in_blocks(image, block_size, pil=True):
 
 
 def normalize_arr(arr):
-    '''
-    @brief Normalize data of 1D array shape
-    @param arr - array data of 1D shape
-    @return Normalized 1D array
+    '''Normalize data of 1D array shape
 
-    Usage :
+    Args:
+        arr: array data of 1D shape
+
+    Returns:
+        Normalized 1D array
+
+    Usage:
 
     >>> from ipfml import processing
-    >>> import numpy as np
+    >>> import Numpy as np
     >>> arr = np.arange(11)
     >>> arr_normalized = processing.normalize_arr(arr)
     >>> arr_normalized[1]
@@ -184,20 +207,24 @@ def normalize_arr(arr):
     min_value = min(arr)
 
     for v in arr:
-         output_arr.append((v - min_value) / (max_value - min_value))
+        output_arr.append((v - min_value) / (max_value - min_value))
 
     return output_arr
 
 
 def normalize_arr_with_range(arr, min, max):
-    '''
-    @brief Normalize data of 1D array shape
-    @param arr - array data of 1D shape
+    '''Normalize data of 1D array shape
 
-    Usage :
+    Args:
+        arr: array data of 1D shape
+
+    Returns:
+        Normalized 1D Numpy array
+
+    Usage:
 
     >>> from ipfml import processing
-    >>> import numpy as np
+    >>> import Numpy as np
     >>> arr = np.arange(11)
     >>> arr_normalized = processing.normalize_arr_with_range(arr, 0, 20)
     >>> arr_normalized[1]
@@ -213,12 +240,15 @@ def normalize_arr_with_range(arr, min, max):
 
 
 def normalize_2D_arr(arr):
-    """
-    @brief Return array normalize from its min and max values
-    @param arr - 2D numpy array
-    @return normalized 2D array
+    """Return array normalize from its min and max values
 
-    Usage :
+    Args:
+        arr: 2D Numpy array
+
+    Returns:
+        Normalized 2D Numpy array
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -233,19 +263,28 @@ def normalize_2D_arr(arr):
     max_value = arr.max(axis=1).max()
     min_value = arr.min(axis=1).min()
 
-    # lambda computation to normalize
-    g = lambda x : (x - min_value) / (max_value - min_value)
-    f = np.vectorize(g)
+    # normalize each row
+    output_array = []
+    width, height = arr.shape
 
-    return f(arr)
+    for row_index in range(0, height):
+        values = arr[row_index, :]
+        output_array.append(
+            normalize_arr_with_range(values, min_value, max_value))
+
+    return np.asarray(output_array)
 
 
 def rgb_to_mscn(image):
-    """
-    @brief Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
-    @param 3D RGB image numpy array or PIL RGB image
+    """Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)
 
-    Usage :
+    Args:
+        image: 3D RGB image Numpy array or PIL RGB image
+
+    Returns:
+        2D Numpy array with MSCN information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -259,18 +298,22 @@ def rgb_to_mscn(image):
     img_arr = np.array(image)
 
     # convert rgb image to gray
-    im = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+    im = np.array(color.rgb2gray(img_arr) * 255, 'uint8')
 
     return metrics.gray_to_mscn(im)
 
 
 def rgb_to_grey_low_bits(image, nb_bits=4):
-    """
-    @brief Convert RGB Image into grey image using only 4 low bits values
-    @param 3D RGB image numpy array or PIL RGB image
-    @param nb_bits, optional parameter which indicates the number of bits to keep
+    """Convert RGB Image into grey image using only 4 low bits values
 
-    Usage :
+    Args:
+        image: 3D RGB image Numpy array or PIL RGB image
+        nb_bits: optional parameter which indicates the number of bits to keep (default 4)
+
+    Returns:
+        2D Numpy array with low bits information kept
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -281,18 +324,22 @@ def rgb_to_grey_low_bits(image, nb_bits=4):
     """
 
     img_arr = np.array(image)
-    grey_block = np.array(color.rgb2gray(img_arr)*255, 'uint8')
+    grey_block = np.array(color.rgb2gray(img_arr) * 255, 'uint8')
 
     return metrics.get_low_bits_img(grey_block, nb_bits)
 
 
 def rgb_to_LAB_L_low_bits(image, nb_bits=4):
-    """
-    @brief Convert RGB Image into Lab L channel image using only 4 low bits values
-    @param 3D RGB image numpy array or PIL RGB image
-    @param nb_bits, optional parameter which indicates the number of bits to keep
+    """Convert RGB Image into Lab L channel image using only 4 low bits values
 
-    Usage :
+    Args:
+        image: 3D RGB image Numpy array or PIL RGB image
+        nb_bits: optional parameter which indicates the number of bits to keep (default 4)
+
+    Returns:
+        2D Numpy array with low bits information kept
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -306,12 +353,16 @@ def rgb_to_LAB_L_low_bits(image, nb_bits=4):
 
     return metrics.get_low_bits_img(L_block, nb_bits)
 
+
 def rgb_to_LAB_L_bits(image, interval):
-    """
-    @brief Returns only bits from LAB L canal specified into the interval
-    @param image to convert using this interval of bits value to keep
-    @param interval (begin, end) of bits values
-    @return Numpy array with reduced values
+    """Returns only bits from LAB L canal specified into the interval
+
+    Args:
+        image: image to convert using this interval of bits value to keep
+        interval: (begin, end) of bits values
+
+    Returns:
+        2D Numpy array with reduced values
 
     >>> from PIL import Image
     >>> from ipfml import processing
