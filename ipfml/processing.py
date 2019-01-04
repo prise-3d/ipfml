@@ -19,7 +19,7 @@ def get_LAB_L_SVD(image):
     Returns:
         U, s, V information obtained from SVD compression using Lab
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -45,7 +45,7 @@ def get_LAB_L_SVD_s(image):
     Returns:
         vector of singular values
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -67,7 +67,7 @@ def get_LAB_L_SVD_U(image):
     Returns:
         U matrix of SVD compression
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -89,7 +89,7 @@ def get_LAB_L_SVD_V(image):
     Returns:
         V matrix of SVD compression
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -114,9 +114,12 @@ def divide_in_blocks(image, block_size, pil=True):
     Returns:
         list containing all 2D Numpy blocks (in RGB or not)
 
-    Usage:
+    Raises:
+        ValueError: If `image_width` or `image_heigt` are not compatible to produce correct block sizes
 
-    >>> import Numpy as np
+    Example:
+
+    >>> import numpy as np
     >>> from PIL import Image
     >>> from ipfml import processing
     >>> from ipfml import metrics
@@ -154,10 +157,10 @@ def divide_in_blocks(image, block_size, pil=True):
     width, height = block_size
 
     if (image_width % width != 0):
-        raise "Width size issue, block size not compatible"
+        raise ValueError("Width size issue, block size not compatible")
 
     if (image_height % height != 0):
-        raise "Height size issue, block size not compatible"
+        raise ValueError("Height size issue, block size not compatible")
 
     nb_block_width = image_width / width
     nb_block_height = image_height / height
@@ -192,10 +195,10 @@ def normalize_arr(arr):
     Returns:
         Normalized 1D array
 
-    Usage:
+    Example:
 
     >>> from ipfml import processing
-    >>> import Numpy as np
+    >>> import numpy as np
     >>> arr = np.arange(11)
     >>> arr_normalized = processing.normalize_arr(arr)
     >>> arr_normalized[1]
@@ -221,10 +224,10 @@ def normalize_arr_with_range(arr, min, max):
     Returns:
         Normalized 1D Numpy array
 
-    Usage:
+    Example:
 
     >>> from ipfml import processing
-    >>> import Numpy as np
+    >>> import numpy as np
     >>> arr = np.arange(11)
     >>> arr_normalized = processing.normalize_arr_with_range(arr, 0, 20)
     >>> arr_normalized[1]
@@ -248,7 +251,7 @@ def normalize_2D_arr(arr):
     Returns:
         Normalized 2D Numpy array
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -284,7 +287,7 @@ def rgb_to_mscn(image):
     Returns:
         2D Numpy array with MSCN information
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -313,7 +316,7 @@ def rgb_to_grey_low_bits(image, nb_bits=4):
     Returns:
         2D Numpy array with low bits information kept
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -339,7 +342,7 @@ def rgb_to_LAB_L_low_bits(image, nb_bits=4):
     Returns:
         2D Numpy array with low bits information kept
 
-    Usage:
+    Example:
 
     >>> from PIL import Image
     >>> from ipfml import processing

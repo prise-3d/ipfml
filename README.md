@@ -21,40 +21,20 @@ Modules
 This project contains modules.
 
 - **processing** : *Image processing module*
-    - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
-    - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
-    - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
-    - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
-    - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
-    - rgb_to_grey_low_bits(image, nb_bits=4): *Convert RGB Image into grey image using only 4 low bits values by default*
-    - rgb_to_LAB_L_low_bits(image, nb_bits=4): *Convert RGB Image into LAB L chanel image using only 4 low bits values by default*
-    - rgb_to_LAB_L_bits(image, interval): *Convert RGB Image into LAB L chanel image using specific interval of bits to keep (2, 5) such as example*
-    - normalize_arr(arr): *Normalize array values*
-    - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
-    - normalize_2D_arr(arr): *Return 2D array normalize from its min and max values*
-
 - **metrics** : *Metrics computation of PIL or 2D numpy image*
-    - get_SVD(image): *Transforms Image into SVD*
-    - get_SVD_U(image): *Transforms Image into SVD and returns only 'U' part*
-    - get_SVD_s(image): *Transforms Image into SVD and returns only 's' part*
-    - get_SVD_V(image): *Transforms Image into SVD and returns only 'V' part*
-    - get_LAB(image): *Transforms Image into LAB*
-    - get_LAB_L(image): *Transforms Image into LAB and returns only 'L' part*
-    - get_LAB_A(image): *Transforms Image into LAB and returns only 'A' part*
-    - get_LAB_B(image): *Transforms Image into LAB and returns only 'B' part*
-    - get_XYZ(image): *Transforms Image into XYZ*
-    - get_XYZ_X(image): *Transforms Image into XYZ and returns only 'X' part*
-    - get_XYZ_Y(image): *Transforms Image into XYZ and returns only 'Y' part*
-    - get_XYZ_Z(image): *Transforms Image into XYZ and returns only 'Z' part*
-    - get_low_bits_img(image, nb_bits=4): *Returns Image or Numpy array with data information reduced using only low bits*
-
 - **filters** : *Image filter module*
-    - **noise** : *Noise filters implemented*
-        - white_noise(image, n, distribution_interval=(-0.5, 0.5)) : *Add white noise to image using the **n** variable which manages intensity of noise in interval [1, 999] and the **distribution_interval** variable which manages interval of uniform distribution*
 
-All these modules will be enhanced during development of the project
+All these modules will be enhanced during development of the package. Documentation is available [here](https://jbuisine.github.io/IPFML/).
 
 How to contribute
 -----------------
 
 This git project uses [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/) implementation. You are free to contribute to it.
+
+## Contributors
+
+* [jbuisine](https://github.com/jbuisine)
+
+## Licence
+
+[MIT](https://github.com/jbuisine/IPFML/blob/master/LICENSE)

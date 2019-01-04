@@ -1,0 +1,10 @@
+sphinx
+matplotlib
+numpy
+Pillow
+sklearn
+scikit-image
+scipy
+opencv-python
+scipy
+yapf

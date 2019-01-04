@@ -268,6 +268,9 @@ def get_XYZ_Z(image):
     Returns:
         The Z chanel from XYZ information
 
+    Raises:
+        ValueError: If `nb_bits` has unexpected value. `nb_bits` needs to be in interval [1, 8].
+
     Usage:
 
     >>> from PIL import Image
@@ -328,6 +331,11 @@ def get_bits_img(image, interval):
 
     Returns:
         Numpy array with reduced values
+
+    Raises:
+        ValueError: If min value from interval is not >= 1.
+        ValueError: If max value from interval is not <= 8.
+        ValueError: If min value from interval >= max value.
 
     Usage:
 

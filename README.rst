@@ -1,7 +1,7 @@
 IPFML
 =====
 
-Image Processing For Machine Learning package.
+Image Processing For Machine Learning python package.
 
 This is a package developed during a thesis project.
 
@@ -30,6 +30,6 @@ All these modules will be enhanced during development of the package.
 Documentation
 -------------
 
-For more information about package, documentation_ is available  
+For more information about package, documentation_ is available. 
 
-.. _documentation: https://gogs.univ-littoral.fr/jerome.buisine/IPFML
+.. _documentation: https://jbuisine.github.io/IPFML/  

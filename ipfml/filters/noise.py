@@ -23,7 +23,7 @@ def _global_noise_filter(image,
     Returns:
         2D Numpy array with specified noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import _global_noise_filter as gf
     >>> import numpy as np
@@ -109,7 +109,7 @@ def white_noise(image,
     Returns:
         2D Numpy array with white noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import white_noise
     >>> import numpy as np
@@ -145,7 +145,7 @@ def gaussian_noise(image,
     Returns:
         2D Numpy array with gaussian noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import gaussian_noise
     >>> import numpy as np
@@ -181,7 +181,7 @@ def laplace_noise(image,
     Returns:
         2D Numpay array with Laplace noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import laplace_noise
     >>> import numpy as np
@@ -217,7 +217,7 @@ def cauchy_noise(image,
     Returns:
         2D Numpy array with Cauchy noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import cauchy_noise
     >>> import numpy as np
@@ -253,7 +253,7 @@ def log_normal_noise(image,
     Returns:
         2D Numpy array with Log-normal noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import log_normal_noise
     >>> import numpy as np
@@ -289,7 +289,7 @@ def mut_white_noise(image,
     Returns:
         2D Numpy array with multiplied white noise applied
 
-    Usage:
+    Example:
 
     >>> from ipfml.filters.noise import mut_white_noise
     >>> import numpy as np
