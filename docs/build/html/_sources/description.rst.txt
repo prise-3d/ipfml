@@ -2,7 +2,8 @@ Description
 =====================================
 
 .. image:: _static/ipfml_logo.png
-
+   :width: 400 px
+   :align: center
 
 Installation
 ------------
@@ -22,6 +23,6 @@ To use, simply do :
 .. code:: python
     
    from PIL import Image
-   from ipfml import image_processing
+   from ipfml import processing
    img = Image.open('path/to/image.png')
-   s = image_processing.get_LAB_L_SVD_s(img)
+   s = processing.get_LAB_L_SVD_s(img)

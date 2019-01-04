@@ -7,6 +7,8 @@ Image Processing For Machine Learning
 =====================================
 
 .. image:: _static/ipfml_logo.png
+   :width: 400 px
+   :align: center
 
 What's IPFML ?
 =================
