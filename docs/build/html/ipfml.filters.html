@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.filters &mdash; IPFML v0.1.9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ipfml" href="ipfml.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> IPFML
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipfml.html">ipfml</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ipfml.filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-ipfml.filters.noise">ipfml.filters.noise</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IPFML</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ipfml.filters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ipfml.filters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ipfml-filters">
+<h1>ipfml.filters<a class="headerlink" href="#ipfml-filters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-ipfml.filters.noise">
+<span id="ipfml-filters-noise"></span><h2>ipfml.filters.noise<a class="headerlink" href="#module-ipfml.filters.noise" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ipfml.filters.noise.cauchy_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">cauchy_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(0</em>, <em>1)</em>, <em>k=0.0002</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.cauchy_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cauchy noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (0, 1))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.0002)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with Cauchy noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">cauchy_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">cauchy_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.gaussian_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">gaussian_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(0</em>, <em>1)</em>, <em>k=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.gaussian_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gaussian noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (0, 1))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with gaussian noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">gaussian_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">gaussian_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.laplace_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">laplace_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(0</em>, <em>1)</em>, <em>k=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.laplace_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Laplace noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (0, 1))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpay array with Laplace noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">laplace_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">laplace_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.log_normal_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">log_normal_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(0</em>, <em>1)</em>, <em>k=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.log_normal_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log-normal noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (0, 1))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.05)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with Log-normal noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">log_normal_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">log_normal_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.mut_white_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">mut_white_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(-0.5</em>, <em>0.5)</em>, <em>k=0.2</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.mut_white_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplied White noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (-0.5, 0.5))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.2)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with multiplied white noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">mut_white_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">mut_white_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.white_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">white_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>distribution_interval=(-0.5</em>, <em>0.5)</em>, <em>k=0.2</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.white_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>White noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>distribution_interval</strong> – set the distribution interval of normal law distribution (default (-0.5, 0.5))</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.2)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with white noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">white_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">white_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="ipfml.html" class="btn btn-neutral" title="ipfml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
