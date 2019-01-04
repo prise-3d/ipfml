@@ -1,9 +1,9 @@
 Image Processing For Machine Learning
 =====================================
 
-<center>
+<p align="center">
     <img src="ipfml_logo.png" width="40%">
-</center>
+</p>
 
 Installation
 ------------

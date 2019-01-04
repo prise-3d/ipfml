@@ -1,13 +1,10 @@
 import numpy as np
+import random
+
 from ipfml import processing
 
 
-def _global_noise_filter(image,
-                         n,
-                         generator,
-                         updator,
-                         identical=False,
-                         k=0.2):
+def _global_noise_filter(image, n, generator, updator, identical=False, k=0.2):
     """White noise filter to apply on image
 
     Args:
@@ -299,11 +296,7 @@ def mut_white_noise(image,
     return _global_noise_filter(image, n, generator, updator, identical, k)
 
 
-def salt_pepper_noise(image,
-                     n,
-                     identical=False,
-                     p=0.1,
-                     k=0.5):
+def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
     """Pepper salt noise filter to apply on image
 
     Args:
@@ -335,9 +328,18 @@ def salt_pepper_noise(image,
 
         return elements
 
-    # here noise variable is boolean to increase or decrease pixel value
-    updator = lambda x, n, k, noise: (x + n * k) if noise == 1 else (x - n * k)
+    # here noise variable is boolean to update or not pixel value
+    def _updator(x, n, k, noise):
 
-    return _global_noise_filter(image, n, _generator, updator, identical, k)
+        # probabilty to increase or decrease pixel value
+        rand = random.uniform(0, 1)
 
+        if noise:
+            if rand >= 0.5:
+                return x + n * k
+            else:
+                return x - n * k
+        else:
+            return x
 
+    return _global_noise_filter(image, n, _generator, _updator, identical, k)
