@@ -20,15 +20,15 @@ Modules
 
 This project contains modules.
 
-- **image_processing** : *Image processing module*
+- **processing** : *Image processing module*
     - get_LAB_L_SVD_U(image): *Returns U SVD from L of LAB Image information*
     - get_LAB_L_SVD_s(image): *Returns s (Singular values) SVD from L of LAB Image information*
     - get_LAB_L_SVD_V(image): *Returns V SVD from L of LAB Image information*
     - divide_in_blocks(image, block_size): *Divide image into equal size blocks*
     - rgb_to_mscn(image): *Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN) using only gray level*
-    - rgb_to_grey_low_bits(image, bind=15): *Convert RGB Image into grey image using only 4 low bits values by default*
-    - rgb_to_LAB_L_low_bits(image, bind=15): *Convert RGB Image into LAB L channel image using only 4 low bits values by default*
-    - rgb_to_LAB_L_bits(image, interval): *Convert RGB Image into LAB L channel image using specific interval of bits to keep (2, 5) such as example*
+    - rgb_to_grey_low_bits(image, nb_bits=4): *Convert RGB Image into grey image using only 4 low bits values by default*
+    - rgb_to_LAB_L_low_bits(image, nb_bits=4): *Convert RGB Image into LAB L chanel image using only 4 low bits values by default*
+    - rgb_to_LAB_L_bits(image, interval): *Convert RGB Image into LAB L chanel image using specific interval of bits to keep (2, 5) such as example*
     - normalize_arr(arr): *Normalize array values*
     - normalize_arr_with_range(arr, min, max): *Normalize array values with specific min and max values*
     - normalize_2D_arr(arr): *Return 2D array normalize from its min and max values*
@@ -46,7 +46,11 @@ This project contains modules.
     - get_XYZ_X(image): *Transforms Image into XYZ and returns only 'X' part*
     - get_XYZ_Y(image): *Transforms Image into XYZ and returns only 'Y' part*
     - get_XYZ_Z(image): *Transforms Image into XYZ and returns only 'Z' part*
-    - get_low_bits_img(image, bind=15): *Returns Image or Numpy array with data information reduced using only low bits (by default*
+    - get_low_bits_img(image, nb_bits=4): *Returns Image or Numpy array with data information reduced using only low bits*
+
+- **filters** : *Image filter module*
+    - **noise** : *Noise filters implemented*
+        - white_noise(image, n, distribution_interval=(-0.5, 0.5)) : *Add white noise to image using the **n** variable which manages intensity of noise in interval [1, 999] and the **distribution_interval** variable which manages interval of uniform distribution*
 
 All these modules will be enhanced during development of the project
 

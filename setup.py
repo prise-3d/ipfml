@@ -6,46 +6,59 @@ def readme():
         return f.read()
 
 class BuildTestCommand(setuptools.command.build_py.build_py):
-  """Custom build command."""
+    """Custom build command."""
 
-  def run(self):
+    def run(self):
 
-    # run tests using doctest
-    import doctest
-    from ipfml import image_processing
-    from ipfml import metrics
+        # run tests using doctest
+        import doctest
+        from ipfml import processing
+        from ipfml import metrics
+        from ipfml.filters import noise as noise_filters
 
-    doctest.testmod(image_processing)
-    doctest.testmod(metrics)
+        print("Run test command...")
+        doctest.testmod(processing)
+        doctest.testmod(metrics)
+        doctest.testmod(noise_filters)
 
-    setuptools.command.build_py.build_py.run(self)
+        # Run format code using ypaf
+        try:
+            print("Run format code command...")
+            self.spawn(['yapf', '-ir', '-vv', 'ipfml'])
+        except RuntimeError:
+            self.warn('format pakcage code failed')
 
-setup(name='IPFML',
-      version='0.1.5',
-      description='Image Processing For Machine Learning',
-      long_description=readme(),
-      classifiers=[
+        setuptools.command.build_py.build_py.run(self)
+
+
+setup(
+    name='ipfml',
+    version='0.1.6',
+    description='Image Processing For Machine Learning',
+    long_description=readme(),
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Artificial Intelligence'
-      ],
-      url='https://gogs.univ-littoral.fr/jerome.buisine/IPFML',
-      author='Jérôme BUISINE',
-      author_email='jerome.buisine@univ-littoral.fr',
-      license='MIT',
-      packages=['ipfml'],
-      install_requires=[
-          'matplotlib',
-          'numpy',
-          'Pillow',
-          'sklearn',
-          'scikit-image',
-          'scipy',
-          'opencv-python',
-          'scipy'
-      ],
-      cmdclass={
+    ],
+    url='https://gogs.univ-littoral.fr/jerome.buisine/IPFML',
+    author='Jérôme BUISINE',
+    author_email='jerome.buisine@univ-littoral.fr',
+    license='MIT',
+    packages=['ipfml'],
+    install_requires=[
+        'matplotlib',
+        'numpy',
+        'Pillow',
+        'sklearn',
+        'scikit-image',
+        'scipy',
+        'opencv-python',
+        'scipy',
+        'yapf'
+    ],
+    cmdclass={
         'build_py': BuildTestCommand,
-      },
-      zip_safe=False)
+    },
+    zip_safe=False)
