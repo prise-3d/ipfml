@@ -1,7 +1,15 @@
-IPFML
-=====
+Image Processing For Machine Learning
+=====================================
 
-Image Processing For Machine Learning package.
+![ipfml_logo](ipfml_logo.png)
+
+
+Installation
+------------
+
+```bash
+pip install ipfml
+```
 
 How to use ?
 ------------
@@ -10,9 +18,9 @@ To use, simply do :
 
 ```python
 from PIL import Image
-from ipfml import image_processing
+from ipfml import processing
 img = Image.open('path/to/image.png')
-s = image_processing.get_LAB_L_SVD_s(img)
+s = processing.get_LAB_L_SVD_s(img)
 ```
 
 Modules
