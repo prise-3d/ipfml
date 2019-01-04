@@ -9,13 +9,17 @@ from skimage import io, color
 
 import cv2
 
-def get_SVD(image):
-    """
-    @brief Transforms Image into SVD
-    @param image to convert
-    @return U, s, V obtained from SVD compression
 
-    Usage :
+def get_SVD(image):
+    """Transforms Image using SVD compression
+
+    Args:
+        image: image to convert into SVD compression
+
+    Return:
+        U, s, V obtained from SVD compression
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -30,13 +34,17 @@ def get_SVD(image):
     """
     return svd(image, full_matrices=False)
 
-def get_SVD_s(image):
-    """
-    @brief Transforms Image into SVD and returns only 's' part
-    @param image - image to convert
-    @return s obtained from SVD compression
 
-    Usage :
+def get_SVD_s(image):
+    """Transforms Image into SVD and returns only 's' part
+
+    Args:
+        image: image to convert
+
+    Returns:
+        vector of singular values obtained from SVD compression
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -48,13 +56,17 @@ def get_SVD_s(image):
     U, s, V = svd(image, full_matrices=False)
     return s
 
-def get_SVD_U(image):
-    """
-    @brief Transforms Image into SVD and returns only 'U' part
-    @param image - image to convert
-    @return U matrix from SVD compression
 
-    Usage :
+def get_SVD_U(image):
+    """Transforms Image into SVD and returns only 'U' part
+
+    Args:
+        image: image to convert
+
+    Returns:
+        U matrix from SVD compression
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -67,11 +79,15 @@ def get_SVD_U(image):
     U, s, V = svd(image, full_matrices=False)
     return U
 
+
 def get_SVD_V(image):
-    """
-    @brief Transforms Image into SVD and returns only 'V' part
-    @param image - image to convert
-    @return V matrix obtained from SVD compression
+    """Transforms Image into SVD and returns only 'V' part
+
+    Args:
+        image: image to convert
+
+    Returns:
+        V matrix obtained from SVD compression
 
     Usage :
 
@@ -86,13 +102,17 @@ def get_SVD_V(image):
     U, s, V = svd(image, full_matrices=False)
     return V
 
-def get_LAB(image):
-    """
-    @brief Transforms RGB  Image into Lab
-    @param image - image to convert
-    @return Lab information
 
-    Usage :
+def get_LAB(image):
+    """Transforms RGB  Image into Lab
+
+    Args:
+        image: image to convert
+
+    Returns:
+        Lab information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -104,11 +124,15 @@ def get_LAB(image):
 
     return color.rgb2lab(image)
 
+
 def get_LAB_L(image):
-    """
-    @brief Transforms RGB Image into Lab and returns L
-    @param image - image to convert
-    @return L chanel from Lab information
+    """Transforms RGB Image into Lab and returns L
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The L chanel from Lab information
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -121,13 +145,17 @@ def get_LAB_L(image):
     lab = get_LAB(image)
     return lab[:, :, 0]
 
-def get_LAB_a(image):
-    """
-    @brief Transforms RGB Image into LAB and returns a
-    @param image - image to convert
-    @return a chanel from Lab information
 
-    Usage :
+def get_LAB_a(image):
+    """Transforms RGB Image into LAB and returns a
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The a chanel from Lab information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -140,11 +168,15 @@ def get_LAB_a(image):
     lab = get_LAB(image)
     return lab[:, :, 1]
 
+
 def get_LAB_b(image):
-    """
-    @brief Transforms RGB Image into LAB and returns b
-    @param image - image to convert
-    @return b chanel from Lab information
+    """Transforms RGB Image into LAB and returns b
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The b chanel from Lab information
 
     Usage :
 
@@ -159,13 +191,17 @@ def get_LAB_b(image):
     lab = get_LAB(image)
     return lab[:, :, 2]
 
-def get_XYZ(image):
-    """
-    @brief Transforms RGB Image into XYZ
-    @param image - image to convert
-    @return XYZ information obtained from transformation
 
-    Usage :
+def get_XYZ(image):
+    """Transforms RGB Image into XYZ
+
+    Args:
+        image: image to convert
+
+    Returns:
+        XYZ information obtained from transformation
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -176,13 +212,17 @@ def get_XYZ(image):
 
     return color.rgb2xyz(image)
 
-def get_XYZ_X(image):
-    """
-    @brief Transforms RGB Image into XYZ and returns X
-    @param image - image to convert
-    @return X chanel from XYZ information
 
-    Usage :
+def get_XYZ_X(image):
+    """Transforms RGB Image into XYZ and returns X
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The X chanel from XYZ information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -195,13 +235,17 @@ def get_XYZ_X(image):
     xyz = color.rgb2xyz(image)
     return xyz[:, :, 0]
 
-def get_XYZ_Y(image):
-    """
-    @brief Transforms RGB Image into XYZ and returns Y
-    @param image - image to convert
-    @return Y chanel from XYZ information
 
-    Usage :
+def get_XYZ_Y(image):
+    """Transforms RGB Image into XYZ and returns Y
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The Y chanel from XYZ information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -214,13 +258,17 @@ def get_XYZ_Y(image):
     xyz = color.rgb2xyz(image)
     return xyz[:, :, 1]
 
-def get_XYZ_Z(image):
-    """
-    @brief Transforms RGB Image into XYZ and returns Z
-    @param image - image to convert
-    @return Z chanel from XYZ information
 
-    Usage :
+def get_XYZ_Z(image):
+    """Transforms RGB Image into XYZ and returns Z
+
+    Args:
+        image: image to convert
+
+    Returns:
+        The Z chanel from XYZ information
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -233,14 +281,18 @@ def get_XYZ_Z(image):
     xyz = color.rgb2xyz(image)
     return xyz[:, :, 2]
 
-def get_low_bits_img(image, nb_bits=4):
-    """
-    @brief Returns Image or Numpy array with data information reduced using only low bits
-    @param image, image to convert
-    @param nb_bits, optional parameter which indicates the number of bits to keep
-    @return Numpy array with reduced values
 
-    Usage :
+def get_low_bits_img(image, nb_bits=4):
+    """Returns Image or Numpy array with data information reduced using only low bits
+
+    Args:
+        image: image to convert
+        nb_bits: optional parameter which indicates the number of bits to keep
+
+    Returns:
+        Numpy array with reduced values
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -251,10 +303,14 @@ def get_low_bits_img(image, nb_bits=4):
     """
 
     if nb_bits <= 0:
-        raise ValueError("unexpected value of number of bits to keep. @nb_bits needs to be positive and greater than 0.")
+        raise ValueError(
+            "unexpected value of number of bits to keep. @nb_bits needs to be positive and greater than 0."
+        )
 
     if nb_bits > 8:
-        raise ValueError("Unexpected value of number of bits to keep. @nb_bits needs to be in interval [1, 8].")
+        raise ValueError(
+            "Unexpected value of number of bits to keep. @nb_bits needs to be in interval [1, 8]."
+        )
 
     img_arr = np.array(image)
 
@@ -262,14 +318,18 @@ def get_low_bits_img(image, nb_bits=4):
 
     return img_arr & bits_values
 
-def get_bits_img(image, interval):
-    """
-    @brief Returns only bits specified into the interval
-    @param image to convert using this interval of bits value to keep
-    @param interval (begin, end) of bits values
-    @return Numpy array with reduced values
 
-    Usage :
+def get_bits_img(image, interval):
+    """Returns only bits specified into the interval
+
+    Args:
+        image: image to convert using this interval of bits value to keep
+        interval: (begin, end) of bits values
+
+    Returns:
+        Numpy array with reduced values
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import metrics
@@ -283,10 +343,14 @@ def get_bits_img(image, interval):
     begin, end = interval
 
     if begin < 1:
-        raise ValueError("Unexpected value of interval. Minimum value of interval needs to be >= 1.")
+        raise ValueError(
+            "Unexpected value of interval. Interval min value needs to be >= 1."
+        )
 
     if end > 8:
-        raise ValueError("Unexpected value of interval. Maximum value of interval needs to be <= 8.")
+        raise ValueError(
+            "Unexpected value of interval. Interval min value needs to be <= 8."
+        )
 
     if begin >= end:
         raise ValueError("Unexpected interval values order.")
@@ -297,12 +361,15 @@ def get_bits_img(image, interval):
 
 
 def gray_to_mscn(image):
-    """
-    @brief Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)
-    @param image - grayscale image
-    @returns MSCN matrix obtained from transformation
+    """Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)
 
-    Usage :
+    Args:
+        image: grayscale image
+
+    Returns:
+        MSCN matrix obtained from transformation
+
+    Usage:
 
     >>> from PIL import Image
     >>> from ipfml import processing
@@ -312,12 +379,13 @@ def gray_to_mscn(image):
     (200, 200)
     """
 
-    s = 7/6
-    blurred = cv2.GaussianBlur(image, (7, 7), s) # apply gaussian blur to the image
+    s = 7 / 6
+    blurred = cv2.GaussianBlur(image, (7, 7),
+                               s)  # apply gaussian blur to the image
     blurred_sq = blurred * blurred
     sigma = cv2.GaussianBlur(image * image, (7, 7), s)
-    sigma = abs(sigma - blurred_sq) ** 0.5
-    sigma = sigma + 1.0/255 # avoid DivideByZero Exception
-    mscn = (image - blurred)/sigma # MSCN(i, j) image
+    sigma = abs(sigma - blurred_sq)**0.5
+    sigma = sigma + 1.0 / 255  # avoid DivideByZero Exception
+    mscn = (image - blurred) / sigma  # MSCN(i, j) image
 
     return mscn

@@ -1,18 +1,29 @@
 import numpy as np
 from ipfml import processing
 
-def _global_noise_filter(image, n, generator, updator, identical=False, distribution_interval=(-0.5, 0.5), k=0.2):
-    """
-    @brief White noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param generator - random function we want to use to generate random numpy array
-    @param updator - lambda function used to update pixel value
-    @param distribution_interval - set the distribution interval of uniform distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with specified noise applied
 
-    Usage :
+def _global_noise_filter(image,
+                         n,
+                         generator,
+                         updator,
+                         identical=False,
+                         distribution_interval=(-0.5, 0.5),
+                         k=0.2):
+    """White noise filter to apply on image
+
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        generator: lambda function used to generate random numpy array with specific distribution
+        updator: lambda function used to update pixel value
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: tuple which set the distribution interval of uniform distribution (default (-0.5, 0.5))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.2)
+
+    Returns:
+        2D Numpy array with specified noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import _global_noise_filter as gf
     >>> import numpy as np
@@ -55,7 +66,10 @@ def _global_noise_filter(image, n, generator, updator, identical=False, distribu
 
         # compute new pixel value
         # n * k * white_noise_filter[i]
-        noisy_image = np.asarray([updator(image_array_flatten[i], n, k, noise_filter[i]) for i in range(0, nb_pixels)])
+        noisy_image = np.asarray([
+            updator(image_array_flatten[i], n, k, noise_filter[i])
+            for i in range(0, nb_pixels)
+        ])
 
         # reshape and normalize new value
         noisy_image = noisy_image.reshape((width, height))
@@ -78,16 +92,24 @@ def _global_noise_filter(image, n, generator, updator, identical=False, distribu
     return output_array
 
 
-def white_noise(image, n, identical=False, distribution_interval=(-0.5, 0.5), k=0.2):
-    """
-    @brief White noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with white noise applied
+def white_noise(image,
+                n,
+                identical=False,
+                distribution_interval=(-0.5, 0.5),
+                k=0.2):
+    """White noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (-0.5, 0.5))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.2)
+
+    Returns:
+        2D Numpy array with white noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import white_noise
     >>> import numpy as np
@@ -102,19 +124,28 @@ def white_noise(image, n, identical=False, distribution_interval=(-0.5, 0.5), k=
 
     updator = lambda x, n, k, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
 
 
-def gaussian_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.1):
-    """
-    @brief Gaussian noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with gaussian noise applied
+def gaussian_noise(image,
+                   n,
+                   identical=False,
+                   distribution_interval=(0, 1),
+                   k=0.1):
+    """Gaussian noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (0, 1))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.1)
+
+    Returns:
+        2D Numpy array with gaussian noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import gaussian_noise
     >>> import numpy as np
@@ -129,19 +160,28 @@ def gaussian_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.
 
     updator = lambda x, n, k, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
 
 
-def laplace_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.1):
-    """
-    @brief Laplace noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with Laplace noise applied
+def laplace_noise(image,
+                  n,
+                  identical=False,
+                  distribution_interval=(0, 1),
+                  k=0.1):
+    """Laplace noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (0, 1))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.1)
+
+    Returns:
+        2D Numpay array with Laplace noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import laplace_noise
     >>> import numpy as np
@@ -156,19 +196,28 @@ def laplace_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.1
 
     updator = lambda x, n, k, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
 
 
-def cauchy_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.0002):
-    """
-    @brief Cauchy noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with Cauchy noise applied
+def cauchy_noise(image,
+                 n,
+                 identical=False,
+                 distribution_interval=(0, 1),
+                 k=0.0002):
+    """Cauchy noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (0, 1))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.0002)
+
+    Returns:
+        2D Numpy array with Cauchy noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import cauchy_noise
     >>> import numpy as np
@@ -183,19 +232,28 @@ def cauchy_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.00
 
     updator = lambda x, n, k, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
 
 
-def log_normal_noise(image, n, identical=False, distribution_interval=(0, 1), k=0.05):
-    """
-    @brief Log-normal noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with Log-normal noise applied
+def log_normal_noise(image,
+                     n,
+                     identical=False,
+                     distribution_interval=(0, 1),
+                     k=0.05):
+    """Log-normal noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (0, 1))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.05)
+
+    Returns:
+        2D Numpy array with Log-normal noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import log_normal_noise
     >>> import numpy as np
@@ -210,19 +268,28 @@ def log_normal_noise(image, n, identical=False, distribution_interval=(0, 1), k=
 
     updator = lambda x, n, k, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
 
 
-def mut_white_noise(image, n, identical=False, distribution_interval=(-0.5, 0.5), k=0.2):
-    """
-    @brief Multiplied White noise filter to apply on image
-    @param image - image used as input (2D or 3D image representation)
-    @param n - used to set importance of noise [1, 999]
-    @param distribution_interval - set the distribution interval of normal law distribution
-    @param k - variable that specifies the amount of noise to be taken into account in the output image
-    @return Image with multiplied white noise applied
+def mut_white_noise(image,
+                    n,
+                    identical=False,
+                    distribution_interval=(-0.5, 0.5),
+                    k=0.2):
+    """Multiplied White noise filter to apply on image
 
-    Usage :
+    Args:
+        image: image used as input (2D or 3D image representation)
+        n: used to set importance of noise [1, 999]
+        identical: keep or not identical noise distribution for each canal if RGB Image (default False)
+        distribution_interval: set the distribution interval of normal law distribution (default (-0.5, 0.5))
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.2)
+
+    Returns:
+        2D Numpy array with multiplied white noise applied
+
+    Usage:
 
     >>> from ipfml.filters.noise import mut_white_noise
     >>> import numpy as np
@@ -237,6 +304,5 @@ def mut_white_noise(image, n, identical=False, distribution_interval=(-0.5, 0.5)
 
     updator = lambda x, n, k, noise: x * n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, distribution_interval, k)
-
-
+    return _global_noise_filter(image, n, generator, updator, identical,
+                                distribution_interval, k)
