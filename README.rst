@@ -1,19 +1,28 @@
-IPFML
-=====
+Image Processing For Machine Learning
+=====================================
 
-Image Processing For Machine Learning python package.
+.. image:: ipfml_logo.png
 
 This is a package developed during a thesis project.
+
+Installation
+------------
+
+.. code:: bash
+   
+   pip install ifpml
 
 How to use ?
 ------------
 
 To use, simply do :
 
-    >>> from PIL import Image
-    >>> from ipfml import image_processing
-    >>> img = Image.open('path/to/image.png')
-    >>> s = image_processing.get_LAB_L_SVD_s(img)
+.. code:: python
+   
+   from PIL import Image
+   from ipfml import processing
+   img = Image.open('path/to/image.png')
+   s = processing.get_LAB_L_SVD_s(img)
 
 
 Modules

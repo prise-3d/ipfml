@@ -1,5 +1,7 @@
 Description
-============
+=====================================
+
+.. image:: _static/ipfml_logo.png
 
 
 Installation
@@ -7,7 +9,9 @@ Installation
 
 Just install package using pip 
 
-   >>> pip install ipfml
+.. code:: bash
+   
+   pip install ipfml
 
 
 How to use ?
@@ -15,9 +19,9 @@ How to use ?
 
 To use, simply do :
 
-    >>> from PIL import Image
-    >>> from ipfml import image_processing
-    >>> img = Image.open('path/to/image.png')
-    >>> s = image_processing.get_LAB_L_SVD_s(img)
-
-
+.. code:: python
+    
+   from PIL import Image
+   from ipfml import image_processing
+   img = Image.open('path/to/image.png')
+   s = image_processing.get_LAB_L_SVD_s(img)
