@@ -24,7 +24,7 @@ Thank you for taking the time to read this guide for the package's contribution.
 
     2.1. [Python conventions](#python-conventions)
 
-    2.3  [Code documentation](#code-documentation)
+    2.3. [Code documentation](#code-documentation)
 
     2.2. [Test implementation](#test-implementation)
 
