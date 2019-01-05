@@ -4,16 +4,14 @@ import random
 from ipfml import processing
 
 
-def _global_noise_filter(image, n, generator, updator, identical=False, k=0.2):
+def _global_noise_filter(image, generator, updator, identical=False):
     """White noise filter to apply on image
 
     Args:
         image: image used as input (2D or 3D image representation)
-        n: used to set importance of noise [1, 999]
         generator: lambda function used to generate random numpy array with specific distribution
         updator: lambda function used to update pixel value
         identical: keep or not identical noise distribution for each canal if RGB Image (default False)
-        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.2)
 
     Returns:
         2D Numpy array with specified noise applied
@@ -23,9 +21,11 @@ def _global_noise_filter(image, n, generator, updator, identical=False, k=0.2):
     >>> from ipfml.filters.noise import _global_noise_filter as gf
     >>> import numpy as np
     >>> image = np.random.uniform(0, 255, 10000).reshape((100, 100))
-    >>> generator = lambda x: np.random.uniform(-0.5, 0.5, x)
-    >>> updator = lambda x, n, k, noise: x + n * k * noise
-    >>> noisy_image = gf(image, 10, generator, updator)
+    >>> generator = lambda w, h: np.random.uniform(-0.5, 0.5, (w, h))
+    >>> n = 10
+    >>> k = 0.2
+    >>> updator = lambda x, noise: x + n * k * noise
+    >>> noisy_image = gf(image, generator, updator)
     >>> noisy_image.shape
     (100, 100)
     """
@@ -38,52 +38,53 @@ def _global_noise_filter(image, n, generator, updator, identical=False, k=0.2):
     else:
         width, height, nb_chanel = image_array.shape
 
-    nb_pixels = width * height
-
-    if identical:
-        noise_filter = generator(nb_pixels)
+    if nb_chanel == 1 or identical:
+        noise_filter = generator(width, height)
 
     # final output numpy array
     output_array = []
 
-    for chanel in range(0, nb_chanel):
+    # check number of chanel
+    if nb_chanel == 1:
 
-        # getting flatten information from image and noise
-        if nb_chanel == 3:
-            image_array_flatten = image_array[:, :, chanel].reshape(nb_pixels)
-        else:
-            image_array_flatten = image_array.reshape(nb_pixels)
+        image_array_flatten = image_array
 
-        # redefine noise if necessary
-        if not identical:
-            noise_filter = generator(nb_pixels)
+        noisy_image = np.array(
+            list(map(updator, image_array_flatten, noise_filter)))
 
-        # compute new pixel value
-        # n * k * white_noise_filter[i]
-        noisy_image = np.asarray([
-            updator(image_array_flatten[i], n, k, noise_filter[i])
-            for i in range(0, nb_pixels)
-        ])
+        return np.array(noisy_image, 'uint8')
 
-        # reshape and normalize new value
-        noisy_image = noisy_image.reshape((width, height))
+    else:
+        # final output numpy array
+        output_array = []
 
-        noisy_image = np.asarray(noisy_image, 'uint8')
+        for chanel in range(0, nb_chanel):
 
-        # in order to concatenae output array
-        if nb_chanel == 3:
+            # getting flatten information from image and noise
+            image_array_flatten = image_array[:, :, chanel]
+
+            # redefine noise if necessary
+            if not identical:
+                noise_filter = generator(width, height)
+
+            # compute new pixel value
+            # x + n * k * white_noise_filter[i] as example
+            noisy_image = np.array(
+                list(map(updator, image_array_flatten, noise_filter)))
+
+            # set uint8 values
+            noisy_image = np.array(noisy_image, 'uint8')
+
+            # in order to concatenate output array
             noisy_image = noisy_image[:, :, np.newaxis]
 
-        # append new chanel
-        output_array.append(noisy_image)
+            # append new chanel
+            output_array.append(noisy_image)
 
-    # concatenate RGB image
-    if nb_chanel == 3:
+        # concatenate RGB image
         output_array = np.concatenate(output_array, axis=2)
-    else:
-        output_array = np.asarray(output_array).reshape(width, height)
 
-    return output_array
+        return output_array
 
 
 def white_noise(image,
@@ -114,11 +115,11 @@ def white_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.uniform(a, b, x)
+    generator = lambda w, h: np.random.uniform(a, b, (w, h))
 
-    updator = lambda x, n, k, noise: x + n * k * noise
+    updator = lambda x, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def gaussian_noise(image,
@@ -149,11 +150,11 @@ def gaussian_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.normal(a, b, x)
+    generator = lambda w, h: np.random.normal(a, b, (w, h))
 
-    updator = lambda x, n, k, noise: x + n * k * noise
+    updator = lambda x, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def laplace_noise(image,
@@ -184,11 +185,11 @@ def laplace_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.laplace(a, b, x)
+    generator = lambda w, h: np.random.laplace(a, b, (w, h))
 
-    updator = lambda x, n, k, noise: x + n * k * noise
+    updator = lambda x, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def cauchy_noise(image,
@@ -219,11 +220,11 @@ def cauchy_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.standard_cauchy(x)
+    generator = lambda w, h: np.random.standard_cauchy((w, h))
 
-    updator = lambda x, n, k, noise: x + n * k * noise
+    updator = lambda x, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def log_normal_noise(image,
@@ -254,11 +255,11 @@ def log_normal_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.lognormal(a, b, x)
+    generator = lambda w, h: np.random.lognormal(a, b, (w, h))
 
-    updator = lambda x, n, k, noise: x + n * k * noise
+    updator = lambda x, noise: x + n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def mut_white_noise(image,
@@ -289,11 +290,11 @@ def mut_white_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda x: np.random.uniform(a, b, x)
+    generator = lambda w, h: np.random.uniform(a, b, (w, h))
 
-    updator = lambda x, n, k, noise: x * n * k * noise
+    updator = lambda x, noise: x * n * k * noise
 
-    return _global_noise_filter(image, n, generator, updator, identical, k)
+    return _global_noise_filter(image, generator, updator, identical)
 
 
 def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
@@ -319,27 +320,33 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
     (100, 100)
     """
 
-    def _generator(x):
+    def _generator(w, h):
+
+        x = w * h
         nb_elem = int(p * x)
 
         elements = np.full(x, 0)
         elements[0:nb_elem] = 1
         np.random.shuffle(elements)
 
-        return elements
+        return elements.reshape(w, h)
 
     # here noise variable is boolean to update or not pixel value
-    def _updator(x, n, k, noise):
+    def _updator(x, noise):
+
+        # apply specific changes to each value of 1D array
+        if isinstance(x, np.ndarray):
+            return np.array(list(map(_updator, x, noise)))
 
         # probabilty to increase or decrease pixel value
         rand = random.uniform(0, 1)
 
         if noise:
-            if rand >= 0.5:
+            if rand > 0.5:
                 return x + n * k
             else:
                 return x - n * k
         else:
             return x
 
-    return _global_noise_filter(image, n, _generator, _updator, identical, k)
+    return _global_noise_filter(image, _generator, _updator, identical)
