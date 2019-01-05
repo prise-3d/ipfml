@@ -40,3 +40,8 @@ Documentation
 For more information about package, documentation_ is available.
 
 .. _documentation: https://jbuisine.github.io/IPFML/
+
+Contribution
+------------
+
+Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) file if you want to contribute!

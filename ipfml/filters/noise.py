@@ -21,7 +21,7 @@ def _global_noise_filter(image, generator, updator, identical=False):
     >>> from ipfml.filters.noise import _global_noise_filter as gf
     >>> import numpy as np
     >>> image = np.random.uniform(0, 255, 10000).reshape((100, 100))
-    >>> generator = lambda w, h: np.random.uniform(-0.5, 0.5, (w, h))
+    >>> generator = lambda h, w: np.random.uniform(-0.5, 0.5, (h, w))
     >>> n = 10
     >>> k = 0.2
     >>> updator = lambda x, noise: x + n * k * noise
@@ -34,9 +34,9 @@ def _global_noise_filter(image, generator, updator, identical=False):
     nb_chanel = 1
 
     if image_array.ndim != 3:
-        width, height = image_array.shape
+        height, width = image_array.shape
     else:
-        width, height, nb_chanel = image_array.shape
+        height, width, nb_chanel = image_array.shape
 
     if nb_chanel == 1 or identical:
         noise_filter = generator(width, height)
@@ -65,7 +65,7 @@ def _global_noise_filter(image, generator, updator, identical=False):
 
             # redefine noise if necessary
             if not identical:
-                noise_filter = generator(width, height)
+                noise_filter = generator(height, width)
 
             # compute new pixel value
             # x + n * k * white_noise_filter[i] as example
@@ -115,7 +115,7 @@ def white_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.uniform(a, b, (w, h))
+    generator = lambda h, w: np.random.uniform(a, b, (h, w))
 
     updator = lambda x, noise: x + n * k * noise
 
@@ -150,7 +150,7 @@ def gaussian_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.normal(a, b, (w, h))
+    generator = lambda h, w: np.random.normal(a, b, (h, w))
 
     updator = lambda x, noise: x + n * k * noise
 
@@ -185,7 +185,7 @@ def laplace_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.laplace(a, b, (w, h))
+    generator = lambda h, w: np.random.laplace(a, b, (h, w))
 
     updator = lambda x, noise: x + n * k * noise
 
@@ -220,7 +220,7 @@ def cauchy_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.standard_cauchy((w, h))
+    generator = lambda h, w: np.random.standard_cauchy((h, w))
 
     updator = lambda x, noise: x + n * k * noise
 
@@ -255,7 +255,7 @@ def log_normal_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.lognormal(a, b, (w, h))
+    generator = lambda h, w: np.random.lognormal(a, b, (h, w))
 
     updator = lambda x, noise: x + n * k * noise
 
@@ -290,7 +290,7 @@ def mut_white_noise(image,
     """
 
     a, b = distribution_interval
-    generator = lambda w, h: np.random.uniform(a, b, (w, h))
+    generator = lambda h, w: np.random.uniform(a, b, (h, w))
 
     updator = lambda x, noise: x * n * k * noise
 
@@ -320,7 +320,7 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
     (100, 100)
     """
 
-    def _generator(w, h):
+    def _generator(h, w):
 
         x = w * h
         nb_elem = int(p * x)
@@ -329,7 +329,7 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
         elements[0:nb_elem] = 1
         np.random.shuffle(elements)
 
-        return elements.reshape(w, h)
+        return elements.reshape(h, w)
 
     # here noise variable is boolean to update or not pixel value
     def _updator(x, noise):
