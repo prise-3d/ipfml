@@ -17,7 +17,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         from ipfml.filters import noise as noise_filters
 
         print("==============================")
-        print("Run test command...")
+        print("Runs test command...")
         doctest.testmod(processing)
         doctest.testmod(metrics)
         doctest.testmod(noise_filters)
@@ -25,7 +25,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         # Run format code using ypaf
         try:
             print("==============================")
-            print("Run format code command...")
+            print("Runs format code command...")
             self.spawn(['yapf', '-ir', '-vv', 'ipfml'])
         except RuntimeError:
             self.warn('format pakcage code failed')
@@ -33,7 +33,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         # Run update auto generated documentation
         try:
             print("==============================")
-            print("Run update of auto generated documentation...")
+            print("Runs update of auto generated documentation...")
             self.spawn(['bash', './build.sh'])
         except RuntimeError:
             self.warn('Error during documentation rendering')
@@ -43,7 +43,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.2.0',
+    version='0.2.1',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
