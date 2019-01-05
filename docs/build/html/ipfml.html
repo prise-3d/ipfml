@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Documentation &mdash; IPFML v0.2.0 documentation</title>
+  <title>Documentation &mdash; IPFML v0.2.1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.2.1
               </div>
             
           
@@ -1068,6 +1068,39 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">mut_white_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 100)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.filters.noise.salt_pepper_noise">
+<code class="descclassname">ipfml.filters.noise.</code><code class="descname">salt_pepper_noise</code><span class="sig-paren">(</span><em>image</em>, <em>n</em>, <em>identical=False</em>, <em>p=0.1</em>, <em>k=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#ipfml.filters.noise.salt_pepper_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pepper salt noise filter to apply on image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – image used as input (2D or 3D image representation)</li>
+<li><strong>n</strong> – used to set importance of noise [1, 999]</li>
+<li><strong>identical</strong> – keep or not identical noise distribution for each canal if RGB Image (default False)</li>
+<li><strong>p</strong> – probability to increase pixel value otherwise decrease it</li>
+<li><strong>k</strong> – variable that specifies the amount of noise to be taken into account in the output image (default 0.5)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D Numpy array with salt and pepper noise applied</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.noise</span> <span class="k">import</span> <span class="n">salt_pepper_noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span> <span class="o">=</span> <span class="n">salt_pepper_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">noisy_image</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(100, 100)</span>
 </pre></div>

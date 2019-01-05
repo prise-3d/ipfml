@@ -1,15 +1,13 @@
 Image Processing For Machine Learning
 =====================================
 
-.. image:: ipfml_logo.png
-
 This is a package developed during a thesis project.
 
 Installation
 ------------
 
 .. code:: bash
-   
+
    pip install ifpml
 
 How to use ?
@@ -18,7 +16,7 @@ How to use ?
 To use, simply do :
 
 .. code:: python
-   
+
    from PIL import Image
    from ipfml import processing
    img = Image.open('path/to/image.png')
@@ -39,6 +37,11 @@ All these modules will be enhanced during development of the package.
 Documentation
 -------------
 
-For more information about package, documentation_ is available. 
+For more information about package, documentation_ is available.
 
-.. _documentation: https://jbuisine.github.io/IPFML/  
+.. _documentation: https://jbuisine.github.io/IPFML/
+
+Contribution
+------------
+
+Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) file if you want to contribute!

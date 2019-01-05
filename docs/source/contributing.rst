@@ -2,6 +2,8 @@ Contributing
 =====================================
 
 .. image:: _static/ipfml_logo.png
+   :width: 400 px
+   :align: center
 
 
 Using GitHub
@@ -9,7 +11,6 @@ Using GitHub
 
 This git project uses git-flow_ implementation. You are free to contribute to it.
 
-.. _git-flow: https://danielkummer.github.io/git-flow-cheatsheet/    
+.. _git-flow: https://danielkummer.github.io/git-flow-cheatsheet/
 
-You just have to create your own feature branch and make a pull request.
-
+Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) guidelines file if you want more information about process!

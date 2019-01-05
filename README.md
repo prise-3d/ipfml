@@ -1,8 +1,9 @@
 Image Processing For Machine Learning
 =====================================
 
-![ipfml_logo](ipfml_logo.png)
-
+<p align="center">
+    <img src="ipfml_logo.png" width="40%">
+</p>
 
 Installation
 ------------
@@ -37,7 +38,7 @@ All these modules will be enhanced during development of the package. Documentat
 How to contribute
 -----------------
 
-This git project uses [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/) implementation. You are free to contribute to it.
+Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) file if you want to contribute!
 
 ## Contributors
 

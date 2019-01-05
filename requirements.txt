@@ -8,3 +8,4 @@ scipy
 opencv-python
 scipy
 yapf
+doctest
