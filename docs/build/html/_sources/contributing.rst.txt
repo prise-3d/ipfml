@@ -13,4 +13,6 @@ This git project uses git-flow_ implementation. You are free to contribute to it
 
 .. _git-flow: https://danielkummer.github.io/git-flow-cheatsheet/
 
-Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) guidelines file if you want more information about process!
+Please refer to the CONTRIBUTION.md_ guidelines file if you want more information about process!
+
+.. _CONTRIBUTION.md: https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md 

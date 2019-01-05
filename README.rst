@@ -44,4 +44,6 @@ For more information about package, documentation_ is available.
 Contribution
 ------------
 
-Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/LICENSE) file if you want to contribute!
+Please refer to the CONTRIBUTION.md_ file if you want to contribute!
+
+.. _CONTRIBUTION.md: https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md 
