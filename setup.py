@@ -28,22 +28,14 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
             print("Runs format code command...")
             self.spawn(['yapf', '-ir', '-vv', 'ipfml'])
         except RuntimeError:
-            self.warn('format pakcage code failed')
-
-        # Run update auto generated documentation
-        try:
-            print("==============================")
-            print("Runs update of auto generated documentation...")
-            self.spawn(['bash', './build.sh'])
-        except RuntimeError:
-            self.warn('Error during documentation rendering')
+            self.warn('Format pakcage code failed')
 
         setuptools.command.build_py.build_py.run(self)
 
 
 setup(
     name='ipfml',
-    version='0.2.4',
+    version='0.2.5',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[

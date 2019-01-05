@@ -1,4 +1,3 @@
-sphinx
 matplotlib
 numpy
 Pillow
@@ -9,3 +8,4 @@ opencv-python
 scipy
 yapf
 doctest
+sphinx
