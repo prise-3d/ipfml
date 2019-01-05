@@ -38,7 +38,7 @@ All these modules will be enhanced during development of the package. Documentat
 How to contribute
 -----------------
 
-Please refer to the [CONTRIBUTION.md](https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md) file if you want to contribute!
+Please refer to the [guidelines](https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md) file if you want to contribute!
 
 ## Contributors
 
