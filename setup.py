@@ -43,7 +43,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.2.3',
+    version='0.2.4',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
@@ -56,7 +56,7 @@ setup(
     author='Jérôme BUISINE',
     author_email='jerome.buisine@univ-littoral.fr',
     license='MIT',
-    packages=['ipfml'],
+    packages=['ipfml', 'ipfml/filters'],
     install_requires=[
         'matplotlib',
         'numpy',
