@@ -95,6 +95,8 @@ bash build.sh
 firefox docs/index.html
 ```
 
+Do not forget to generate new documentation output before doing a pull request.
+
 ## Test implementation
 
 This project use the [doctest](https://docs.python.org/3/library/doctest.html) package which enables to write tests into documentation as shown in example below:
@@ -138,7 +140,6 @@ python setup.py build
 This command do a lot of thing for you:
   - Runs the tests from documentation and raise errors if there are.
   - Formats all **\*.py** inside *ipfml* folder using **yapf**.
-  - Generate new documentation output inside **docs** folder.
 
 ## Pull request
 
