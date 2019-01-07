@@ -24,9 +24,9 @@ copyright = '2019, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
 # The short X.Y version
-version = '0.2.5'
+version = '0.2.6'
 # The full versiabson, including alpha/beta/rc tags
-release = 'v0.2.5'
+release = 'v0.2.6'
 
 
 # -- General configuration ---------------------------------------------------
@@ -101,6 +101,13 @@ html_theme_options = {
     'navigation_depth': 4,
     'includehidden': True,
     'titles_only': False
+}
+
+html_context = {
+  'display_github': True,
+  'github_user': 'jbuisine',
+  'github_repo': 'IPFML',
+  'github_version': 'master/docs/source/'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

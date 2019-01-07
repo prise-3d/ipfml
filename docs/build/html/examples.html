@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Examples &mdash; IPFML v0.2.5 documentation</title>
+  <title>Examples &mdash; IPFML v0.2.6 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2.5
+                0.2.6
               </div>
             
           
@@ -144,7 +144,9 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/examples.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/jbuisine/IPFML/blob/master/docs/source/examples.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -206,8 +208,9 @@
 <span class="n">img_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/image_nature.jpg&#39;</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
 
-<span class="c1"># set noise impact to 30</span>
-<span class="n">noisy_image</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">gaussian_noise</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="c1"># set noise impact to 400</span>
+<span class="c1"># set same noise for each chanel</span>
+<span class="n">noisy_image</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">gaussian_noise</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">identical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">output</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">noisy_image</span><span class="p">)</span>
 <span class="n">output</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
