@@ -4,6 +4,19 @@ import random
 from ipfml import processing
 
 
+def _normalise(x):
+
+    if isinstance(x, np.ndarray):
+        return np.array(list(map(_normalise, x)))
+
+    if x > 255:
+        return 255
+    if x < 0:
+        return 0
+
+    return x
+
+
 def _global_noise_filter(image, generator, updator, identical=False):
     """White noise filter to apply on image
 
@@ -39,7 +52,7 @@ def _global_noise_filter(image, generator, updator, identical=False):
         height, width, nb_chanel = image_array.shape
 
     if nb_chanel == 1 or identical:
-        noise_filter = generator(width, height)
+        noise_filter = generator(height, width)
 
     # final output numpy array
     output_array = []
@@ -47,12 +60,10 @@ def _global_noise_filter(image, generator, updator, identical=False):
     # check number of chanel
     if nb_chanel == 1:
 
-        image_array_flatten = image_array
+        noisy_image = np.array(list(map(updator, image_array, noise_filter)))
 
-        noisy_image = np.array(
-            list(map(updator, image_array_flatten, noise_filter)))
-
-        return np.array(noisy_image, 'uint8')
+        # normalise values
+        return np.array(list(map(_normalise, noisy_image)), 'uint8')
 
     else:
         # final output numpy array
@@ -61,7 +72,7 @@ def _global_noise_filter(image, generator, updator, identical=False):
         for chanel in range(0, nb_chanel):
 
             # getting flatten information from image and noise
-            image_array_flatten = image_array[:, :, chanel]
+            image_array_chanel = image_array[:, :, chanel]
 
             # redefine noise if necessary
             if not identical:
@@ -70,10 +81,10 @@ def _global_noise_filter(image, generator, updator, identical=False):
             # compute new pixel value
             # x + n * k * white_noise_filter[i] as example
             noisy_image = np.array(
-                list(map(updator, image_array_flatten, noise_filter)))
+                list(map(updator, image_array_chanel, noise_filter)))
 
-            # set uint8 values
-            noisy_image = np.array(noisy_image, 'uint8')
+            # normalise values
+            noisy_image = np.array(list(map(_normalise, noisy_image)), 'uint8')
 
             # in order to concatenate output array
             noisy_image = noisy_image[:, :, np.newaxis]
@@ -265,8 +276,8 @@ def log_normal_noise(image,
 def mut_white_noise(image,
                     n,
                     identical=False,
-                    distribution_interval=(-0.5, 0.5),
-                    k=0.2):
+                    distribution_interval=(0, 1),
+                    k=0.002):
     """Multiplied White noise filter to apply on image
 
     Args:
@@ -274,7 +285,7 @@ def mut_white_noise(image,
         n: used to set importance of noise [1, 999]
         identical: keep or not identical noise distribution for each canal if RGB Image (default False)
         distribution_interval: set the distribution interval of normal law distribution (default (-0.5, 0.5))
-        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.2)
+        k: variable that specifies the amount of noise to be taken into account in the output image (default 0.002)
 
     Returns:
         2D Numpy array with multiplied white noise applied
@@ -292,7 +303,7 @@ def mut_white_noise(image,
     a, b = distribution_interval
     generator = lambda h, w: np.random.uniform(a, b, (h, w))
 
-    updator = lambda x, noise: x * n * k * noise
+    updator = lambda x, noise: x * (n * k * noise)
 
     return _global_noise_filter(image, generator, updator, identical)
 

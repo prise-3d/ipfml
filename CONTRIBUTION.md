@@ -141,6 +141,9 @@ This command do a lot of thing for you:
   - Runs the tests from documentation and raise errors if there are.
   - Formats all **\*.py** inside *ipfml* folder using **yapf**.
 
+Do not forget to build documentation as explained in section [2.3](#code-documentation).
+
+
 ## Pull request
 
 Once you have built the package following previous instructions. You can make a pull request using GitHub. A [documentation](https://help.github.com/articles/about-pull-requests/) about pull requests is available.

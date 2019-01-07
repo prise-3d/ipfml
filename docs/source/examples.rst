@@ -61,8 +61,9 @@ Noise filter example
    img_path = 'path/to/image_nature.jpg'
    img = Image.open(img_path)
 
-   # set noise impact to 30
-   noisy_image = nf.gaussian_noise(img, n=30)
+   # set noise impact to 400
+   # set same noise for each chanel
+   noisy_image = nf.gaussian_noise(img, n=400, identical=True)
 
    output = Image.fromarray(noisy_image)
    output.show()
