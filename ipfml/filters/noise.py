@@ -300,8 +300,8 @@ def mut_white_noise(image,
     (100, 100)
     """
 
-    min_value = 1 - (k/2);
-    max_value = 1 + (k/2);
+    min_value = 1 - (k / 2)
+    max_value = 1 + (k / 2)
 
     a, b = distribution_interval
     generator = lambda h, w: min_value + (np.random.uniform(a, b, (h, w)) * (max_value - min_value))

@@ -1,13 +1,22 @@
 from skimage.measure import compare_ssim, compare_psnr
 from ipfml.exceptions import NumpyShapeComparisonException
 
+import numpy as np
 """
 Full-reference Image Quality Assessment (FR-IQA) methods
 """
 
-def _prepare_arrays(arr1, arr2):
-    img_true = np.asarray(img_true, dtype=float_32)
-    img_test = np.asarray(img_test, dtype=float_32)
+
+def _prepare_arrays(img_true, img_test):
+    """
+    Prepare image data
+
+    Raises:
+        NumpyShapeComparisonException: if shape of images are not the same
+    """
+
+    img_true = np.asarray(img_true, dtype='float32')
+    img_test = np.asarray(img_test, dtype='float32')
 
     if img_true.shape != img_test.shape:
         raise NumpyShapeComparisonException
@@ -16,7 +25,7 @@ def _prepare_arrays(arr1, arr2):
 
 
 def mse(img_true, img_test):
-    """Returns Mean-Squared Error between two Numpy arrays
+    """Returns Mean-Squared Error score between two Numpy arrays
 
     Args:
         img_true: Image, numpy array of any dimension
@@ -29,13 +38,13 @@ def mse(img_true, img_test):
         NumpyShapeComparisonException: if shape of images are not the same
 
     Example:
-        >>> from ipfml import utils
+        >>> from ipfml.iqa import fr
         >>> import numpy as np
         >>> arr1 = np.arange(10)
-        >>> arr2 = np.arange(5, 10)
-        >>> mse = utils.mse(arr1, arr2)
-        >>> mse
-        100
+        >>> arr2 = np.arange(5, 15)
+        >>> mse_score = fr.mse(arr1, arr2)
+        >>> mse_score
+        25.0
     """
 
     img_true, img_test = _prepare_arrays(img_true, img_test)
@@ -44,52 +53,52 @@ def mse(img_true, img_test):
 
 
 def rmse(img_true, img_test):
-    """Returns Mean-Squared Error between two Numpy arrays
+    """Returns Root Mean-Squared Error score between two Numpy arrays
 
     Args:
         img_true: Image, numpy array of any dimension
         img_test: Image, numpy array of any dimension
 
     Returns:
-        Computed MSE score
+        Computed RMSE score
 
     Raises:
         NumpyShapeComparisonException: if shape of images are not the same
 
     Example:
-        >>> from ipfml import utils
+        >>> from ipfml.iqa import fr
         >>> import numpy as np
         >>> arr1 = np.arange(10)
-        >>> arr2 = np.arange(5, 10)
-        >>> rmse = utils.rmse(arr1, arr2)
-        >>> rmse
-        100
+        >>> arr2 = np.arange(5, 15)
+        >>> rmse_score = fr.rmse(arr1, arr2)
+        >>> rmse_score
+        5.0
     """
 
     return np.sqrt(mse(img_true, img_test))
 
 
 def mae(img_true, img_test):
-    """Returns Mean-Squared Error between two Numpy arrays
+    """Returns Mean Absolute Error between two Numpy arrays
 
     Args:
         img_true: Image, numpy array of any dimension
         img_test: Image, numpy array of any dimension
 
     Returns:
-        Computed MSE score
+        Computed MAE score
 
     Raises:
         NumpyShapeComparisonException: if shape of images are not the same
 
     Example:
-        >>> from ipfml import utils
+        >>> from ipfml.iqa import fr
         >>> import numpy as np
         >>> arr1 = np.arange(10)
-        >>> arr2 = np.arange(5, 10)
-        >>> mse = utils.mse(arr1, arr2)
-        >>> mse
-        100
+        >>> arr2 = np.arange(5, 15)
+        >>> mae_score = fr.mae(arr1, arr2)
+        >>> mae_score
+        5.0
     """
 
     img_true, img_test = _prepare_arrays(img_true, img_test)
@@ -106,6 +115,15 @@ def pnsr(img_true, img_test):
 
     Returns:
         Computed PSNR score
+
+    Example:
+        >>> from ipfml.iqa import fr
+        >>> import numpy as np
+        >>> arr1 = np.arange(10)
+        >>> arr2 = np.arange(5, 15)
+        >>> pnsr_score = fr.pnsr(arr1, arr2)
+        >>> int(pnsr_score)
+        365
     """
 
     return compare_psnr(img_true, img_test)

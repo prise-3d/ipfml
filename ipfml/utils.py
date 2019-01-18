@@ -1,9 +1,8 @@
 import numpy as np
-
-
 """
 Utils functions of ipfml package
 """
+
 
 def normalize_arr(arr):
     '''Normalize data of 1D array shape

@@ -10,7 +10,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-#build/
+build/
 develop-eggs/
 dist/
 downloads/
@@ -55,3 +55,6 @@ coverage.xml
 # PyBuilder
 target/
 .python-version
+
+# Docs
+!docs/build
