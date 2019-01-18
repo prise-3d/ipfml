@@ -4,6 +4,7 @@ Utils functions of ipfml package (array normalization)
 
 import numpy as np
 
+
 def normalize_arr(arr):
     '''Normalize data of 1D array shape
 
