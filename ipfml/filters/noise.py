@@ -284,7 +284,7 @@ def mut_white_noise(image,
         image: image used as input (2D or 3D image representation)
         n: used to set importance of noise [1, 999]
         identical: keep or not identical noise distribution for each canal if RGB Image (default False)
-        distribution_interval: set the distribution interval of normal law distribution (default (-0.5, 0.5))
+        distribution_interval: set the distribution interval of normal law distribution (default (0, 1))
         k: variable that specifies the amount of noise to be taken into account in the output image (default 0.002)
 
     Returns:
@@ -300,10 +300,13 @@ def mut_white_noise(image,
     (100, 100)
     """
 
-    a, b = distribution_interval
-    generator = lambda h, w: np.random.uniform(a, b, (h, w))
+    min_value = 1 - (k / 2)
+    max_value = 1 + (k / 2)
 
-    updator = lambda x, noise: x * (n * k * noise)
+    a, b = distribution_interval
+    generator = lambda h, w: min_value + (np.random.uniform(a, b, (h, w)) * (max_value - min_value))
+
+    updator = lambda x, noise: x * pow(noise, n)
 
     return _global_noise_filter(image, generator, updator, identical)
 
