@@ -1,3 +1,7 @@
+"""
+Functions to quickly extract reduced information from image
+"""
+
 from PIL import Image
 from matplotlib import cm
 import random

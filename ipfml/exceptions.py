@@ -1,5 +1,5 @@
 """
-Module which contains all customs Exceptions
+Module which contains all customs Exceptions used into ipfml package
 """
 
 

@@ -17,7 +17,7 @@ What's IPFML ?
 IPFML is a python ackage developed during a thesis project.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    description

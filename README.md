@@ -32,6 +32,8 @@ This project contains modules.
 - **processing** : *Image processing module*
 - **metrics** : *Metrics computation of PIL or 2D numpy image*
 - **filters** : *Image filter module*
+- **utils** : *All utils functions developed for the package*
+- **exceptions** : *All customized exceptions*
 
 All these modules will be enhanced during development of the package. Documentation is available [here](https://jbuisine.github.io/IPFML/).
 

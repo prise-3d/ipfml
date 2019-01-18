@@ -1,8 +1,11 @@
+"""
+Noise filters to apply on images
+"""
+
 import numpy as np
 import random
 
 from ipfml import processing
-
 
 def _normalise(x):
 
