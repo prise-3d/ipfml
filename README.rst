@@ -31,6 +31,8 @@ This project contains modules.
 - **processing** : *Image processing of images*
 - **metrics** : *Metrics computation of PIL or 2D, 3D numpy images*
 - **filters** : *Filters implemented such as noise filters*
+- **utils** : *All utils functions developed for the package*
+- **exceptions** : *All customized exceptions*
 
 All these modules will be enhanced during development of the package.
 
