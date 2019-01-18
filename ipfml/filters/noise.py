@@ -7,6 +7,7 @@ import random
 
 from ipfml import processing
 
+
 def _normalise(x):
 
     if isinstance(x, np.ndarray):
