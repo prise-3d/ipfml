@@ -1,4 +1,6 @@
-# module file which contains all image metrics used in project
+"""
+Functions which can be used to extract information from image
+"""
 
 from numpy.linalg import svd
 from scipy import misc

@@ -24,9 +24,9 @@ copyright = '2019, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
 # The short X.Y version
-version = '0.2.6'
+version = '0.2.8'
 # The full versiabson, including alpha/beta/rc tags
-release = 'v0.2.6'
+release = 'v0.2.8'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,8 +43,13 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
-    'sphinx.ext.autosummary'
+    'sphinx.ext.autosummary',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.coverage'
 ]
+
+autodoc_default_flags = ['members']
+autosummary_generate = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
