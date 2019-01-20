@@ -12,8 +12,9 @@ ipfml.iqa.fr
       mae
       ms_ssim
       mse
-      pnsr
+      psnr
       rmse
+      ssim
       vif
    
    

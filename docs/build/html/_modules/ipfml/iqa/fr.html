@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.iqa.fr &mdash; IPFML v0.2.8 documentation</title>
+  <title>ipfml.iqa.fr &mdash; IPFML v0.2.9 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.2.8
+                0.2.9
               </div>
             
           
@@ -159,7 +159,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<span class="k">def</span> <span class="nf">_prepare_arrays</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_prepare_arrays</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">,</span> <span class="n">p_dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Prepare image data</span>
 
@@ -167,8 +167,8 @@
 <span class="sd">        NumpyShapeComparisonException: if shape of images are not the same</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">img_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-    <span class="n">img_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">img_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">p_dtype</span><span class="p">)</span>
+    <span class="n">img_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">p_dtype</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">img_true</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">img_test</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NumpyShapeComparisonException</span>
@@ -258,7 +258,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">img_true</span> <span class="o">-</span> <span class="n">img_test</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="pnsr"><a class="viewcode-back" href="../../../ipfml/ipfml.iqa.fr.html#ipfml.iqa.fr.pnsr">[docs]</a><span class="k">def</span> <span class="nf">pnsr</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">):</span>
+<div class="viewcode-block" id="psnr"><a class="viewcode-back" href="../../../ipfml/ipfml.iqa.fr.html#ipfml.iqa.fr.psnr">[docs]</a><span class="k">def</span> <span class="nf">psnr</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the computed Peak Signal to Noise Ratio (PSNR) between two images</span>
 
 <span class="sd">    Args:</span>
@@ -271,14 +271,44 @@
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; from ipfml.iqa import fr</span>
 <span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt; arr1 = np.arange(10)</span>
-<span class="sd">        &gt;&gt;&gt; arr2 = np.arange(5, 15)</span>
-<span class="sd">        &gt;&gt;&gt; pnsr_score = fr.pnsr(arr1, arr2)</span>
-<span class="sd">        &gt;&gt;&gt; int(pnsr_score)</span>
-<span class="sd">        365</span>
+<span class="sd">        &gt;&gt;&gt; arr1 = np.arange(100).reshape(10, 10)</span>
+<span class="sd">        &gt;&gt;&gt; arr2 = np.arange(5, 105).reshape(10, 10)</span>
+<span class="sd">        &gt;&gt;&gt; psnr_score = fr.psnr(arr1, arr2)</span>
+<span class="sd">        &gt;&gt;&gt; int(psnr_score)</span>
+<span class="sd">        34</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span> <span class="o">=</span> <span class="n">_prepare_arrays</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">compare_psnr</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ssim"><a class="viewcode-back" href="../../../ipfml/ipfml.iqa.fr.html#ipfml.iqa.fr.ssim">[docs]</a><span class="k">def</span> <span class="nf">ssim</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the computed Structural Similarity (SSIM) between two images</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_true: Image, numpy array of any dimension</span>
+<span class="sd">        img_test: Image, numpy array of any dimension</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Computed SSIM score</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from ipfml.iqa import fr</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; arr1 = np.arange(100).reshape(10, 10)</span>
+<span class="sd">        &gt;&gt;&gt; arr2 = np.arange(5, 105).reshape(10, 10)</span>
+<span class="sd">        &gt;&gt;&gt; ssim_score = fr.ssim(arr1, arr2)</span>
+<span class="sd">        &gt;&gt;&gt; int(ssim_score)</span>
+<span class="sd">        0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span> <span class="o">=</span> <span class="n">_prepare_arrays</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">img_true</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">compare_ssim</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">compare_ssim</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ms_ssim"><a class="viewcode-back" href="../../../ipfml/ipfml.iqa.fr.html#ipfml.iqa.fr.ms_ssim">[docs]</a><span class="k">def</span> <span class="nf">ms_ssim</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">):</span>

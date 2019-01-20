@@ -14,7 +14,7 @@ Image Processing For Machine Learning
 What's IPFML ?
 =================
 
-IPFML is a python ackage developed during a thesis project.
+IPFML is a python package developed during a thesis project.
 
 .. toctree::
    :maxdepth: 3

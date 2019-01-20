@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.iqa.fr &mdash; IPFML v0.2.8 documentation</title>
+  <title>ipfml.iqa.fr &mdash; IPFML v0.2.9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2.8
+                0.2.9
               </div>
             
           
@@ -186,13 +186,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="#ipfml.iqa.fr.mse" title="ipfml.iqa.fr.mse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mse</span></code></a>(img_true,&nbsp;img_test)</td>
 <td>Returns Mean-Squared Error score between two Numpy arrays</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.iqa.fr.pnsr" title="ipfml.iqa.fr.pnsr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pnsr</span></code></a>(img_true,&nbsp;img_test)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.iqa.fr.psnr" title="ipfml.iqa.fr.psnr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psnr</span></code></a>(img_true,&nbsp;img_test)</td>
 <td>Returns the computed Peak Signal to Noise Ratio (PSNR) between two images</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ipfml.iqa.fr.rmse" title="ipfml.iqa.fr.rmse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmse</span></code></a>(img_true,&nbsp;img_test)</td>
 <td>Returns Root Mean-Squared Error score between two Numpy arrays</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.iqa.fr.vif" title="ipfml.iqa.fr.vif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vif</span></code></a>(img_true,&nbsp;img_test)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.iqa.fr.ssim" title="ipfml.iqa.fr.ssim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ssim</span></code></a>(img_true,&nbsp;img_test)</td>
+<td>Returns the computed Structural Similarity (SSIM) between two images</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.iqa.fr.vif" title="ipfml.iqa.fr.vif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vif</span></code></a>(img_true,&nbsp;img_test)</td>
 <td>Implemented later..</td>
 </tr>
 </tbody>
@@ -272,8 +275,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="ipfml.iqa.fr.pnsr">
-<code class="descclassname">ipfml.iqa.fr.</code><code class="descname">pnsr</code><span class="sig-paren">(</span><em>img_true</em>, <em>img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#pnsr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.pnsr" title="Permalink to this definition">¶</a></dt>
+<dt id="ipfml.iqa.fr.psnr">
+<code class="descclassname">ipfml.iqa.fr.</code><code class="descname">psnr</code><span class="sig-paren">(</span><em>img_true</em>, <em>img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#psnr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.psnr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the computed Peak Signal to Noise Ratio (PSNR) between two images</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -293,11 +296,11 @@
 <p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="k">import</span> <span class="n">fr</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pnsr_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">pnsr</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">pnsr_score</span><span class="p">)</span>
-<span class="go">365</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psnr_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">psnr</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">psnr_score</span><span class="p">)</span>
+<span class="go">34</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -332,6 +335,37 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rmse_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">rmse</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rmse_score</span>
 <span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.ssim">
+<code class="descclassname">ipfml.iqa.fr.</code><code class="descname">ssim</code><span class="sig-paren">(</span><em>img_true</em>, <em>img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#ssim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.ssim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the computed Structural Similarity (SSIM) between two images</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img_true</strong> – Image, numpy array of any dimension</li>
+<li><strong>img_test</strong> – Image, numpy array of any dimension</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Computed SSIM score</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="k">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssim_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">ssim</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">ssim_score</span><span class="p">)</span>
+<span class="go">0</span>
 </pre></div>
 </div>
 </dd></dl>
