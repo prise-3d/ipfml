@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing &mdash; IPFML v0.3.0 documentation</title>
+  <title>ipfml.processing &mdash; IPFML v0.3.1 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -156,10 +156,12 @@
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">color</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">ipfml.metrics</span> <span class="k">as</span> <span class="nn">metrics</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">color</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">ipfml.metrics</span> <span class="k">as</span> <span class="nn">metrics</span>
+<span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">exceptions</span>
 
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">signal</span>
 
@@ -255,89 +257,6 @@
 
     <span class="n">L</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_SVD_V</span><span class="p">(</span><span class="n">L</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="divide_in_blocks"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.divide_in_blocks">[docs]</a><span class="k">def</span> <span class="nf">divide_in_blocks</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Divide image into equal size blocks</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: PIL Image or Numpy array</span>
-<span class="sd">        block: tuple (width, height) representing the size of each dimension of the block</span>
-<span class="sd">        pil: block type returned (default True)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        list containing all 2D Numpy blocks (in RGB or not)</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `image_width` or `image_heigt` are not compatible to produce correct block sizes</span>
-
-<span class="sd">    Example:</span>
-
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; image_values = np.random.randint(255, size=(800, 800, 3))</span>
-<span class="sd">    &gt;&gt;&gt; blocks = divide_in_blocks(image_values, (20, 20))</span>
-<span class="sd">    &gt;&gt;&gt; len(blocks)</span>
-<span class="sd">    1600</span>
-<span class="sd">    &gt;&gt;&gt; blocks[0].width</span>
-<span class="sd">    20</span>
-<span class="sd">    &gt;&gt;&gt; blocks[0].height</span>
-<span class="sd">    20</span>
-<span class="sd">    &gt;&gt;&gt; img_l = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; L = metrics.get_LAB_L(img_l)</span>
-<span class="sd">    &gt;&gt;&gt; blocks_L = divide_in_blocks(L, (100, 100))</span>
-<span class="sd">    &gt;&gt;&gt; len(blocks_L)</span>
-<span class="sd">    4</span>
-<span class="sd">    &gt;&gt;&gt; blocks_L[0].width</span>
-<span class="sd">    100</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
-
-    <span class="c1"># convert in Numpy array</span>
-    <span class="n">image_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-
-    <span class="c1"># check dimension of input image</span>
-    <span class="k">if</span> <span class="n">image_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
-        <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
-
-    <span class="c1"># check size compatibility</span>
-    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">block_size</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">image_width</span> <span class="o">%</span> <span class="n">width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Width size issue, block size not compatible&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">image_height</span> <span class="o">%</span> <span class="n">height</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Height size issue, block size not compatible&quot;</span><span class="p">)</span>
-
-    <span class="n">nb_block_width</span> <span class="o">=</span> <span class="n">image_width</span> <span class="o">/</span> <span class="n">width</span>
-    <span class="n">nb_block_height</span> <span class="o">=</span> <span class="n">image_height</span> <span class="o">/</span> <span class="n">height</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nb_block_width</span><span class="p">)):</span>
-
-        <span class="n">begin_x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">width</span>
-
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nb_block_height</span><span class="p">)):</span>
-
-            <span class="n">begin_y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">height</span>
-
-            <span class="c1"># getting sub block information</span>
-            <span class="n">current_block</span> <span class="o">=</span> <span class="n">image_array</span><span class="p">[</span><span class="n">begin_x</span><span class="p">:(</span><span class="n">begin_x</span> <span class="o">+</span> <span class="n">width</span><span class="p">),</span> <span class="n">begin_y</span><span class="p">:(</span>
-                <span class="n">begin_y</span> <span class="o">+</span> <span class="n">height</span><span class="p">)]</span>
-
-            <span class="k">if</span> <span class="n">pil</span><span class="p">:</span>
-                <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">current_block</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">),</span> <span class="n">mode</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_block</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">blocks</span></div>
 
 
 <div class="viewcode-block" id="rgb_to_mscn"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.rgb_to_mscn">[docs]</a><span class="k">def</span> <span class="nf">rgb_to_mscn</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
@@ -440,6 +359,212 @@
     <span class="n">L_block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_bits_img</span><span class="p">(</span><span class="n">L_block</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="divide_in_blocks"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.divide_in_blocks">[docs]</a><span class="k">def</span> <span class="nf">divide_in_blocks</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Divide image into equal size blocks</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image or Numpy array</span>
+<span class="sd">        block: tuple (width, height) representing the size of each dimension of the block</span>
+<span class="sd">        pil: block type returned as PIL Image (default True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list containing all 2D Numpy blocks (in RGB or not)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If `image_width` or `image_height` are not compatible to produce correct block sizes</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
+<span class="sd">    &gt;&gt;&gt; image_values = np.random.randint(255, size=(800, 800, 3))</span>
+<span class="sd">    &gt;&gt;&gt; blocks = divide_in_blocks(image_values, (20, 20))</span>
+<span class="sd">    &gt;&gt;&gt; len(blocks)</span>
+<span class="sd">    1600</span>
+<span class="sd">    &gt;&gt;&gt; blocks[0].width</span>
+<span class="sd">    20</span>
+<span class="sd">    &gt;&gt;&gt; blocks[0].height</span>
+<span class="sd">    20</span>
+<span class="sd">    &gt;&gt;&gt; img_l = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; L = metrics.get_LAB_L(img_l)</span>
+<span class="sd">    &gt;&gt;&gt; blocks_L = divide_in_blocks(L, (100, 100))</span>
+<span class="sd">    &gt;&gt;&gt; len(blocks_L)</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; blocks_L[0].width</span>
+<span class="sd">    100</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
+
+    <span class="c1"># convert in Numpy array</span>
+    <span class="n">image_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="c1"># check dimension of input image</span>
+    <span class="k">if</span> <span class="n">image_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
+        <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># check size compatibility</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">block_size</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">image_width</span> <span class="o">%</span> <span class="n">width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Width size issue, block size not compatible&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">image_height</span> <span class="o">%</span> <span class="n">height</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Height size issue, block size not compatible&quot;</span><span class="p">)</span>
+
+    <span class="n">nb_block_width</span> <span class="o">=</span> <span class="n">image_width</span> <span class="o">/</span> <span class="n">width</span>
+    <span class="n">nb_block_height</span> <span class="o">=</span> <span class="n">image_height</span> <span class="o">/</span> <span class="n">height</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nb_block_width</span><span class="p">)):</span>
+
+        <span class="n">begin_x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">width</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nb_block_height</span><span class="p">)):</span>
+
+            <span class="n">begin_y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">height</span>
+
+            <span class="c1"># getting sub block information</span>
+            <span class="n">current_block</span> <span class="o">=</span> <span class="n">image_array</span><span class="p">[</span><span class="n">begin_x</span><span class="p">:(</span><span class="n">begin_x</span> <span class="o">+</span> <span class="n">width</span><span class="p">),</span> <span class="n">begin_y</span><span class="p">:(</span>
+                <span class="n">begin_y</span> <span class="o">+</span> <span class="n">height</span><span class="p">)]</span>
+
+            <span class="k">if</span> <span class="n">pil</span><span class="p">:</span>
+                <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">current_block</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">),</span> <span class="n">mode</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_block</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">blocks</span></div>
+
+
+<div class="viewcode-block" id="fusion_images"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.fusion_images">[docs]</a><span class="k">def</span> <span class="nf">fusion_images</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Fusion array of images into single image</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        images: array of images (PIL Image or Numpy array)</span>
+<span class="sd">        pil: block type returned as PIL Image (default True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        merged image from array of images</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if `images` is not an array or is empty</span>
+<span class="sd">        NumpyShapeComparisonException: if `images` array contains images with different shapes</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; image_values_1 = np.random.randint(255, size=(800, 800, 3))</span>
+<span class="sd">    &gt;&gt;&gt; image_values_2 = np.random.randint(255, size=(800, 800, 3))</span>
+<span class="sd">    &gt;&gt;&gt; merged_image = processing.fusion_images([image_values_1, image_values_2], pil=False)</span>
+<span class="sd">    &gt;&gt;&gt; merged_image.shape</span>
+<span class="sd">    (800, 800, 3)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Empty array of images provided...&#39;</span><span class="p">)</span>
+
+    <span class="c1"># convert image in numpy array (perhaps not necessary)</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">]</span>
+    <span class="n">image_array</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">image_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># raise exception if all images do not have same shape</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">image_array</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">images</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="n">NumpyShapeComparisonException</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">image_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">image_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">dim</span><span class="p">])</span>
+
+    <span class="n">nb_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+
+    <span class="c1"># construction of mean image from rotation</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">grey_value</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="c1"># for each image we merge pixel values</span>
+                <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+                    <span class="n">grey_value</span> <span class="o">+=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+
+                <span class="n">image_mean</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">grey_value</span> <span class="o">/</span> <span class="n">nb_images</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+                    <span class="n">canal_value</span> <span class="o">=</span> <span class="mi">0</span>
+
+                    <span class="c1"># for each image we merge pixel values</span>
+                    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+                        <span class="n">canal_value</span> <span class="o">+=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+
+                    <span class="n">image_mean</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">canal_value</span> <span class="o">/</span> <span class="n">nb_images</span>
+
+    <span class="n">image_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image_mean</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pil</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image_mean</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image_mean</span></div>
+
+
+<div class="viewcode-block" id="rotate_image"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.rotate_image">[docs]</a><span class="k">def</span> <span class="nf">rotate_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Rotate image using specific angle</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image or Numpy array</span>
+<span class="sd">        angle: Angle value of the rotation</span>
+<span class="sd">        pil: block type returned as PIL Image (default True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Image with rotation applied</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; image_values = np.random.randint(255, size=(800, 800, 3))</span>
+<span class="sd">    &gt;&gt;&gt; rotated_image = processing.rotate_image(image_values, 90, pil=False)</span>
+<span class="sd">    &gt;&gt;&gt; rotated_image.shape</span>
+<span class="sd">    (800, 800, 3)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
+    <span class="n">image_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="c1"># convert image in numpy array (perhaps not necessary)</span>
+    <span class="k">if</span> <span class="n">image_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">rotated_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">image_array</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pil</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">rotated_image</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rotated_image</span></div>
 </pre></div>
 
            </div>
