@@ -5,10 +5,12 @@ Functions to quickly extract reduced information from image
 from PIL import Image
 import random
 
-from skimage import color
-import numpy as np
-import ipfml.metrics as metrics
 import cv2
+from skimage import transform, color
+import numpy as np
+
+import ipfml.metrics as metrics
+from ipfml import exceptions
 
 from scipy import signal
 
@@ -104,89 +106,6 @@ def get_LAB_L_SVD_V(image):
 
     L = metrics.get_LAB_L(image)
     return metrics.get_SVD_V(L)
-
-
-def divide_in_blocks(image, block_size, pil=True):
-    '''Divide image into equal size blocks
-
-    Args:
-        image: PIL Image or Numpy array
-        block: tuple (width, height) representing the size of each dimension of the block
-        pil: block type returned (default True)
-
-    Returns:
-        list containing all 2D Numpy blocks (in RGB or not)
-
-    Raises:
-        ValueError: If `image_width` or `image_heigt` are not compatible to produce correct block sizes
-
-    Example:
-
-    >>> import numpy as np
-    >>> from PIL import Image
-    >>> from ipfml import processing
-    >>> from ipfml import metrics
-    >>> image_values = np.random.randint(255, size=(800, 800, 3))
-    >>> blocks = divide_in_blocks(image_values, (20, 20))
-    >>> len(blocks)
-    1600
-    >>> blocks[0].width
-    20
-    >>> blocks[0].height
-    20
-    >>> img_l = Image.open('./images/test_img.png')
-    >>> L = metrics.get_LAB_L(img_l)
-    >>> blocks_L = divide_in_blocks(L, (100, 100))
-    >>> len(blocks_L)
-    4
-    >>> blocks_L[0].width
-    100
-    '''
-
-    blocks = []
-    mode = 'RGB'
-
-    # convert in Numpy array
-    image_array = np.array(image)
-
-    # check dimension of input image
-    if image_array.ndim != 3:
-        mode = 'L'
-        image_width, image_height = image_array.shape
-    else:
-        image_width, image_height, _ = image_array.shape
-
-    # check size compatibility
-    width, height = block_size
-
-    if (image_width % width != 0):
-        raise ValueError("Width size issue, block size not compatible")
-
-    if (image_height % height != 0):
-        raise ValueError("Height size issue, block size not compatible")
-
-    nb_block_width = image_width / width
-    nb_block_height = image_height / height
-
-    for i in range(int(nb_block_width)):
-
-        begin_x = i * width
-
-        for j in range(int(nb_block_height)):
-
-            begin_y = j * height
-
-            # getting sub block information
-            current_block = image_array[begin_x:(begin_x + width), begin_y:(
-                begin_y + height)]
-
-            if pil:
-                blocks.append(
-                    Image.fromarray(current_block.astype('uint8'), mode))
-            else:
-                blocks.append(current_block)
-
-    return blocks
 
 
 def rgb_to_mscn(image):
@@ -289,3 +208,205 @@ def rgb_to_LAB_L_bits(image, interval):
     L_block = np.asarray(metrics.get_LAB_L(image), 'uint8')
 
     return metrics.get_bits_img(L_block, interval)
+
+
+def divide_in_blocks(image, block_size, pil=True):
+    '''Divide image into equal size blocks
+
+    Args:
+        image: PIL Image or Numpy array
+        block: tuple (width, height) representing the size of each dimension of the block
+        pil: block type returned as PIL Image (default True)
+
+    Returns:
+        list containing all 2D Numpy blocks (in RGB or not)
+
+    Raises:
+        ValueError: If `image_width` or `image_height` are not compatible to produce correct block sizes
+
+    Example:
+
+    >>> import numpy as np
+    >>> from PIL import Image
+    >>> from ipfml import processing
+    >>> from ipfml import metrics
+    >>> image_values = np.random.randint(255, size=(800, 800, 3))
+    >>> blocks = divide_in_blocks(image_values, (20, 20))
+    >>> len(blocks)
+    1600
+    >>> blocks[0].width
+    20
+    >>> blocks[0].height
+    20
+    >>> img_l = Image.open('./images/test_img.png')
+    >>> L = metrics.get_LAB_L(img_l)
+    >>> blocks_L = divide_in_blocks(L, (100, 100))
+    >>> len(blocks_L)
+    4
+    >>> blocks_L[0].width
+    100
+    '''
+
+    blocks = []
+    mode = 'RGB'
+
+    # convert in Numpy array
+    image_array = np.array(image)
+
+    # check dimension of input image
+    if image_array.ndim != 3:
+        mode = 'L'
+        image_width, image_height = image_array.shape
+    else:
+        image_width, image_height, _ = image_array.shape
+
+    # check size compatibility
+    width, height = block_size
+
+    if (image_width % width != 0):
+        raise ValueError("Width size issue, block size not compatible")
+
+    if (image_height % height != 0):
+        raise ValueError("Height size issue, block size not compatible")
+
+    nb_block_width = image_width / width
+    nb_block_height = image_height / height
+
+    for i in range(int(nb_block_width)):
+
+        begin_x = i * width
+
+        for j in range(int(nb_block_height)):
+
+            begin_y = j * height
+
+            # getting sub block information
+            current_block = image_array[begin_x:(begin_x + width), begin_y:(
+                begin_y + height)]
+
+            if pil:
+                blocks.append(
+                    Image.fromarray(current_block.astype('uint8'), mode))
+            else:
+                blocks.append(current_block)
+
+    return blocks
+
+
+def fusion_images(images, pil=True):
+    '''Fusion array of images into single image
+
+    Args:
+        images: array of images (PIL Image or Numpy array)
+        pil: block type returned as PIL Image (default True)
+
+    Returns:
+        merged image from array of images
+
+    Raises:
+        ValueError: if `images` is not an array or is empty
+        NumpyShapeComparisonException: if `images` array contains images with different shapes
+
+    Example:
+
+    >>> import numpy as np
+    >>> from ipfml import processing
+    >>> image_values_1 = np.random.randint(255, size=(800, 800, 3))
+    >>> image_values_2 = np.random.randint(255, size=(800, 800, 3))
+    >>> merged_image = processing.fusion_images([image_values_1, image_values_2], pil=False)
+    >>> merged_image.shape
+    (800, 800, 3)
+    '''
+
+    mode = 'RGB'
+    dim  = 1
+
+    if len(images) == 0:
+        raise ValueError('Empty array of images provided...')
+
+    # convert image in numpy array (perhaps not necessary)
+    images = [np.asarray(img) for img in images]
+    image_array = images[0]
+
+    if image_array.ndim != 3:
+        mode = 'L'
+        width, height = image_array.shape
+    else:
+        width, height, dim = image_array.shape
+
+    # raise exception if all images do not have same shape
+    if not np.array([image_array.shape == a.shape for a in images]).all():
+        raise NumpyShapeComparisonException()
+
+    if dim == 1:
+        image_mean = np.empty([width, height])
+    else:
+        image_mean = np.empty([width, height, dim])
+
+    nb_images = len(images)
+
+    # construction of mean image from rotation
+    for i in range(width):
+        for j in range(height):
+
+            if dim == 1:
+                grey_value = 0
+
+                # for each image we merge pixel values
+                for img in images:
+                    grey_value += img[i][j]
+
+                image_mean[i][j] = grey_value / nb_images
+
+            else:
+                for k in range(dim):
+                    canal_value = 0
+
+                    # for each image we merge pixel values
+                    for img in images:
+                        canal_value += img[i][j][k]
+
+                    image_mean[i][j][k] = canal_value / nb_images
+
+    image_mean = np.array(image_mean, 'uint8')
+
+    if pil:
+        return Image.fromarray(image_mean, mode)
+    else:
+        return image_mean
+
+
+def rotate_image(image, angle=90, pil=True):
+    '''Rotate image using specific angle
+
+    Args:
+        image: PIL Image or Numpy array
+        angle: Angle value of the rotation
+        pil: block type returned as PIL Image (default True)
+
+    Returns:
+        Image with rotation applied
+
+    Example:
+
+    >>> import numpy as np
+    >>> from ipfml import processing
+    >>> image_values = np.random.randint(255, size=(800, 800, 3))
+    >>> rotated_image = processing.rotate_image(image_values, 90, pil=False)
+    >>> rotated_image.shape
+    (800, 800, 3)
+    '''
+
+    mode = 'RGB'
+    image_array = np.asarray(image)
+
+    if image_array.ndim != 3:
+        mode = 'L'
+
+    rotated_image = np.array(transform.rotate(image_array, angle)*255, 'uint8')
+
+    if pil:
+        return Image.fromarray(rotated_image, mode)
+    else:
+        return rotated_image
+
