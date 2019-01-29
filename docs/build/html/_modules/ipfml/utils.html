@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; IPFML v0.3.1 documentation</title>
+  <title>ipfml.utils &mdash; IPFML v0.3.2 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.2
               </div>
             
           
@@ -155,9 +155,11 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="k">import</span> <span class="n">simps</span>
+
 
 <div class="viewcode-block" id="normalize_arr"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.normalize_arr">[docs]</a><span class="k">def</span> <span class="nf">normalize_arr</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Normalize data of 1D array shape</span>
+    <span class="sd">&quot;&quot;&quot;Normalize data of 1D array shape</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        arr: array data of 1D shape</span>
@@ -173,7 +175,7 @@
 <span class="sd">    &gt;&gt;&gt; arr_normalized = utils.normalize_arr(arr)</span>
 <span class="sd">    &gt;&gt;&gt; arr_normalized[1]</span>
 <span class="sd">    0.1</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">output_arr</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">max_value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
@@ -196,10 +198,10 @@
 
 <span class="sd">    Example:</span>
 
-<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; arr = np.arange(11)</span>
-<span class="sd">    &gt;&gt;&gt; arr_normalized = processing.normalize_arr_with_range(arr, 0, 20)</span>
+<span class="sd">    &gt;&gt;&gt; arr_normalized = utils.normalize_arr_with_range(arr, 0, 20)</span>
 <span class="sd">    &gt;&gt;&gt; arr_normalized[1]</span>
 <span class="sd">    0.05</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -246,6 +248,52 @@
             <span class="n">normalize_arr_with_range</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">output_array</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="integral_area_trapz"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.integral_area_trapz">[docs]</a><span class="k">def</span> <span class="nf">integral_area_trapz</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns area under curves from provided data points using Trapezium rule</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        points: array of point coordinates</span>
+<span class="sd">        dx: number of unit for x axis</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Area under curves obtained from these points</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; y_values = np.array([5, 20, 4, 18, 19, 18, 7, 4])</span>
+<span class="sd">    &gt;&gt;&gt; area = utils.integral_area_trapz(y_values, dx=5)</span>
+<span class="sd">    &gt;&gt;&gt; area</span>
+<span class="sd">    452.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="n">dx</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="integral_area_simps"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.integral_area_simps">[docs]</a><span class="k">def</span> <span class="nf">integral_area_simps</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns area under curves from provided data points using Simpsons rule</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        points: array of point coordinates</span>
+<span class="sd">        dx: number of unit for x axis</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Area under curves obtained from these points</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; y_values = np.array([5, 20, 4, 18, 19, 18, 7, 4])</span>
+<span class="sd">    &gt;&gt;&gt; area = utils.integral_area_simps(y_values, dx=5)</span>
+<span class="sd">    &gt;&gt;&gt; area</span>
+<span class="sd">    460.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">simps</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="n">dx</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

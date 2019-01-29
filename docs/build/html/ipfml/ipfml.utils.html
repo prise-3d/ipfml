@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; IPFML v0.3.1 documentation</title>
+  <title>ipfml.utils &mdash; IPFML v0.3.2 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.2
               </div>
             
           
@@ -174,6 +174,12 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.integral_area_simps" title="ipfml.utils.integral_area_simps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_simps</span></code></a>(y_values,&nbsp;dx)</td>
+<td>Returns area under curves from provided data points using Simpsons rule</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.integral_area_trapz" title="ipfml.utils.integral_area_trapz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_trapz</span></code></a>(y_values,&nbsp;dx)</td>
+<td>Returns area under curves from provided data points using Trapezium rule</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.normalize_2D_arr" title="ipfml.utils.normalize_2D_arr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_2D_arr</span></code></a>(arr)</td>
 <td>Return array normalize from its min and max values</td>
 </tr>
@@ -185,6 +191,66 @@
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.utils.integral_area_simps">
+<code class="descclassname">ipfml.utils.</code><code class="descname">integral_area_simps</code><span class="sig-paren">(</span><em>y_values</em>, <em>dx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#integral_area_simps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.integral_area_simps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns area under curves from provided data points using Simpsons rule</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>points</strong> – array of point coordinates</li>
+<li><strong>dx</strong> – number of unit for x axis</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Area under curves obtained from these points</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">integral_area_simps</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span>
+<span class="go">460.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.utils.integral_area_trapz">
+<code class="descclassname">ipfml.utils.</code><code class="descname">integral_area_trapz</code><span class="sig-paren">(</span><em>y_values</em>, <em>dx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#integral_area_trapz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.integral_area_trapz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns area under curves from provided data points using Trapezium rule</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>points</strong> – array of point coordinates</li>
+<li><strong>dx</strong> – number of unit for x axis</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Area under curves obtained from these points</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">integral_area_trapz</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span>
+<span class="go">452.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="ipfml.utils.normalize_2D_arr">
 <code class="descclassname">ipfml.utils.</code><code class="descname">normalize_2D_arr</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#normalize_2D_arr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.normalize_2D_arr" title="Permalink to this definition">¶</a></dt>
@@ -251,10 +317,10 @@
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_normalized</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">normalize_arr_with_range</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_normalized</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">normalize_arr_with_range</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_normalized</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">0.05</span>
 </pre></div>

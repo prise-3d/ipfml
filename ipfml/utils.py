@@ -4,9 +4,11 @@ Utils functions of ipfml package (array normalization)
 
 import numpy as np
 
+from scipy.integrate import simps
+
 
 def normalize_arr(arr):
-    '''Normalize data of 1D array shape
+    """Normalize data of 1D array shape
 
     Args:
         arr: array data of 1D shape
@@ -22,7 +24,7 @@ def normalize_arr(arr):
     >>> arr_normalized = utils.normalize_arr(arr)
     >>> arr_normalized[1]
     0.1
-    '''
+    """
 
     output_arr = []
     max_value = max(arr)
@@ -45,10 +47,10 @@ def normalize_arr_with_range(arr, min, max):
 
     Example:
 
-    >>> from ipfml import processing
+    >>> from ipfml import utils
     >>> import numpy as np
     >>> arr = np.arange(11)
-    >>> arr_normalized = processing.normalize_arr_with_range(arr, 0, 20)
+    >>> arr_normalized = utils.normalize_arr_with_range(arr, 0, 20)
     >>> arr_normalized[1]
     0.05
     '''
@@ -95,3 +97,49 @@ def normalize_2D_arr(arr):
             normalize_arr_with_range(values, min_value, max_value))
 
     return np.asarray(output_array)
+
+
+def integral_area_trapz(y_values, dx):
+    """Returns area under curves from provided data points using Trapezium rule
+
+    Args:
+        points: array of point coordinates
+        dx: number of unit for x axis
+
+    Returns:
+        Area under curves obtained from these points
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> y_values = np.array([5, 20, 4, 18, 19, 18, 7, 4])
+    >>> area = utils.integral_area_trapz(y_values, dx=5)
+    >>> area
+    452.5
+    """
+
+    return np.trapz(y_values, dx=dx)
+
+
+def integral_area_simps(y_values, dx):
+    """Returns area under curves from provided data points using Simpsons rule
+
+    Args:
+        points: array of point coordinates
+        dx: number of unit for x axis
+
+    Returns:
+        Area under curves obtained from these points
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> y_values = np.array([5, 20, 4, 18, 19, 18, 7, 4])
+    >>> area = utils.integral_area_simps(y_values, dx=5)
+    >>> area
+    460.0
+    """
+
+    return simps(y_values, dx=dx)

@@ -10,6 +10,7 @@ ipfml.processing
    .. autosummary::
    
       divide_in_blocks
+      fusion_images
       get_LAB_L_SVD
       get_LAB_L_SVD_U
       get_LAB_L_SVD_V
@@ -18,6 +19,7 @@ ipfml.processing
       rgb_to_LAB_L_low_bits
       rgb_to_grey_low_bits
       rgb_to_mscn
+      rotate_image
    
    
 
