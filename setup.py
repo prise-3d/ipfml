@@ -16,6 +16,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         from ipfml import metrics
         from ipfml.filters import noise as noise_filters
         from ipfml.iqa import fr as fr_iqa
+        from ipfml import utils
 
         print("==============================")
         print("Runs test command...")
@@ -23,6 +24,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         doctest.testmod(metrics)
         doctest.testmod(noise_filters)
         doctest.testmod(fr_iqa)
+        doctest.testmod(utils)
 
         # Run format code using ypaf
         try:
@@ -37,11 +39,11 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.3.1',
+    version='0.3.2',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Artificial Intelligence'
@@ -52,7 +54,6 @@ setup(
     license='MIT',
     packages=['ipfml', 'ipfml/filters', 'ipfml/iqa'],
     install_requires=[
-        'matplotlib',
         'numpy',
         'Pillow',
         'sklearn',

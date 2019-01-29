@@ -319,7 +319,7 @@ def fusion_images(images, pil=True):
     '''
 
     mode = 'RGB'
-    dim  = 1
+    dim = 1
 
     if len(images) == 0:
         raise ValueError('Empty array of images provided...')
@@ -377,7 +377,7 @@ def fusion_images(images, pil=True):
 
 
 def rotate_image(image, angle=90, pil=True):
-    '''Rotate image using specific angle
+    """Rotate image using specific angle
 
     Args:
         image: PIL Image or Numpy array
@@ -389,13 +389,14 @@ def rotate_image(image, angle=90, pil=True):
 
     Example:
 
+    >>> from PIL import Image
     >>> import numpy as np
     >>> from ipfml import processing
-    >>> image_values = np.random.randint(255, size=(800, 800, 3))
+    >>> image_values = Image.open('./images/test_img.png')
     >>> rotated_image = processing.rotate_image(image_values, 90, pil=False)
     >>> rotated_image.shape
-    (800, 800, 3)
-    '''
+    (200, 200, 3)
+    """
 
     mode = 'RGB'
     image_array = np.asarray(image)
@@ -403,10 +404,10 @@ def rotate_image(image, angle=90, pil=True):
     if image_array.ndim != 3:
         mode = 'L'
 
-    rotated_image = np.array(transform.rotate(image_array, angle)*255, 'uint8')
+    rotated_image = np.array(
+        transform.rotate(image_array, angle) * 255, 'uint8')
 
     if pil:
         return Image.fromarray(rotated_image, mode)
     else:
         return rotated_image
-

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing &mdash; IPFML v0.3.1 documentation</title>
+  <title>ipfml.processing &mdash; IPFML v0.3.2 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.2
               </div>
             
           
@@ -528,7 +528,7 @@
 
 
 <div class="viewcode-block" id="rotate_image"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.rotate_image">[docs]</a><span class="k">def</span> <span class="nf">rotate_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Rotate image using specific angle</span>
+    <span class="sd">&quot;&quot;&quot;Rotate image using specific angle</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        image: PIL Image or Numpy array</span>
@@ -540,23 +540,20 @@
 
 <span class="sd">    Example:</span>
 
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
-<span class="sd">    &gt;&gt;&gt; image_values = np.random.randint(255, size=(800, 800, 3))</span>
+<span class="sd">    &gt;&gt;&gt; image_values = Image.open(&#39;./images/test_img.png&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; rotated_image = processing.rotate_image(image_values, 90, pil=False)</span>
 <span class="sd">    &gt;&gt;&gt; rotated_image.shape</span>
-<span class="sd">    (800, 800, 3)</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    (200, 200, 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
     <span class="n">image_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-    <span class="c1"># convert image in numpy array (perhaps not necessary)</span>
     <span class="k">if</span> <span class="n">image_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
 
     <span class="n">rotated_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
         <span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">image_array</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>

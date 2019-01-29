@@ -8,7 +8,7 @@ Installation
 
 .. code:: bash
 
-   pip install ifpml
+   pip install ipfml
 
 How to use ?
 ------------
