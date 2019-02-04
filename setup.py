@@ -26,20 +26,12 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         doctest.testmod(fr_iqa)
         doctest.testmod(utils)
 
-        # Run format code using ypaf
-        try:
-            print("==============================")
-            print("Runs format code command...")
-            self.spawn(['yapf', '-ir', '-vv', 'ipfml'])
-        except RuntimeError:
-            self.warn('Format pakcage code failed')
-
         setuptools.command.build_py.build_py.run(self)
 
 
 setup(
     name='ipfml',
-    version='0.3.2',
+    version='0.3.3',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
@@ -61,7 +53,6 @@ setup(
         'scipy',
         'opencv-python',
         'scipy',
-        'yapf'
     ],
     cmdclass={
         'build_py': BuildTestCommand,
