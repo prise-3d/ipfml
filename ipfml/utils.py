@@ -103,7 +103,7 @@ def integral_area_trapz(y_values, dx):
     """Returns area under curves from provided data points using Trapezium rule
 
     Args:
-        points: array of point coordinates
+        y_values: y values of curve
         dx: number of unit for x axis
 
     Returns:
@@ -126,7 +126,7 @@ def integral_area_simps(y_values, dx):
     """Returns area under curves from provided data points using Simpsons rule
 
     Args:
-        points: array of point coordinates
+        y_values: y values of curve
         dx: number of unit for x axis
 
     Returns:
@@ -143,3 +143,47 @@ def integral_area_simps(y_values, dx):
     """
 
     return simps(y_values, dx=dx)
+
+
+def get_indices_of_highest_values(arr, n):
+    """Returns indices of n highest values from list or 1D numpy array
+
+    Args:
+        arr: List of numpy array
+        n: number of highest elements wanted
+
+    Returns:
+        `n` indices of highest values
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> arr = np.arange(10)
+    >>> indices = utils.get_indices_of_highest_values(arr, 2)
+    >>> indices
+    array([9, 8])
+    """
+    return np.array(arr).argsort()[-n:][::-1]
+
+
+def get_indices_of_lowest_values(arr, n):
+    """Returns indices of n highest values from list or 1D numpy array
+
+    Args:
+        arr: List of numpy array
+        n: number of highest elements wanted
+
+    Returns:
+        `n` indices of highest values
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> arr = np.arange(10)
+    >>> indices = utils.get_indices_of_lowest_values(arr, 2)
+    >>> indices
+    array([0, 1])
+    """
+    return np.array(arr).argsort()[::-1][-n:][::-1]
