@@ -9,6 +9,8 @@ ipfml.utils
 
    .. autosummary::
    
+      get_indices_of_highest_values
+      get_indices_of_lowest_values
       integral_area_simps
       integral_area_trapz
       normalize_2D_arr
