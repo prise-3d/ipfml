@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing &mdash; IPFML v0.3.4 documentation</title>
+  <title>ipfml.processing &mdash; IPFML v0.3.5 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.4
+                0.3.5
               </div>
             
           
@@ -192,19 +192,22 @@
 <tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_s" title="ipfml.processing.get_LAB_L_SVD_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code></a>(image)</td>
 <td>Returns s (Singular values) SVD from L of LAB Image information</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.rgb_to_LAB_L_bits" title="ipfml.processing.rgb_to_LAB_L_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code></a>(image,&nbsp;interval)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_mscn_coefficients" title="ipfml.processing.get_mscn_coefficients"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code></a>(image)</td>
+<td>Compute the Mean Substracted Constrast Normalized coefficients of an image</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rgb_to_LAB_L_bits" title="ipfml.processing.rgb_to_LAB_L_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code></a>(image,&nbsp;interval)</td>
 <td>Returns only bits from LAB L canal specified into the interval</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rgb_to_LAB_L_low_bits" title="ipfml.processing.rgb_to_LAB_L_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_low_bits</span></code></a>(image[,&nbsp;nb_bits])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.rgb_to_LAB_L_low_bits" title="ipfml.processing.rgb_to_LAB_L_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_low_bits</span></code></a>(image[,&nbsp;nb_bits])</td>
 <td>Convert RGB Image into Lab L channel image using only 4 low bits values</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.rgb_to_grey_low_bits" title="ipfml.processing.rgb_to_grey_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_grey_low_bits</span></code></a>(image[,&nbsp;nb_bits])</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rgb_to_grey_low_bits" title="ipfml.processing.rgb_to_grey_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_grey_low_bits</span></code></a>(image[,&nbsp;nb_bits])</td>
 <td>Convert RGB Image into grey image using only 4 low bits values</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rgb_to_mscn" title="ipfml.processing.rgb_to_mscn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_mscn</span></code></a>(image)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.rgb_to_mscn" title="ipfml.processing.rgb_to_mscn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_mscn</span></code></a>(image)</td>
 <td>Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.rotate_image" title="ipfml.processing.rotate_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_image</span></code></a>(image[,&nbsp;angle,&nbsp;pil])</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rotate_image" title="ipfml.processing.rotate_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_image</span></code></a>(image[,&nbsp;angle,&nbsp;pil])</td>
 <td>Rotate image using specific angle</td>
 </tr>
 </tbody>
@@ -393,6 +396,40 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">get_LAB_L_SVD_s</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="go">200</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.get_mscn_coefficients">
+<code class="descclassname">ipfml.processing.</code><code class="descname">get_mscn_coefficients</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing.html#get_mscn_coefficients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.get_mscn_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Mean Substracted Constrast Normalized coefficients of an image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image</strong> – PIL Image, Numpy array or path of image</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">MSCN coefficients</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> – If <cite>image</cite> is set as str path and image was not found</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – If <cite>image</cite> numpy shape are not correct</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mscn_coefficients</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">get_mscn_coefficients</span><span class="p">(</span><span class="n">image_values</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mscn_coefficients</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
 </pre></div>
 </div>
 </dd></dl>
