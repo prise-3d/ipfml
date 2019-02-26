@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing &mdash; IPFML v0.3.4 documentation</title>
+  <title>ipfml.processing &mdash; IPFML v0.3.5 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.4
+                0.3.5
               </div>
             
           
@@ -158,12 +158,13 @@
 
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">color</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">signal</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">ipfml.metrics</span> <span class="k">as</span> <span class="nn">metrics</span>
 <span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">exceptions</span>
 
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">signal</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 
 <div class="viewcode-block" id="get_LAB_L_SVD"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.get_LAB_L_SVD">[docs]</a><span class="k">def</span> <span class="nf">get_LAB_L_SVD</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
@@ -562,6 +563,70 @@
         <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">rotated_image</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">rotated_image</span></div>
+
+
+<div class="viewcode-block" id="get_mscn_coefficients"><a class="viewcode-back" href="../../ipfml/ipfml.processing.html#ipfml.processing.get_mscn_coefficients">[docs]</a><span class="k">def</span> <span class="nf">get_mscn_coefficients</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Mean Substracted Constrast Normalized coefficients of an image</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image, Numpy array or path of image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        MSCN coefficients</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If `image` is set as str path and image was not found</span>
+<span class="sd">        ValueError: If `image` numpy shape are not correct</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; image_values = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; mscn_coefficients = processing.get_mscn_coefficients(image_values)</span>
+<span class="sd">    &gt;&gt;&gt; mscn_coefficients.shape</span>
+<span class="sd">    (200, 200)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+            <span class="c1"># open image directly as grey level image</span>
+            <span class="n">imdist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Image not found in your system&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># convert if necessary to grey level numpy array</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">imdist</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">imdist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Incorrect image shape&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># if PIL Image</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">imdist</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">imdist</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Incorrect image shape&#39;</span><span class="p">)</span>
+
+    <span class="n">imdist</span> <span class="o">=</span> <span class="n">imdist</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">imdist</span> <span class="o">=</span> <span class="n">imdist</span> <span class="o">/</span> <span class="mf">255.0</span>
+
+    <span class="c1"># calculating MSCN coefficients</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span>
+        <span class="n">imdist</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">borderType</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">BORDER_CONSTANT</span><span class="p">)</span>
+    <span class="n">mu_sq</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">mu</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span>
+        <span class="n">imdist</span> <span class="o">*</span> <span class="n">imdist</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="n">borderType</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">BORDER_CONSTANT</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">sigma</span> <span class="o">-</span> <span class="n">mu_sq</span><span class="p">)))</span>
+    <span class="n">structdis</span> <span class="o">=</span> <span class="p">(</span><span class="n">imdist</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">structdis</span></div>
 </pre></div>
 
            </div>

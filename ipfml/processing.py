@@ -7,12 +7,13 @@ import random
 
 import cv2
 from skimage import transform, color
-import numpy as np
+from scipy import signal
 
+import numpy as np
 import ipfml.metrics as metrics
 from ipfml import exceptions
 
-from scipy import signal
+import os
 
 
 def get_LAB_L_SVD(image):
@@ -411,3 +412,67 @@ def rotate_image(image, angle=90, pil=True):
         return Image.fromarray(rotated_image, mode)
     else:
         return rotated_image
+
+
+def get_mscn_coefficients(image):
+    """Compute the Mean Substracted Constrast Normalized coefficients of an image
+
+    Args:
+        image: PIL Image, Numpy array or path of image
+
+    Returns:
+        MSCN coefficients
+
+    Raises:
+        FileNotFoundError: If `image` is set as str path and image was not found
+        ValueError: If `image` numpy shape are not correct
+
+    Example:
+
+    >>> from PIL import Image
+    >>> import numpy as np
+    >>> from ipfml import processing
+    >>> image_values = Image.open('./images/test_img.png')
+    >>> mscn_coefficients = processing.get_mscn_coefficients(image_values)
+    >>> mscn_coefficients.shape
+    (200, 200)
+    """
+
+    if isinstance(image, str):
+        if os.path.exists(image):
+            # open image directly as grey level image
+            imdist = cv2.imread(image, 0)
+        else:
+            raise FileNotFoundError('Image not found in your system')
+
+    elif isinstance(image, np.ndarray):
+        # convert if necessary to grey level numpy array
+        if image.ndim == 2:
+            imdist = image
+        if image.ndim == 3:
+            imdist = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            raise ValueError('Incorrect image shape')
+    else:
+        # if PIL Image
+        image = np.asarray(image)
+
+        if image.ndim == 2:
+            imdist = image
+        if image.ndim == 3:
+            imdist = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            raise ValueError('Incorrect image shape')
+
+    imdist = imdist.astype(np.float64)
+    imdist = imdist / 255.0
+
+    # calculating MSCN coefficients
+    mu = cv2.GaussianBlur(
+        imdist, (7, 7), 7 / 6, borderType=cv2.BORDER_CONSTANT)
+    mu_sq = mu * mu
+    sigma = cv2.GaussianBlur(
+        imdist * imdist, (7, 7), 7 / 6, borderType=cv2.BORDER_CONSTANT)
+    sigma = np.sqrt(abs((sigma - mu_sq)))
+    structdis = (imdist - mu) / (sigma + 1)
+    return structdis
