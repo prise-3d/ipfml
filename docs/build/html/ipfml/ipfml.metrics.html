@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.metrics &mdash; IPFML v0.3.5 documentation</title>
+  <title>ipfml.metrics &mdash; IPFML v0.3.6 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.5
+                0.3.6
               </div>
             
           
@@ -608,9 +608,10 @@
 </table>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">rgb_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">gray_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(200, 200)</span>
 </pre></div>

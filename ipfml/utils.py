@@ -3,6 +3,7 @@ Utils functions of ipfml package (array normalization)
 """
 
 import numpy as np
+import math
 
 from scipy.integrate import simps
 
@@ -187,3 +188,95 @@ def get_indices_of_lowest_values(arr, n):
     array([0, 1])
     """
     return np.array(arr).argsort()[::-1][-n:][::-1]
+
+
+def get_entropy(arr):
+    """Returns the computed entropy from arr
+
+    Args:
+        arr: numpy array
+
+    Returns:
+        entropy score computed
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> arr = np.arange(10)
+    >>> entropy = utils.get_entropy(arr)
+    >>> int(entropy)
+    0
+    """
+
+    arr = np.array(arr)
+    eigen_values = []
+    sum_eigen_values = (arr * arr).sum()
+
+    for val in arr:
+        eigen_values.append(val * val)
+
+    v = []
+
+    for val in eigen_values:
+        v.append(val / sum_eigen_values)
+
+    entropy = 0
+
+    for val in v:
+        if val > 0:
+            entropy += val * math.log(val)
+
+    entropy *= -1
+
+    entropy /= math.log(len(v))
+
+    return entropy
+
+
+def get_entropy_without_i(arr, i):
+    """Returns the computed entropy from arr without contribution of i
+
+    Args:
+        arr: numpy array
+        i: column index
+
+    Returns:
+        entropy score computed
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> arr = np.arange(10)
+    >>> entropy = utils.get_entropy_without_i(arr, 3)
+    >>> int(entropy)
+    0
+    """
+
+    arr = np.array([v for index, v in enumerate(arr) if index != i])
+
+    return get_entropy(arr)
+
+
+def get_entropy_contribution_of_i(arr, i):
+    """Returns the entropy contribution i column
+
+    Args:
+        arr: numpy array
+        i: column index
+
+    Returns:
+        entropy contribution score computed
+
+    Example:
+
+    >>> from ipfml import utils
+    >>> import numpy as np
+    >>> arr = np.arange(10)
+    >>> entropy = utils.get_entropy_contribution_of_i(arr, 3)
+    >>> int(entropy)
+    0
+    """
+
+    return get_entropy(arr) - get_entropy_without_i(arr, i)

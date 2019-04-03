@@ -382,9 +382,10 @@ def gray_to_mscn(image):
     Usage:
 
     >>> from PIL import Image
-    >>> from ipfml import processing
+    >>> from ipfml import metrics
     >>> img = Image.open('./images/test_img.png')
-    >>> img_mscn = processing.rgb_to_mscn(img)
+    >>> img = metrics.get_LAB_L(img)
+    >>> img_mscn = metrics.gray_to_mscn(img)
     >>> img_mscn.shape
     (200, 200)
     """

@@ -349,6 +349,19 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
 
         return elements.reshape(h, w)
 
+    image_array = np.array(image)
+    if image_array.ndim == 3:
+        height, width, _ = image_array.shape
+    else:
+        height, width = image_array.shape
+
+    # need same random variable for each pixel value if identical
+    if identical:
+        gen = np.random.uniform(0, 1, height * width)
+        for i in range(2):
+            gen = np.insert(gen, 0, gen)
+        gen = iter(gen)
+
     # here noise variable is boolean to update or not pixel value
     def _updator(x, noise):
 
@@ -357,7 +370,10 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
             return np.array(list(map(_updator, x, noise)))
 
         # probabilty to increase or decrease pixel value
-        rand = random.uniform(0, 1)
+        if identical:
+            rand = next(gen)
+        else:
+            rand = random.uniform(0, 1)
 
         if noise:
             if rand > 0.5:

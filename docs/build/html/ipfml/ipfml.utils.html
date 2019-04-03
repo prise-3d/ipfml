@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; IPFML v0.3.5 documentation</title>
+  <title>ipfml.utils &mdash; IPFML v0.3.6 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.5
+                0.3.6
               </div>
             
           
@@ -174,29 +174,123 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.get_indices_of_highest_values" title="ipfml.utils.get_indices_of_highest_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_indices_of_highest_values</span></code></a>(arr,&nbsp;n)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.get_entropy" title="ipfml.utils.get_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_entropy</span></code></a>(arr)</td>
+<td>Returns the computed entropy from arr</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.get_entropy_contribution_of_i" title="ipfml.utils.get_entropy_contribution_of_i"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_entropy_contribution_of_i</span></code></a>(arr,&nbsp;i)</td>
+<td>Returns the entropy contribution i column</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.get_entropy_without_i" title="ipfml.utils.get_entropy_without_i"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_entropy_without_i</span></code></a>(arr,&nbsp;i)</td>
+<td>Returns the computed entropy from arr without contribution of i</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.get_indices_of_highest_values" title="ipfml.utils.get_indices_of_highest_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_indices_of_highest_values</span></code></a>(arr,&nbsp;n)</td>
 <td>Returns indices of n highest values from list or 1D numpy array</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.get_indices_of_lowest_values" title="ipfml.utils.get_indices_of_lowest_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_indices_of_lowest_values</span></code></a>(arr,&nbsp;n)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.get_indices_of_lowest_values" title="ipfml.utils.get_indices_of_lowest_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_indices_of_lowest_values</span></code></a>(arr,&nbsp;n)</td>
 <td>Returns indices of n highest values from list or 1D numpy array</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.integral_area_simps" title="ipfml.utils.integral_area_simps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_simps</span></code></a>(y_values,&nbsp;dx)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.integral_area_simps" title="ipfml.utils.integral_area_simps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_simps</span></code></a>(y_values,&nbsp;dx)</td>
 <td>Returns area under curves from provided data points using Simpsons rule</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.integral_area_trapz" title="ipfml.utils.integral_area_trapz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_trapz</span></code></a>(y_values,&nbsp;dx)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.integral_area_trapz" title="ipfml.utils.integral_area_trapz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integral_area_trapz</span></code></a>(y_values,&nbsp;dx)</td>
 <td>Returns area under curves from provided data points using Trapezium rule</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.normalize_2D_arr" title="ipfml.utils.normalize_2D_arr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_2D_arr</span></code></a>(arr)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.normalize_2D_arr" title="ipfml.utils.normalize_2D_arr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_2D_arr</span></code></a>(arr)</td>
 <td>Return array normalize from its min and max values</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.normalize_arr" title="ipfml.utils.normalize_arr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_arr</span></code></a>(arr)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.normalize_arr" title="ipfml.utils.normalize_arr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_arr</span></code></a>(arr)</td>
 <td>Normalize data of 1D array shape</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.utils.normalize_arr_with_range" title="ipfml.utils.normalize_arr_with_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_arr_with_range</span></code></a>(arr,&nbsp;min,&nbsp;max)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.utils.normalize_arr_with_range" title="ipfml.utils.normalize_arr_with_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_arr_with_range</span></code></a>(arr,&nbsp;min,&nbsp;max)</td>
 <td>Normalize data of 1D array shape</td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.utils.get_entropy">
+<code class="descclassname">ipfml.utils.</code><code class="descname">get_entropy</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#get_entropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.get_entropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the computed entropy from arr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arr</strong> – numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">entropy score computed</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_entropy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.utils.get_entropy_contribution_of_i">
+<code class="descclassname">ipfml.utils.</code><code class="descname">get_entropy_contribution_of_i</code><span class="sig-paren">(</span><em>arr</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#get_entropy_contribution_of_i"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.get_entropy_contribution_of_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the entropy contribution i column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arr</strong> – numpy array</li>
+<li><strong>i</strong> – column index</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">entropy contribution score computed</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_entropy_contribution_of_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.utils.get_entropy_without_i">
+<code class="descclassname">ipfml.utils.</code><code class="descname">get_entropy_without_i</code><span class="sig-paren">(</span><em>arr</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#get_entropy_without_i"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.get_entropy_without_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the computed entropy from arr without contribution of i</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arr</strong> – numpy array</li>
+<li><strong>i</strong> – column index</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">entropy score computed</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_entropy_without_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="ipfml.utils.get_indices_of_highest_values">
 <code class="descclassname">ipfml.utils.</code><code class="descname">get_indices_of_highest_values</code><span class="sig-paren">(</span><em>arr</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/utils.html#get_indices_of_highest_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.utils.get_indices_of_highest_values" title="Permalink to this definition">¶</a></dt>
