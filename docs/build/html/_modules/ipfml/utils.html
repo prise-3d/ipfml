@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; IPFML v0.3.5 documentation</title>
+  <title>ipfml.utils &mdash; IPFML v0.3.6 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.5
+                0.3.6
               </div>
             
           
@@ -154,6 +154,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="k">import</span> <span class="n">simps</span>
 
@@ -338,6 +339,98 @@
 <span class="sd">    array([0, 1])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="n">n</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_entropy"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.get_entropy">[docs]</a><span class="k">def</span> <span class="nf">get_entropy</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the computed entropy from arr</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arr: numpy array</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        entropy score computed</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; arr = np.arange(10)</span>
+<span class="sd">    &gt;&gt;&gt; entropy = utils.get_entropy(arr)</span>
+<span class="sd">    &gt;&gt;&gt; int(entropy)</span>
+<span class="sd">    0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">eigen_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sum_eigen_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">*</span> <span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="n">eigen_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">eigen_values</span><span class="p">:</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="n">sum_eigen_values</span><span class="p">)</span>
+
+    <span class="n">entropy</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">entropy</span> <span class="o">+=</span> <span class="n">val</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">entropy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">entropy</span> <span class="o">/=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">entropy</span></div>
+
+
+<div class="viewcode-block" id="get_entropy_without_i"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.get_entropy_without_i">[docs]</a><span class="k">def</span> <span class="nf">get_entropy_without_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the computed entropy from arr without contribution of i</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arr: numpy array</span>
+<span class="sd">        i: column index</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        entropy score computed</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; arr = np.arange(10)</span>
+<span class="sd">    &gt;&gt;&gt; entropy = utils.get_entropy_without_i(arr, 3)</span>
+<span class="sd">    &gt;&gt;&gt; int(entropy)</span>
+<span class="sd">    0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">get_entropy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_entropy_contribution_of_i"><a class="viewcode-back" href="../../ipfml/ipfml.utils.html#ipfml.utils.get_entropy_contribution_of_i">[docs]</a><span class="k">def</span> <span class="nf">get_entropy_contribution_of_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the entropy contribution i column</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arr: numpy array</span>
+<span class="sd">        i: column index</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        entropy contribution score computed</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml import utils</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; arr = np.arange(10)</span>
+<span class="sd">    &gt;&gt;&gt; entropy = utils.get_entropy_contribution_of_i(arr, 3)</span>
+<span class="sd">    &gt;&gt;&gt; int(entropy)</span>
+<span class="sd">    0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">get_entropy</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">get_entropy_without_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

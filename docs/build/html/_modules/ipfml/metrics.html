@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.metrics &mdash; IPFML v0.3.5 documentation</title>
+  <title>ipfml.metrics &mdash; IPFML v0.3.6 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.3.5
+                0.3.6
               </div>
             
           
@@ -533,9 +533,10 @@
 <span class="sd">    Usage:</span>
 
 <span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import processing</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
 <span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; img_mscn = processing.rgb_to_mscn(img)</span>
+<span class="sd">    &gt;&gt;&gt; img = metrics.get_LAB_L(img)</span>
+<span class="sd">    &gt;&gt;&gt; img_mscn = metrics.gray_to_mscn(img)</span>
 <span class="sd">    &gt;&gt;&gt; img_mscn.shape</span>
 <span class="sd">    (200, 200)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
