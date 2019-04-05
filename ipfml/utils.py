@@ -4,6 +4,7 @@ Utils functions of ipfml package (array normalization)
 
 import numpy as np
 import math
+import sys
 
 from scipy.integrate import simps
 
@@ -32,7 +33,11 @@ def normalize_arr(arr):
     min_value = min(arr)
 
     for v in arr:
-        output_arr.append((v - min_value) / (max_value - min_value))
+        try:
+            output_arr.append((v - min_value) / (max_value - min_value))
+        except ZeroDivisionError:
+            output_arr.append((v - min_value) /
+                              (max_value - min_value + sys.float_info.epsilon))
 
     return output_arr
 
@@ -59,7 +64,10 @@ def normalize_arr_with_range(arr, min, max):
     output_arr = []
 
     for v in arr:
-        output_arr.append((v - min) / (max - min))
+        try:
+            output_arr.append((v - min) / (max - min))
+        except ZeroDivisionError:
+            output_arr.append((v - min) / (max - min + sys.float_info.epsilon))
 
     return output_arr
 
