@@ -46,6 +46,6 @@ Please refer to the [guidelines](https://github.com/prise-3d/IPFML/blob/master/C
 
 * [jbuisine](https://github.com/jbuisine)
 
-## Licence
+## License
 
 [MIT](https://github.com/prise-3d/IPFML/blob/master/LICENSE)

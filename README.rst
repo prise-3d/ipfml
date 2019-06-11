@@ -41,11 +41,11 @@ Documentation
 
 For more information about package, documentation_ is available.
 
-.. _documentation: https://jbuisine.github.io/IPFML/
+.. _documentation: https://prise-3d.github.io/IPFML/
 
-Contribution
+Contributing
 ------------
 
 Please refer to the guidelines_ file if you want to contribute!
 
-.. _guidelines: https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md 
+.. _guidelines: https://github.com/prise-3d/IPFML/blob/master/CONTRIBUTING.md 
