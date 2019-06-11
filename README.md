@@ -35,12 +35,12 @@ This project contains modules.
 - **utils** : *All utils functions developed for the package*
 - **exceptions** : *All customized exceptions*
 
-All these modules will be enhanced during development of the package. Documentation is available [here](https://jbuisine.github.io/IPFML/).
+All these modules will be enhanced during development of the package. Documentation is available [here](https://prise-3d.github.io/IPFML/).
 
 How to contribute
 -----------------
 
-Please refer to the [guidelines](https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md) file if you want to contribute!
+Please refer to the [guidelines](https://github.com/prise-3d/IPFML/blob/master/CONTRIBUTING.md) file if you want to contribute!
 
 ## Contributors
 
@@ -48,4 +48,4 @@ Please refer to the [guidelines](https://github.com/jbuisine/IPFML/blob/master/C
 
 ## Licence
 
-[MIT](https://github.com/jbuisine/IPFML/blob/master/LICENSE)
+[MIT](https://github.com/prise-3d/IPFML/blob/master/LICENSE)
