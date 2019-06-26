@@ -58,3 +58,6 @@ target/
 
 # Docs
 !docs/build
+
+# IDE
+.vscode

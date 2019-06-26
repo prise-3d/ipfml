@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing &mdash; IPFML v0.3.9 documentation</title>
+  <title>ipfml.processing &mdash; IPFML v0.4.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.9
+                0.4.0
               </div>
             
           
@@ -177,23 +177,29 @@
 <tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.divide_in_blocks" title="ipfml.processing.divide_in_blocks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_in_blocks</span></code></a>(image,&nbsp;block_size[,&nbsp;pil])</td>
 <td>Divide image into equal size blocks</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.fusion_images" title="ipfml.processing.fusion_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fusion_images</span></code></a>(images[,&nbsp;pil])</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.fast_ica_reconstruction" title="ipfml.processing.fast_ica_reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fast_ica_reconstruction</span></code></a>(image,&nbsp;components)</td>
+<td>Reconstruct an image from SVD compression using specific number of components to use</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.fusion_images" title="ipfml.processing.fusion_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fusion_images</span></code></a>(images[,&nbsp;pil])</td>
 <td>Fusion array of images into single image</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD" title="ipfml.processing.get_LAB_L_SVD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD</span></code></a>(image)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD" title="ipfml.processing.get_LAB_L_SVD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD</span></code></a>(image)</td>
 <td>Returns Singular values from LAB L Image information</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_U" title="ipfml.processing.get_LAB_L_SVD_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_U</span></code></a>(image)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_U" title="ipfml.processing.get_LAB_L_SVD_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_U</span></code></a>(image)</td>
 <td>Returns U SVD from L of LAB Image information</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_V" title="ipfml.processing.get_LAB_L_SVD_V"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_V</span></code></a>(image)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_V" title="ipfml.processing.get_LAB_L_SVD_V"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_V</span></code></a>(image)</td>
 <td>Returns V SVD from L of LAB Image information</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_s" title="ipfml.processing.get_LAB_L_SVD_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code></a>(image)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_LAB_L_SVD_s" title="ipfml.processing.get_LAB_L_SVD_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code></a>(image)</td>
 <td>Returns s (Singular values) SVD from L of LAB Image information</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.get_mscn_coefficients" title="ipfml.processing.get_mscn_coefficients"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code></a>(image)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.get_mscn_coefficients" title="ipfml.processing.get_mscn_coefficients"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code></a>(image)</td>
 <td>Compute the Mean Substracted Constrast Normalized coefficients of an image</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.ipca_reconstruction" title="ipfml.processing.ipca_reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipca_reconstruction</span></code></a>(image,&nbsp;components[,&nbsp;…])</td>
+<td>Reconstruct an image from SVD compression using specific number of components to use and batch size</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rgb_to_LAB_L_bits" title="ipfml.processing.rgb_to_LAB_L_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code></a>(image,&nbsp;interval)</td>
 <td>Returns only bits from LAB L canal specified into the interval</td>
@@ -209,6 +215,9 @@
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ipfml.processing.rotate_image" title="ipfml.processing.rotate_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate_image</span></code></a>(image[,&nbsp;angle,&nbsp;pil])</td>
 <td>Rotate image using specific angle</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.svd_reconstruction" title="ipfml.processing.svd_reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svd_reconstruction</span></code></a>(image,&nbsp;interval)</td>
+<td>Reconstruct an image from SVD compression using specific interval of Singular Values</td>
 </tr>
 </tbody>
 </table>
@@ -255,6 +264,37 @@
 <span class="go">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">blocks_L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">width</span>
 <span class="go">100</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.fast_ica_reconstruction">
+<code class="descclassname">ipfml.processing.</code><code class="descname">fast_ica_reconstruction</code><span class="sig-paren">(</span><em>image</em>, <em>components</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing.html#fast_ica_reconstruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.fast_ica_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from SVD compression using specific number of components to use</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – PIL Image, Numpy array or path of 3D image</li>
+<li><strong>components</strong> – Number of components used for reconstruction</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Reconstructed image</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">fast_ica_reconstruction</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -435,6 +475,38 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="ipfml.processing.ipca_reconstruction">
+<code class="descclassname">ipfml.processing.</code><code class="descname">ipca_reconstruction</code><span class="sig-paren">(</span><em>image</em>, <em>components</em>, <em>_batch_size=25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing.html#ipca_reconstruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.ipca_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from SVD compression using specific number of components to use and batch size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – PIL Image, Numpy array or path of 3D image</li>
+<li><strong>components</strong> – Number of components used for reconstruction</li>
+<li><strong>batch_size</strong> – Batch size used for learn (default 25)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Reconstructed image</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">ipca_reconstruction</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="ipfml.processing.rgb_to_LAB_L_bits">
 <code class="descclassname">ipfml.processing.</code><code class="descname">rgb_to_LAB_L_bits</code><span class="sig-paren">(</span><em>image</em>, <em>interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing.html#rgb_to_LAB_L_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.rgb_to_LAB_L_bits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns only bits from LAB L canal specified into the interval</p>
@@ -576,6 +648,37 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_image</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">rotate_image</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">pil</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_image</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.svd_reconstruction">
+<code class="descclassname">ipfml.processing.</code><code class="descname">svd_reconstruction</code><span class="sig-paren">(</span><em>image</em>, <em>interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing.html#svd_reconstruction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.svd_reconstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from SVD compression using specific interval of Singular Values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – PIL Image, Numpy array or path of 3D image</li>
+<li><strong>interval</strong> – Interval used for reconstruction</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Reconstructed image</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">svd_reconstruction</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
 </pre></div>
 </div>
 </dd></dl>
