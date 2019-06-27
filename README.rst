@@ -18,9 +18,9 @@ To use, simply do :
 .. code:: python
 
    from PIL import Image
-   from ipfml import processing
+   from ipfml.processing import transform
    img = Image.open('path/to/image.png')
-   s = processing.get_LAB_L_SVD_s(img)
+   s = transform.get_LAB_L_SVD_s(img)
 
 
 Modules
@@ -28,11 +28,12 @@ Modules
 
 This project contains modules.
 
-- **processing** : *Image processing of images*
-- **metrics** : *Metrics computation of PIL or 2D, 3D numpy images*
-- **filters** : *Filters implemented such as noise filters*
+- **metrics** : *Metrics computation for model performance*
 - **utils** : *All utils functions developed for the package*
 - **exceptions** : *All customized exceptions*
+- **filters** : *Image filter module*
+- **iqa** : *Image quality assessments*
+- **processing** : *Image processing module*
 
 All these modules will be enhanced during development of the package.
 
@@ -41,11 +42,11 @@ Documentation
 
 For more information about package, documentation_ is available.
 
-.. _documentation: https://prise-3d.github.io/IPFML/
+.. _documentation: https://prise-3d.github.io/ipfml/
 
 Contributing
 ------------
 
 Please refer to the guidelines_ file if you want to contribute!
 
-.. _guidelines: https://github.com/prise-3d/IPFML/blob/master/CONTRIBUTING.md 
+.. _guidelines: https://github.com/prise-3d/ipfml/blob/master/CONTRIBUTING.md 

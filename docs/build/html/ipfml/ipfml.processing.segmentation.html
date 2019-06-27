@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.processing.segmentation &mdash; ipfml v0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ipfml.processing.transform" href="ipfml.processing.transform.html" />
+    <link rel="prev" title="ipfml.processing.reconstruction" href="ipfml.processing.reconstruction.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ipfml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../description.html">Description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ipfml.html">Documentation of ipfml</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ipfml.metrics.html">ipfml.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipfml.utils.html">ipfml.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipfml.exceptions.html">ipfml.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-filters">ipfml.filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-iqa">ipfml.iqa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ipfml.html#ipfml-processing">ipfml.processing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.compression.html">ipfml.processing.compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.movement.html">ipfml.processing.movement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.reconstruction.html">ipfml.processing.reconstruction</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ipfml.processing.segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.transform.html">ipfml.processing.transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ipfml</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../ipfml.html">Documentation of ipfml</a> &raquo;</li>
+        
+      <li>ipfml.processing.segmentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/ipfml/ipfml.processing.segmentation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-ipfml.processing.segmentation">
+<span id="ipfml-processing-segmentation"></span><h1>ipfml.processing.segmentation<a class="headerlink" href="#module-ipfml.processing.segmentation" title="Permalink to this headline">¶</a></h1>
+<p>All segmentation methods applied on images</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.processing.segmentation.divide_in_blocks" title="ipfml.processing.segmentation.divide_in_blocks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">divide_in_blocks</span></code></a>(image,&nbsp;block_size[,&nbsp;pil])</td>
+<td>Divide image into equal size blocks</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="ipfml.processing.segmentation.divide_in_blocks">
+<code class="descclassname">ipfml.processing.segmentation.</code><code class="descname">divide_in_blocks</code><span class="sig-paren">(</span><em>image</em>, <em>block_size</em>, <em>pil=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/segmentation.html#divide_in_blocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.segmentation.divide_in_blocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divide image into equal size blocks</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – PIL Image or Numpy array</li>
+<li><strong>block</strong> – tuple (width, height) representing the size of each dimension of the block</li>
+<li><strong>pil</strong> – block type returned as PIL Image (default True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list containing all 2D Numpy blocks (in RGB or not)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – If <cite>image_width</cite> or <cite>image_height</cite> are not compatible to produce correct block sizes</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="k">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">segmentation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">divide_in_blocks</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="go">1600</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">width</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">height</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_l</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">img_l</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks_L</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">divide_in_blocks</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">blocks_L</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks_L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">width</span>
+<span class="go">100</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ipfml.processing.transform.html" class="btn btn-neutral float-right" title="ipfml.processing.transform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ipfml.processing.reconstruction.html" class="btn btn-neutral" title="ipfml.processing.reconstruction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

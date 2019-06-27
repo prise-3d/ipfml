@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Description &mdash; IPFML v0.4.0 documentation</title>
+  <title>Description &mdash; ipfml v0.4.1 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Documentation" href="ipfml.html" />
+    <link rel="next" title="Documentation of ipfml" href="ipfml.html" />
     <link rel="prev" title="Image Processing For Machine Learning" href="index.html" /> 
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> IPFML
+            <a href="index.html" class="icon icon-home"> ipfml
           
 
           
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -89,7 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use ?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ipfml.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipfml.html">Documentation of ipfml</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
@@ -106,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">IPFML</a>
+          <a href="index.html">ipfml</a>
         
       </nav>
 
@@ -144,7 +144,7 @@
         
             
             
-              <a href="https://github.com/jbuisine/IPFML/blob/master/docs/source/description.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/description.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -172,9 +172,9 @@
 <h2>How to use ?<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
 <p>To use, simply do :</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="k">import</span> <span class="n">transform</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;path/to/image.png&#39;</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">get_LAB_L_SVD_s</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L_SVD_s</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -188,7 +188,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ipfml.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ipfml.html" class="btn btn-neutral float-right" title="Documentation of ipfml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Image Processing For Machine Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

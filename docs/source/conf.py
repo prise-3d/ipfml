@@ -14,19 +14,19 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../ipfml'))
+sys.path.insert(0, os.path.abspath('../../../ipfml'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'IPFML'
+project = 'ipfml'
 copyright = '2019, Jérôme BUISINE'
 author = 'Jérôme BUISINE'
 
 # The short X.Y version
-version = '0.4.0'
+version = '0.4.1'
 # The full version, including alpha/beta/rc tags
-release = 'v0.4.0'
+release = 'v0.4.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -111,8 +111,8 @@ html_theme_options = {
 
 html_context = {
   'display_github': True,
-  'github_user': 'jbuisine',
-  'github_repo': 'IPFML',
+  'github_user': 'prise-3d',
+  'github_repo': 'ipfml',
   'github_version': 'master/docs/source/'
 }
 
@@ -134,7 +134,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'IPFMLdoc'
+htmlhelp_basename = 'ipfmldoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -161,7 +161,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'IPFML.tex', 'IPFML Documentation',
+    (master_doc, 'ipfml.tex', 'ipfml Documentation',
      'Jérôme BUISINE', 'manual'),
 ]
 
@@ -171,7 +171,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'ipfml', 'IPFML Documentation',
+    (master_doc, 'ipfml', 'ipfml Documentation',
      [author], 1)
 ]
 
@@ -182,8 +182,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'IPFML', 'IPFML Documentation',
-     author, 'IPFML', 'One line description of project.',
+    (master_doc, 'ipfml', 'ipfml Documentation',
+     author, 'ipfml', 'One line description of project.',
      'Miscellaneous'),
 ]
 

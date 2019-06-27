@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Examples &mdash; IPFML v0.4.0 documentation</title>
+  <title>Examples &mdash; ipfml v0.4.1 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
-    <link rel="prev" title="ipfml.iqa.fr" href="ipfml/ipfml.iqa.fr.html" /> 
+    <link rel="prev" title="ipfml.processing.transform" href="ipfml/ipfml.processing.transform.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> IPFML
+            <a href="index.html" class="icon icon-home"> ipfml
           
 
           
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -85,9 +85,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ipfml.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipfml.html">Documentation of ipfml</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#metrics-example">Metrics example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#processing-example">Processing example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#noise-filter-example">Noise filter example</a></li>
 </ul>
@@ -107,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">IPFML</a>
+          <a href="index.html">ipfml</a>
         
       </nav>
 
@@ -145,7 +144,7 @@
         
             
             
-              <a href="https://github.com/jbuisine/IPFML/blob/master/docs/source/examples.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/examples.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -164,34 +163,15 @@
 <p>Some examples are already available into documentation. You can find here some others and results of use of IPFML package.</p>
 <p>All examples below will use this picture.</p>
 <img alt="_images/nature.jpg" src="_images/nature.jpg" />
-<div class="section" id="metrics-example">
-<h2>Metrics example<a class="headerlink" href="#metrics-example" title="Permalink to this headline">¶</a></h2>
-<p>Using <strong>metrics</strong> module you can convert image into Lab, XYZ, SVD…</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">metrics</span>
-
-<span class="n">img_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/image_nature.jpg&#39;</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-<span class="c1"># convert result into PIL Image</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="n">output</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>This is the generated output using only L chanel from Lab.</p>
-<img alt="_images/nature_lab_l.png" src="_images/nature_lab_l.png" />
-</div>
 <div class="section" id="processing-example">
 <h2>Processing example<a class="headerlink" href="#processing-example" title="Permalink to this headline">¶</a></h2>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">processing</span>
+<span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="k">import</span> <span class="n">transform</span>
 
 <span class="n">img_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/image_nature.jpg&#39;</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
 
-<span class="n">low_bits_img</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">rgb_to_grey_low_bits</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">low_bits_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_grey_low_bits</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
 <span class="n">output</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">low_bits_img</span><span class="p">)</span>
 <span class="n">output</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -232,7 +212,7 @@
         <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ipfml/ipfml.iqa.fr.html" class="btn btn-neutral" title="ipfml.iqa.fr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ipfml/ipfml.processing.transform.html" class="btn btn-neutral" title="ipfml.processing.transform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

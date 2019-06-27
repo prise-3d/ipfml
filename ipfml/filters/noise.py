@@ -2,10 +2,9 @@
 Noise filters to apply on images
 """
 
+# main imports
 import numpy as np
 import random
-
-from ipfml import processing
 
 
 def _normalise(x):

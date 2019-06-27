@@ -2,7 +2,7 @@ Image Processing For Machine Learning
 =====================================
 
 <p align="center">
-    <img src="ipfml_logo.png" width="40%">
+    <img src="https://github.com/prise-3d/ipfml/blob/master/ipfml_logo.png" width="40%">
 </p>
 
 Installation
@@ -19,9 +19,9 @@ To use, simply do :
 
 ```python
 from PIL import Image
-from ipfml import processing
+from ipfml.processing import transform
 img = Image.open('path/to/image.png')
-s = processing.get_LAB_L_SVD_s(img)
+s = transform.get_LAB_L_SVD_s(img)
 ```
 
 Modules
@@ -29,18 +29,19 @@ Modules
 
 This project contains modules.
 
-- **processing** : *Image processing module*
-- **metrics** : *Metrics computation of PIL or 2D numpy image*
-- **filters** : *Image filter module*
+- **metrics** : *Metrics computation for model performance*
 - **utils** : *All utils functions developed for the package*
 - **exceptions** : *All customized exceptions*
+- **filters** : *Image filter module*
+- **iqa** : *Image quality assessments*
+- **processing** : *Image processing module*
 
-All these modules will be enhanced during development of the package. Documentation is available [here](https://prise-3d.github.io/IPFML/).
+All these modules will be enhanced during development of the package. Documentation is available [here](https://prise-3d.github.io/ipfml/).
 
 How to contribute
 -----------------
 
-Please refer to the [guidelines](https://github.com/prise-3d/IPFML/blob/master/CONTRIBUTING.md) file if you want to contribute!
+Please refer to the [guidelines](https://github.com/prise-3d/ipfml/blob/master/CONTRIBUTING.md) file if you want to contribute!
 
 ## Contributors
 
@@ -48,4 +49,4 @@ Please refer to the [guidelines](https://github.com/prise-3d/IPFML/blob/master/C
 
 ## License
 
-[MIT](https://github.com/prise-3d/IPFML/blob/master/LICENSE)
+[MIT](https://github.com/prise-3d/ipfml/blob/master/LICENSE)
