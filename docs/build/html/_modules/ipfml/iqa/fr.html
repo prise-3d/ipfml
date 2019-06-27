@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.iqa.fr &mdash; IPFML v0.4.0 documentation</title>
+  <title>ipfml.iqa.fr &mdash; ipfml v0.4.1 documentation</title>
   
 
   
@@ -46,7 +46,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> IPFML
+            <a href="../../../index.html" class="icon icon-home"> ipfml
           
 
           
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -83,7 +83,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../description.html">Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../ipfml.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ipfml.html">Documentation of ipfml</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
 </ul>
@@ -100,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">IPFML</a>
+          <a href="../../../index.html">ipfml</a>
         
       </nav>
 
@@ -153,10 +153,14 @@
 <span class="sd">Full-reference Image Quality Assessment (FR-IQA) methods</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="k">import</span> <span class="n">compare_ssim</span><span class="p">,</span> <span class="n">compare_psnr</span>
-<span class="kn">from</span> <span class="nn">ipfml.exceptions</span> <span class="k">import</span> <span class="n">NumpyShapeComparisonException</span>
-
+<span class="c1"># main imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># computations imports</span>
+<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="k">import</span> <span class="n">compare_ssim</span><span class="p">,</span> <span class="n">compare_psnr</span>
+
+<span class="c1"># ipfml imports</span>
+<span class="kn">from</span> <span class="nn">ipfml.exceptions</span> <span class="k">import</span> <span class="n">NumpyShapeComparisonException</span>
 
 
 <span class="k">def</span> <span class="nf">_prepare_arrays</span><span class="p">(</span><span class="n">img_true</span><span class="p">,</span> <span class="n">img_test</span><span class="p">,</span> <span class="n">p_dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">):</span>

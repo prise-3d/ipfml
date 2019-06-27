@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; IPFML v0.4.0 documentation</title>
+  <title>ipfml.utils &mdash; ipfml v0.4.1 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ipfml.exceptions" href="ipfml.exceptions.html" />
-    <link rel="prev" title="ipfml.processing" href="ipfml.processing.html" /> 
+    <link rel="prev" title="ipfml.metrics" href="ipfml.metrics.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> IPFML
+            <a href="../index.html" class="icon icon-home"> ipfml
           
 
           
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -85,13 +85,13 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../description.html">Description</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../ipfml.html">Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ipfml.html">Documentation of ipfml</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ipfml.metrics.html">ipfml.metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ipfml.processing.html">ipfml.processing</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ipfml.utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ipfml.exceptions.html">ipfml.exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-filters">ipfml.filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-iqa">ipfml.iqa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-processing">ipfml.processing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
@@ -110,7 +110,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">IPFML</a>
+          <a href="../index.html">ipfml</a>
         
       </nav>
 
@@ -141,7 +141,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../ipfml.html">Documentation</a> &raquo;</li>
+          <li><a href="../ipfml.html">Documentation of ipfml</a> &raquo;</li>
         
       <li>ipfml.utils</li>
     
@@ -150,7 +150,7 @@
         
             
             
-              <a href="https://github.com/jbuisine/IPFML/blob/master/docs/source/ipfml/ipfml.utils.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/ipfml/ipfml.utils.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -166,7 +166,7 @@
             
   <div class="section" id="module-ipfml.utils">
 <span id="ipfml-utils"></span><h1>ipfml.utils<a class="headerlink" href="#module-ipfml.utils" title="Permalink to this headline">¶</a></h1>
-<p>Utils functions of ipfml package (array normalization)</p>
+<p>Utils functions of ipfml package (normalization, integral…)</p>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -427,9 +427,10 @@
 </table>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span><span class="p">,</span> <span class="n">processing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="k">import</span> <span class="n">transform</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">rgb_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img_normalized</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">normalize_2D_arr</span><span class="p">(</span><span class="n">img_mscn</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img_normalized</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(200, 200)</span>
@@ -500,7 +501,7 @@
         <a href="ipfml.exceptions.html" class="btn btn-neutral float-right" title="ipfml.exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ipfml.processing.html" class="btn btn-neutral" title="ipfml.processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ipfml.metrics.html" class="btn btn-neutral" title="ipfml.metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

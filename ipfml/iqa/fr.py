@@ -2,10 +2,14 @@
 Full-reference Image Quality Assessment (FR-IQA) methods
 """
 
-from skimage.measure import compare_ssim, compare_psnr
-from ipfml.exceptions import NumpyShapeComparisonException
-
+# main imports
 import numpy as np
+
+# computations imports
+from skimage.measure import compare_ssim, compare_psnr
+
+# ipfml imports
+from ipfml.exceptions import NumpyShapeComparisonException
 
 
 def _prepare_arrays(img_true, img_test, p_dtype='float32'):

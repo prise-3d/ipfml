@@ -1,13 +1,10 @@
-Documentation
-================
-
+Documentation of ipfml
+======================
 
 .. autosummary::
    :toctree: ipfml
 
    ipfml.metrics
-   ipfml.processing
-   
    ipfml.utils
    ipfml.exceptions  
 
@@ -27,3 +24,14 @@ ipfml.iqa
   
    ipfml.iqa.fr
 
+ipfml.processing
+-------------------
+
+.. autosummary::
+   :toctree: ipfml
+
+   ipfml.processing.compression
+   ipfml.processing.movement
+   ipfml.processing.reconstruction
+   ipfml.processing.segmentation
+   ipfml.processing.transform

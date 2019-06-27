@@ -23,6 +23,6 @@ To use, simply do :
 .. code:: python
     
    from PIL import Image
-   from ipfml import processing
+   from ipfml.processing import transform
    img = Image.open('path/to/image.png')
-   s = processing.get_LAB_L_SVD_s(img)
+   s = transform.get_LAB_L_SVD_s(img)

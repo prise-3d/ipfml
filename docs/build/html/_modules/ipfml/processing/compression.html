@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.processing.compression &mdash; ipfml v0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ipfml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ipfml.html">Documentation of ipfml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ipfml</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ipfml.processing.compression</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ipfml.processing.compression</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions for image compression and extraction</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># image processing imports</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">svd</span>
+
+
+<div class="viewcode-block" id="get_SVD"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.compression.html#ipfml.processing.compression.get_SVD">[docs]</a><span class="k">def</span> <span class="nf">get_SVD</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms Image using SVD compression</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: image to convert into SVD compression</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        U, s, V obtained from SVD compression</span>
+
+<span class="sd">    Usage:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import compression</span>
+<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; U, s, V = compression.get_SVD(img)</span>
+<span class="sd">    &gt;&gt;&gt; U.shape</span>
+<span class="sd">    (200, 200, 3)</span>
+<span class="sd">    &gt;&gt;&gt; len(s)</span>
+<span class="sd">    200</span>
+<span class="sd">    &gt;&gt;&gt; V.shape</span>
+<span class="sd">    (200, 3, 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_SVD_s"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.compression.html#ipfml.processing.compression.get_SVD_s">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_s</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;s&#39; part</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: image to convert</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        vector of singular values obtained from SVD compression</span>
+
+<span class="sd">    Usage:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import compression</span>
+<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; s = compression.get_SVD_s(img)</span>
+<span class="sd">    &gt;&gt;&gt; len(s)</span>
+<span class="sd">    200</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="get_SVD_U"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.compression.html#ipfml.processing.compression.get_SVD_U">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_U</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;U&#39; part</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: image to convert</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        U matrix from SVD compression</span>
+
+<span class="sd">    Usage:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import compression</span>
+<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; U = compression.get_SVD_U(img)</span>
+<span class="sd">    &gt;&gt;&gt; U.shape</span>
+<span class="sd">    (200, 200, 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">U</span></div>
+
+
+<div class="viewcode-block" id="get_SVD_V"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.compression.html#ipfml.processing.compression.get_SVD_V">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_V</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;V&#39; part</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: image to convert</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        V matrix obtained from SVD compression</span>
+
+<span class="sd">    Usage :</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import compression</span>
+<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; V = compression.get_SVD_V(img)</span>
+<span class="sd">    &gt;&gt;&gt; V.shape</span>
+<span class="sd">    (200, 3, 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">V</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

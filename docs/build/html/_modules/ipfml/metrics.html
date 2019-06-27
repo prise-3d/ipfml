@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.metrics &mdash; IPFML v0.4.0 documentation</title>
+  <title>ipfml.metrics &mdash; ipfml v0.4.1 documentation</title>
   
 
   
@@ -46,7 +46,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> IPFML
+            <a href="../../index.html" class="icon icon-home"> ipfml
           
 
           
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -83,7 +83,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../description.html">Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ipfml.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ipfml.html">Documentation of ipfml</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
@@ -100,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">IPFML</a>
+          <a href="../../index.html">ipfml</a>
         
       </nav>
 
@@ -150,407 +150,48 @@
             
   <h1>Source code for ipfml.metrics</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Functions which can be used to extract information from image</span>
+<span class="sd">Contains all metrics used for model results comparisons</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">svd</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">misc</span>
-
+<span class="c1"># main imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">preprocessing</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">color</span>
-
-<span class="kn">import</span> <span class="nn">cv2</span>
 
 
-<div class="viewcode-block" id="get_SVD"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_SVD">[docs]</a><span class="k">def</span> <span class="nf">get_SVD</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms Image using SVD compression</span>
+<div class="viewcode-block" id="coefficient_of_determination"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.coefficient_of_determination">[docs]</a><span class="k">def</span> <span class="nf">coefficient_of_determination</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the coefficient of determination between `y` and `y_predicted` values</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        image: image to convert into SVD compression</span>
-
-<span class="sd">    Return:</span>
-<span class="sd">        U, s, V obtained from SVD compression</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; U, s, V = metrics.get_SVD(img)</span>
-<span class="sd">    &gt;&gt;&gt; U.shape</span>
-<span class="sd">    (200, 200, 3)</span>
-<span class="sd">    &gt;&gt;&gt; len(s)</span>
-<span class="sd">    200</span>
-<span class="sd">    &gt;&gt;&gt; V.shape</span>
-<span class="sd">    (200, 3, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_SVD_s"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_SVD_s">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_s</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;s&#39; part</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
+<span class="sd">        y: array of reference values</span>
+<span class="sd">        predicted: array of predicted values</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        vector of singular values obtained from SVD compression</span>
+<span class="sd">        coefficient of determination</span>
 
-<span class="sd">    Usage:</span>
+<span class="sd">    Example:</span>
 
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
 <span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; s = metrics.get_SVD_s(img)</span>
-<span class="sd">    &gt;&gt;&gt; len(s)</span>
-<span class="sd">    200</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">s</span></div>
-
-
-<div class="viewcode-block" id="get_SVD_U"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_SVD_U">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_U</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;U&#39; part</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        U matrix from SVD compression</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; U = metrics.get_SVD_U(img)</span>
-<span class="sd">    &gt;&gt;&gt; U.shape</span>
-<span class="sd">    (200, 200, 3)</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; y = np.arange(10)</span>
+<span class="sd">    &gt;&gt;&gt; predicted = np.arange(10) * 1.05</span>
+<span class="sd">    &gt;&gt;&gt; coeff = metrics.coefficient_of_determination(y, predicted)</span>
+<span class="sd">    &gt;&gt;&gt; int(coeff)</span>
+<span class="sd">    1</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">U</span></div>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span>
 
+    <span class="n">y_mean</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<div class="viewcode-block" id="get_SVD_V"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_SVD_V">[docs]</a><span class="k">def</span> <span class="nf">get_SVD_V</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms Image into SVD and returns only &#39;V&#39; part</span>
+    <span class="n">numerator_sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">denominator_sum</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
+    <span class="k">for</span> <span class="n">id_val</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">numerator_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">predicted</span><span class="p">[</span><span class="n">id_val</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="n">predicted</span><span class="p">[</span><span class="n">id_val</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span>
+        <span class="n">denominator_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        V matrix obtained from SVD compression</span>
-
-<span class="sd">    Usage :</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; V = metrics.get_SVD_V(img)</span>
-<span class="sd">    &gt;&gt;&gt; V.shape</span>
-<span class="sd">    (200, 3, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">V</span></div>
-
-
-<div class="viewcode-block" id="get_LAB"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_LAB">[docs]</a><span class="k">def</span> <span class="nf">get_LAB</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB  Image into Lab</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Lab information</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; Lab = metrics.get_LAB(img)</span>
-<span class="sd">    &gt;&gt;&gt; Lab.shape</span>
-<span class="sd">    (200, 200, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2lab</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_LAB_L"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_LAB_L">[docs]</a><span class="k">def</span> <span class="nf">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into Lab and returns L</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The L chanel from Lab information</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; L = metrics.get_LAB_L(img)</span>
-<span class="sd">    &gt;&gt;&gt; L.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">lab</span> <span class="o">=</span> <span class="n">get_LAB</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">lab</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_LAB_a"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_LAB_a">[docs]</a><span class="k">def</span> <span class="nf">get_LAB_a</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into LAB and returns a</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The a chanel from Lab information</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; a = metrics.get_LAB_a(img)</span>
-<span class="sd">    &gt;&gt;&gt; a.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">lab</span> <span class="o">=</span> <span class="n">get_LAB</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">lab</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_LAB_b"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_LAB_b">[docs]</a><span class="k">def</span> <span class="nf">get_LAB_b</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into LAB and returns b</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The b chanel from Lab information</span>
-
-<span class="sd">    Usage :</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; b = metrics.get_LAB_b(img)</span>
-<span class="sd">    &gt;&gt;&gt; b.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">lab</span> <span class="o">=</span> <span class="n">get_LAB</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">lab</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_XYZ"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_XYZ">[docs]</a><span class="k">def</span> <span class="nf">get_XYZ</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into XYZ</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        XYZ information obtained from transformation</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; metrics.get_XYZ(img).shape</span>
-<span class="sd">    (200, 200, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2xyz</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_XYZ_X"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_XYZ_X">[docs]</a><span class="k">def</span> <span class="nf">get_XYZ_X</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into XYZ and returns X</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The X chanel from XYZ information</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; x = metrics.get_XYZ_X(img)</span>
-<span class="sd">    &gt;&gt;&gt; x.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">xyz</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2xyz</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_XYZ_Y"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_XYZ_Y">[docs]</a><span class="k">def</span> <span class="nf">get_XYZ_Y</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into XYZ and returns Y</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The Y chanel from XYZ information</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; y = metrics.get_XYZ_Y(img)</span>
-<span class="sd">    &gt;&gt;&gt; y.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">xyz</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2xyz</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_XYZ_Z"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_XYZ_Z">[docs]</a><span class="k">def</span> <span class="nf">get_XYZ_Z</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms RGB Image into XYZ and returns Z</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The Z chanel from XYZ information</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `nb_bits` has unexpected value. `nb_bits` needs to be in interval [1, 8].</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; z = metrics.get_XYZ_Z(img)</span>
-<span class="sd">    &gt;&gt;&gt; z.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">xyz</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2xyz</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">xyz</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="get_low_bits_img"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_low_bits_img">[docs]</a><span class="k">def</span> <span class="nf">get_low_bits_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">nb_bits</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns Image or Numpy array with data information reduced using only low bits</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert</span>
-<span class="sd">        nb_bits: optional parameter which indicates the number of bits to keep</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Numpy array with reduced values</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; low_bits_img = metrics.get_low_bits_img(img, 5)</span>
-<span class="sd">    &gt;&gt;&gt; low_bits_img.shape</span>
-<span class="sd">    (200, 200, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="n">nb_bits</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;unexpected value of number of bits to keep. @nb_bits needs to be positive and greater than 0.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">nb_bits</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Unexpected value of number of bits to keep. @nb_bits needs to be in interval [1, 8].&quot;</span>
-        <span class="p">)</span>
-
-    <span class="n">img_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-
-    <span class="n">bits_values</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_bits</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
-
-    <span class="k">return</span> <span class="n">img_arr</span> <span class="o">&amp;</span> <span class="n">bits_values</span></div>
-
-
-<div class="viewcode-block" id="get_bits_img"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.get_bits_img">[docs]</a><span class="k">def</span> <span class="nf">get_bits_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns only bits specified into the interval</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: image to convert using this interval of bits value to keep</span>
-<span class="sd">        interval: (begin, end) of bits values</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Numpy array with reduced values</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If min value from interval is not &gt;= 1.</span>
-<span class="sd">        ValueError: If max value from interval is not &lt;= 8.</span>
-<span class="sd">        ValueError: If min value from interval &gt;= max value.</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; bits_img = metrics.get_bits_img(img, (2, 5))</span>
-<span class="sd">    &gt;&gt;&gt; bits_img.shape</span>
-<span class="sd">    (200, 200, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">img_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">interval</span>
-
-    <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Unexpected value of interval. Interval min value needs to be &gt;= 1.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">end</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Unexpected value of interval. Interval min value needs to be &lt;= 8.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">begin</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected interval values order.&quot;</span><span class="p">)</span>
-
-    <span class="n">bits_values</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
-
-    <span class="k">return</span> <span class="n">img_arr</span> <span class="o">&amp;</span> <span class="n">bits_values</span></div>
-
-
-<div class="viewcode-block" id="gray_to_mscn"><a class="viewcode-back" href="../../ipfml/ipfml.metrics.html#ipfml.metrics.gray_to_mscn">[docs]</a><span class="k">def</span> <span class="nf">gray_to_mscn</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        image: grayscale image</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        MSCN matrix obtained from transformation</span>
-
-<span class="sd">    Usage:</span>
-
-<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
-<span class="sd">    &gt;&gt;&gt; from ipfml import metrics</span>
-<span class="sd">    &gt;&gt;&gt; img = Image.open(&#39;./images/test_img.png&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; img = metrics.get_LAB_L(img)</span>
-<span class="sd">    &gt;&gt;&gt; img_mscn = metrics.gray_to_mscn(img)</span>
-<span class="sd">    &gt;&gt;&gt; img_mscn.shape</span>
-<span class="sd">    (200, 200)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">s</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">6</span>
-    <span class="n">blurred</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
-                               <span class="n">s</span><span class="p">)</span>  <span class="c1"># apply gaussian blur to the image</span>
-    <span class="n">blurred_sq</span> <span class="o">=</span> <span class="n">blurred</span> <span class="o">*</span> <span class="n">blurred</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">image</span> <span class="o">*</span> <span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">s</span><span class="p">)</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span> <span class="o">-</span> <span class="n">blurred_sq</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mi">255</span>  <span class="c1"># avoid DivideByZero Exception</span>
-    <span class="n">mscn</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span> <span class="o">-</span> <span class="n">blurred</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span>  <span class="c1"># MSCN(i, j) image</span>
-
-    <span class="k">return</span> <span class="n">mscn</span></div>
+    <span class="k">return</span> <span class="n">numerator_sum</span> <span class="o">/</span> <span class="n">denominator_sum</span></div>
 </pre></div>
 
            </div>

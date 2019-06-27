@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.processing.reconstruction &mdash; ipfml v0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ipfml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ipfml.html">Documentation of ipfml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ipfml</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ipfml.processing.reconstruction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ipfml.processing.reconstruction</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions for reconstruction process of image using reduction/compression methods</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># main imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># image processing imports</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">svd</span> <span class="k">as</span> <span class="n">np_svd</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">FastICA</span><span class="p">,</span> <span class="n">IncrementalPCA</span>
+
+<span class="c1"># ipfml imports</span>
+<span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="k">import</span> <span class="n">transform</span>
+
+
+<div class="viewcode-block" id="svd"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.reconstruction.html#ipfml.processing.reconstruction.svd">[docs]</a><span class="k">def</span> <span class="nf">svd</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruct an image from SVD compression using specific interval of Singular Values</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image, Numpy array or path of 3D image</span>
+<span class="sd">        interval: Interval used for reconstruction</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Reconstructed image</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import reconstruction</span>
+<span class="sd">    &gt;&gt;&gt; image_values = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image = reconstruction.svd(image_values, (100, 200))</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image.shape</span>
+<span class="sd">    (200, 200)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">interval</span>
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lab_img</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np_svd</span><span class="p">(</span><span class="n">lab_img</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># reconstruction using specific interval</span>
+    <span class="n">smat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">smat</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+    <span class="n">output_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">[:,</span> <span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">,</span> <span class="p">:]))</span>
+
+    <span class="k">return</span> <span class="n">output_img</span></div>
+
+
+<div class="viewcode-block" id="fast_ica"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.reconstruction.html#ipfml.processing.reconstruction.fast_ica">[docs]</a><span class="k">def</span> <span class="nf">fast_ica</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">components</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruct an image from Fast ICA compression using specific number of components to use</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image, Numpy array or path of 3D image</span>
+<span class="sd">        components: Number of components used for reconstruction</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Reconstructed image</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import reconstruction</span>
+<span class="sd">    &gt;&gt;&gt; image_values = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image = reconstruction.fast_ica(image_values, 25)</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image.shape</span>
+<span class="sd">    (200, 200)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lab_img</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="n">ica</span> <span class="o">=</span> <span class="n">FastICA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="c1"># run ICA on image</span>
+    <span class="n">ica</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">lab_img</span><span class="p">)</span>
+    <span class="c1"># reconstruct image with independent components</span>
+    <span class="n">image_ica</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">lab_img</span><span class="p">)</span>
+    <span class="n">restored_image</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">image_ica</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">restored_image</span></div>
+
+
+<div class="viewcode-block" id="ipca"><a class="viewcode-back" href="../../../ipfml/ipfml.processing.reconstruction.html#ipfml.processing.reconstruction.ipca">[docs]</a><span class="k">def</span> <span class="nf">ipca</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">components</span><span class="p">,</span> <span class="n">_batch_size</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruct an image from IPCA compression using specific number of components to use and batch size</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: PIL Image, Numpy array or path of 3D image</span>
+<span class="sd">        components: Number of components used for reconstruction</span>
+<span class="sd">        batch_size: Batch size used for learn (default 25)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Reconstructed image</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from PIL import Image</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from ipfml.processing import reconstruction</span>
+<span class="sd">    &gt;&gt;&gt; image_values = Image.open(&#39;./images/test_img.png&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image = reconstruction.ipca(image_values, 20)</span>
+<span class="sd">    &gt;&gt;&gt; reconstructed_image.shape</span>
+<span class="sd">    (200, 200)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">lab_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lab_img</span><span class="p">,</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="n">transformer</span> <span class="o">=</span> <span class="n">IncrementalPCA</span><span class="p">(</span>
+        <span class="n">n_components</span><span class="o">=</span><span class="n">components</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">_batch_size</span><span class="p">)</span>
+
+    <span class="n">transformed_image</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">lab_img</span><span class="p">)</span>
+    <span class="n">restored_image</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">transformed_image</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">restored_image</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

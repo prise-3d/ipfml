@@ -1,11 +1,13 @@
 """
-Utils functions of ipfml package (array normalization)
+Utils functions of ipfml package (normalization, integral...)
 """
 
+# main imports
 import numpy as np
 import math
 import sys
 
+# computation imports
 from scipy.integrate import simps
 
 
@@ -84,9 +86,10 @@ def normalize_2D_arr(arr):
     Example:
 
     >>> from PIL import Image
-    >>> from ipfml import utils, processing
+    >>> from ipfml import utils
+    >>> from ipfml.processing import transform
     >>> img = Image.open('./images/test_img.png')
-    >>> img_mscn = processing.rgb_to_mscn(img)
+    >>> img_mscn = transform.rgb_to_mscn(img)
     >>> img_normalized = utils.normalize_2D_arr(img_mscn)
     >>> img_normalized.shape
     (200, 200)
