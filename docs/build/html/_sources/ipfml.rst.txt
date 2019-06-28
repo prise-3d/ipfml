@@ -1,5 +1,5 @@
-Documentation of ipfml
-======================
+Documentation
+=============
 
 .. autosummary::
    :toctree: ipfml

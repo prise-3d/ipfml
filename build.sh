@@ -4,7 +4,7 @@
 echo "Use of yapf package to format code.."
 yapf -ir -vv ipfml
 
-# Build IPFML package
+# Build ipfml package
 echo "Build package..."
 python setup.py build
 
