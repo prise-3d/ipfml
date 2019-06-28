@@ -15,4 +15,4 @@ This git project uses git-flow_ implementation. You are free to contribute to it
 
 Please refer to the guidelines_ file if you want more information about process!
 
-.. _guidelines: https://github.com/jbuisine/IPFML/blob/master/CONTRIBUTION.md 
+.. _guidelines: https://github.com/jbuisine/ipfml/blob/master/CONTRIBUTION.md 

@@ -1,4 +1,4 @@
-.. IPFML documentation master file, created by
+.. ipfml documentation master file, created by
    sphinx-quickstart on Fri Jan  4 12:10:59 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -11,10 +11,10 @@ Image Processing For Machine Learning
    :width: 400 px
    :align: center
 
-What's IPFML ?
+What's `ipfml` ?
 =================
 
-IPFML is a python package developed during a thesis project.
+`ipfml` is a python package developed during a thesis project.
 
 .. toctree::
    :maxdepth: 3

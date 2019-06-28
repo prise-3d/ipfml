@@ -1,7 +1,7 @@
 Examples
 =====================================
 
-Some examples are already available into documentation. You can find here some others and results of use of IPFML package.
+Some examples are already available into documentation. You can find here some others and results of use of `ipfml` package.
 
 All examples below will use this picture.
 
