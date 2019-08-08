@@ -4,6 +4,7 @@ Kernel to apply on images using convolution
 
 # main imports
 import numpy as np
+import sys
 
 
 def plane_mean(window):

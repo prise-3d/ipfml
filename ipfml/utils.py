@@ -35,11 +35,9 @@ def normalize_arr(arr):
     min_value = min(arr)
 
     for v in arr:
-        try:
-            output_arr.append((v - min_value) / (max_value - min_value))
-        except ZeroDivisionError:
-            output_arr.append((v - min_value) /
-                              (max_value - min_value + sys.float_info.epsilon))
+        # add of epsilon value in order to avoid Zero Division
+        output_arr.append(
+            (v - min_value) / (max_value - min_value + sys.float_info.epsilon))
 
     return output_arr
 
@@ -66,10 +64,8 @@ def normalize_arr_with_range(arr, min, max):
     output_arr = []
 
     for v in arr:
-        try:
-            output_arr.append((v - min) / (max - min))
-        except ZeroDivisionError:
-            output_arr.append((v - min) / (max - min + sys.float_info.epsilon))
+        # add of epsilon value in order to avoid Zero Division
+        output_arr.append((v - min) / (max - min + sys.float_info.epsilon))
 
     return output_arr
 
@@ -101,7 +97,7 @@ def normalize_2D_arr(arr):
 
     # normalize each row
     output_array = []
-    width, height = arr.shape
+    _, height = arr.shape
 
     for row_index in range(0, height):
         values = arr[row_index, :]
