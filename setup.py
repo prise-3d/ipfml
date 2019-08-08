@@ -13,8 +13,10 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         # run tests using doctest
         import doctest
         
-        # noise folder
+        # filters folder
         from ipfml.filters import noise as noise_filters
+        from ipfml.filters import kernels as kernels_filters
+        from ipfml.filters import convolution as convolution_filters
         
         # iqa folder
         from ipfml.iqa import fr as fr_iqa
@@ -37,6 +39,8 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
         # noise folder
         doctest.testmod(noise_filters)
+        doctest.testmod(kernels_filters)
+        doctest.testmod(convolution_filters)
 
         # iqa folder
         doctest.testmod(fr_iqa)
@@ -59,7 +63,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.4.2',
+    version='0.4.3',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
