@@ -12,7 +12,7 @@ def convolution2D(image, kernel, kernel_size=(5, 5)):
     Args:
         image: 2D image to apply convolution on
         kernel: specific kernel from `ipfml.filters.kernels` to use
-        kernel_size: 
+        kernel_size: window size to use (default (5, 5))
 
     Returns:
         2D numpy array obtained from image using kernel

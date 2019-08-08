@@ -31,7 +31,7 @@ This project contains modules.
 - **metrics** : *Metrics computation for model performance*
 - **utils** : *All utils functions developed for the package*
 - **exceptions** : *All customized exceptions*
-- **filters** : *Image filter module*
+- **filters** : *Image filter module with convolution*
 - **iqa** : *Image quality assessments*
 - **processing** : *Image processing module*
 

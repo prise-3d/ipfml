@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.filters.kernels &mdash; ipfml v0.4.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ipfml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ipfml.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ipfml</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ipfml.filters.kernels</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ipfml.filters.kernels</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Kernel to apply on images using convolution</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># main imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="plane_mean"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.plane_mean">[docs]</a><span class="k">def</span> <span class="nf">plane_mean</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plane mean kernel to use with convolution process on image</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Normalized residual error from mean plane</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import plane_mean</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = plane_mean(window)</span>
+<span class="sd">    &gt;&gt;&gt; (result &lt; 0.0001)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># prepare data</span>
+    <span class="n">nb_elem</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">height</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_elem</span><span class="p">)]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">height</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_elem</span><span class="p">)]</span>
+    <span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># get residual (error) from mean plane computed</span>
+    <span class="n">tmp_A</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp_b</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)):</span>
+        <span class="n">tmp_A</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">tmp_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">tmp_b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">tmp_A</span><span class="p">)</span>
+
+    <span class="n">fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">*</span> <span class="n">fit</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">residual</span></div>
+
+
+<span class="c1"># return difference between min and max errors</span>
+<div class="viewcode-block" id="plane_max_error"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.plane_max_error">[docs]</a><span class="k">def</span> <span class="nf">plane_max_error</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plane max error kernel to use with convolution process on image</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Difference between max and min error from mean plane</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import plane_max_error</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = plane_max_error(window)</span>
+<span class="sd">    &gt;&gt;&gt; (result &lt; 0.0001)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># prepare data</span>
+    <span class="n">nb_elem</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">height</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_elem</span><span class="p">)]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">height</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_elem</span><span class="p">)]</span>
+    <span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># get residual (error) from mean plane computed</span>
+    <span class="n">tmp_A</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp_b</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)):</span>
+        <span class="n">tmp_A</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">tmp_b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">tmp_b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">tmp_A</span><span class="p">)</span>
+
+    <span class="n">fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">*</span> <span class="n">fit</span>
+
+    <span class="c1"># get absolute values from errors</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">errors</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">errors</span><span class="o">.</span><span class="n">min</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="bilateral_diff"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.bilateral_diff">[docs]</a><span class="k">def</span> <span class="nf">bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="nb">max</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bilaeral difference kernel to use with convolution process on image</span>
+<span class="sd">       Apply difference pixel to pixel and keep max on min difference before applying mean</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+<span class="sd">        func: max or min function to get difference between pixels</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mean of max or min difference of pixels</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import bilateral_diff</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = bilateral_diff(window)</span>
+<span class="sd">    &gt;&gt;&gt; result</span>
+<span class="sd">    3.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">total_row_diff_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">total_col_diff_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+
+        <span class="n">row_diff_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">col_diff_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+
+            <span class="n">diff_row</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">diff_row</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">diff_row</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">diff1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">diff2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">diff_row</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">diff1</span><span class="p">,</span> <span class="n">diff2</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">diff_col</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">diff_col</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">diff1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">diff2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">diff_col</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">diff1</span><span class="p">,</span> <span class="n">diff2</span><span class="p">)</span>
+
+            <span class="n">row_diff_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">diff_row</span><span class="p">)</span>
+            <span class="n">col_diff_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">diff_col</span><span class="p">)</span>
+
+        <span class="n">total_row_diff_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">row_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_diff_list</span><span class="p">))</span>
+        <span class="n">total_col_diff_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">col_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">col_diff_list</span><span class="p">))</span>
+
+    <span class="n">row_diff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">total_row_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_row_diff_list</span><span class="p">)</span>
+    <span class="n">col_diff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">total_col_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_col_diff_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">row_diff</span><span class="p">,</span> <span class="n">col_diff</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
