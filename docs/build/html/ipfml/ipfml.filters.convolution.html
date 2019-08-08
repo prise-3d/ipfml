@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.metrics &mdash; ipfml v0.4.4 documentation</title>
+  <title>ipfml.filters.convolution &mdash; ipfml v0.4.4 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ipfml.utils" href="ipfml.utils.html" />
-    <link rel="prev" title="Documentation" href="../ipfml.html" /> 
+    <link rel="next" title="ipfml.filters.kernels" href="ipfml.filters.kernels.html" />
+    <link rel="prev" title="ipfml.exceptions" href="ipfml.exceptions.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -86,10 +86,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../description.html">Description</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../ipfml.html">Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ipfml.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipfml.metrics.html">ipfml.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ipfml.utils.html">ipfml.utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ipfml.exceptions.html">ipfml.exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-filters">ipfml.filters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ipfml.html#ipfml-filters">ipfml.filters</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ipfml.filters.convolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.filters.kernels.html">ipfml.filters.kernels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.filters.noise.html">ipfml.filters.noise</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-iqa">ipfml.iqa</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-processing">ipfml.processing</a></li>
 </ul>
@@ -143,14 +148,14 @@
         
           <li><a href="../ipfml.html">Documentation</a> &raquo;</li>
         
-      <li>ipfml.metrics</li>
+      <li>ipfml.filters.convolution</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/ipfml/ipfml.metrics.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/ipfml/ipfml.filters.convolution.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -164,9 +169,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ipfml.metrics">
-<span id="ipfml-metrics"></span><h1>ipfml.metrics<a class="headerlink" href="#module-ipfml.metrics" title="Permalink to this headline">¶</a></h1>
-<p>Contains all metrics used for model results comparisons</p>
+  <div class="section" id="module-ipfml.filters.convolution">
+<span id="ipfml-filters-convolution"></span><h1>ipfml.filters.convolution<a class="headerlink" href="#module-ipfml.filters.convolution" title="Permalink to this headline">¶</a></h1>
+<p>Convolution functions to apply on images</p>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -174,38 +179,39 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ipfml.metrics.coefficient_of_determination" title="ipfml.metrics.coefficient_of_determination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coefficient_of_determination</span></code></a>(y,&nbsp;predicted)</td>
-<td>Returns the coefficient of determination between <cite>y</cite> and <cite>y_predicted</cite> values</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ipfml.filters.convolution.convolution2D" title="ipfml.filters.convolution.convolution2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolution2D</span></code></a>(image,&nbsp;kernel[,&nbsp;kernel_size])</td>
+<td>Apply 2D convolution on image using specific kernel from <cite>ipfml.filters.kernels</cite></td>
 </tr>
 </tbody>
 </table>
 <dl class="function">
-<dt id="ipfml.metrics.coefficient_of_determination">
-<code class="descclassname">ipfml.metrics.</code><code class="descname">coefficient_of_determination</code><span class="sig-paren">(</span><em>y</em>, <em>predicted</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/metrics.html#coefficient_of_determination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.metrics.coefficient_of_determination" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the coefficient of determination between <cite>y</cite> and <cite>y_predicted</cite> values</p>
+<dt id="ipfml.filters.convolution.convolution2D">
+<code class="descclassname">ipfml.filters.convolution.</code><code class="descname">convolution2D</code><span class="sig-paren">(</span><em>image</em>, <em>kernel</em>, <em>kernel_size=(5</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/filters/convolution.html#convolution2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.filters.convolution.convolution2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply 2D convolution on image using specific kernel from <cite>ipfml.filters.kernels</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>y</strong> – array of reference values</li>
-<li><strong>predicted</strong> – array of predicted values</li>
+<li><strong>image</strong> – 2D image to apply convolution on</li>
+<li><strong>kernel</strong> – specific kernel from <cite>ipfml.filters.kernels</cite> to use</li>
+<li><strong>kernel_size</strong> – window size to use (default (5, 5))</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">coefficient of determination</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">2D numpy array obtained from image using kernel</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="k">import</span> <span class="n">metrics</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.convolution</span> <span class="k">import</span> <span class="n">convolution2D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.filters.kernels</span> <span class="k">import</span> <span class="n">plane_mean</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.05</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coeff</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">coefficient_of_determination</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
-<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convolved_image</span> <span class="o">=</span> <span class="n">convolution2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">plane_mean</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convolved_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(7, 7)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -220,10 +226,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ipfml.utils.html" class="btn btn-neutral float-right" title="ipfml.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ipfml.filters.kernels.html" class="btn btn-neutral float-right" title="ipfml.filters.kernels" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../ipfml.html" class="btn btn-neutral" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ipfml.exceptions.html" class="btn btn-neutral" title="ipfml.exceptions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -13,7 +13,9 @@ ipfml.filters
 
 .. autosummary::
    :toctree: ipfml
-  
+   
+   ipfml.filters.convolution
+   ipfml.filters.kernels
    ipfml.filters.noise
 
 ipfml.iqa

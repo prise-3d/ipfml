@@ -143,6 +143,11 @@ This command do a lot of thing for you:
 
 Do not forget to build documentation as explained in section [2.3](#code-documentation).
 
+Or directly use bash script which runs all you need:
+
+```bash
+bash build.sh
+```
 
 ## Pull request
 

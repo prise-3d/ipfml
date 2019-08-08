@@ -32,7 +32,7 @@ This project contains modules.
 - **metrics** : *Metrics computation for model performance*
 - **utils** : *All utils functions developed for the package*
 - **exceptions** : *All customized exceptions*
-- **filters** : *Image filter module*
+- **filters** : *Image filter module with convolution*
 - **iqa** : *Image quality assessments*
 - **processing** : *Image processing module*
 
@@ -41,7 +41,7 @@ All these modules will be enhanced during development of the package. Documentat
 How to contribute
 -----------------
 
-Please refer to the [guidelines](https://github.com/prise-3d/ipfml/blob/master/CONTRIBUTING.md) file if you want to contribute!
+Please refer to the [guidelines](CONTRIBUTING.md) file if you want to contribute!
 
 ## Contributors
 
@@ -49,4 +49,4 @@ Please refer to the [guidelines](https://github.com/prise-3d/ipfml/blob/master/C
 
 ## License
 
-[MIT](https://github.com/prise-3d/ipfml/blob/master/LICENSE)
+[MIT](LICENSE)
