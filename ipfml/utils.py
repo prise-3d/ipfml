@@ -24,20 +24,18 @@ def normalize_arr(arr):
 
     >>> from ipfml import utils
     >>> import numpy as np
-    >>> arr = np.arange(11)
+    >>> arr = np.arange(5)
     >>> arr_normalized = utils.normalize_arr(arr)
     >>> arr_normalized[1]
     0.1
     """
 
     output_arr = []
-    max_value = max(arr)
-    min_value = min(arr)
+    sum_value = sum(arr)
 
     for v in arr:
         # add of epsilon value in order to avoid Zero Division
-        output_arr.append(
-            (v - min_value) / (max_value - min_value + sys.float_info.epsilon))
+        output_arr.append(v / sum_value)
 
     return output_arr
 
