@@ -9,7 +9,8 @@ ipfml.filters.kernels
 
    .. autosummary::
    
-      bilateral_diff
+      max_bilateral_diff
+      min_bilateral_diff
       plane_max_error
       plane_mean
    
