@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.filters.kernels &mdash; ipfml v0.4.6 documentation</title>
+  <title>ipfml.filters.kernels &mdash; ipfml v0.4.7 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.4.6
+                0.4.7
               </div>
             
           
@@ -257,8 +257,8 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">errors</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">errors</span><span class="o">.</span><span class="n">min</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="bilateral_diff"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.bilateral_diff">[docs]</a><span class="k">def</span> <span class="nf">bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="nb">max</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bilaeral difference kernel to use with convolution process on image</span>
+<span class="k">def</span> <span class="nf">_bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Main bilateral difference kernel to use with convolution process on image</span>
 <span class="sd">       Apply difference pixel to pixel and keep max on min difference before applying mean</span>
 
 <span class="sd">    Args:</span>
@@ -267,15 +267,6 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        mean of max or min difference of pixels</span>
-
-<span class="sd">    Example:</span>
-
-<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import bilateral_diff</span>
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
-<span class="sd">    &gt;&gt;&gt; result = bilateral_diff(window)</span>
-<span class="sd">    &gt;&gt;&gt; result</span>
-<span class="sd">    3.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
@@ -325,7 +316,53 @@
     <span class="n">row_diff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">total_row_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_row_diff_list</span><span class="p">)</span>
     <span class="n">col_diff</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">total_col_diff_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_col_diff_list</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">row_diff</span><span class="p">,</span> <span class="n">col_diff</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">row_diff</span><span class="p">,</span> <span class="n">col_diff</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="max_bilateral_diff"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.max_bilateral_diff">[docs]</a><span class="k">def</span> <span class="nf">max_bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bilateral difference kernel to use with convolution process on image</span>
+<span class="sd">       Apply difference pixel to pixel and keep max difference before applying mean</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mean of max difference of pixels</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import max_bilateral_diff</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = max_bilateral_diff(window)</span>
+<span class="sd">    &gt;&gt;&gt; result</span>
+<span class="sd">    3.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">_bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="nb">max</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="min_bilateral_diff"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.min_bilateral_diff">[docs]</a><span class="k">def</span> <span class="nf">min_bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bilateral difference kernel to use with convolution process on image</span>
+<span class="sd">       Apply difference pixel to pixel and keep min difference before applying mean</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mean of min difference of pixels</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import min_bilateral_diff</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = min_bilateral_diff(window)</span>
+<span class="sd">    &gt;&gt;&gt; result</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">_bilateral_diff</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="nb">min</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

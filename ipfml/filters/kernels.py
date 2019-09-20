@@ -106,8 +106,8 @@ def plane_max_error(window):
     return (errors.max() - errors.min())
 
 
-def bilateral_diff(window, func=max):
-    """Bilaeral difference kernel to use with convolution process on image
+def _bilateral_diff(window, func):
+    """Main bilateral difference kernel to use with convolution process on image
        Apply difference pixel to pixel and keep max on min difference before applying mean
 
     Args:
@@ -116,15 +116,6 @@ def bilateral_diff(window, func=max):
 
     Returns:
         mean of max or min difference of pixels
-
-    Example:
-
-    >>> from ipfml.filters.kernels import bilateral_diff
-    >>> import numpy as np
-    >>> window = np.arange(9).reshape([3, 3])
-    >>> result = bilateral_diff(window)
-    >>> result
-    3.0
     """
 
     window = np.array(window)
@@ -175,3 +166,49 @@ def bilateral_diff(window, func=max):
     col_diff = sum(total_col_diff_list) / len(total_col_diff_list)
 
     return func(row_diff, col_diff)
+
+
+def max_bilateral_diff(window):
+    """Bilateral difference kernel to use with convolution process on image
+       Apply difference pixel to pixel and keep max difference before applying mean
+
+    Args:
+        window: the window part to use from image
+
+    Returns:
+        mean of max difference of pixels
+
+    Example:
+
+    >>> from ipfml.filters.kernels import max_bilateral_diff
+    >>> import numpy as np
+    >>> window = np.arange(9).reshape([3, 3])
+    >>> result = max_bilateral_diff(window)
+    >>> result
+    3.0
+    """
+
+    return _bilateral_diff(window, max)
+
+
+def min_bilateral_diff(window):
+    """Bilateral difference kernel to use with convolution process on image
+       Apply difference pixel to pixel and keep min difference before applying mean
+
+    Args:
+        window: the window part to use from image
+
+    Returns:
+        mean of min difference of pixels
+
+    Example:
+
+    >>> from ipfml.filters.kernels import min_bilateral_diff
+    >>> import numpy as np
+    >>> window = np.arange(9).reshape([3, 3])
+    >>> result = min_bilateral_diff(window)
+    >>> result
+    1.0
+    """
+
+    return _bilateral_diff(window, min)
