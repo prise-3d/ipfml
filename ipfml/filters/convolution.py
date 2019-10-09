@@ -6,7 +6,7 @@ Convolution functions to apply on images
 import numpy as np
 
 
-def convolution2D(image, kernel, kernel_size=(5, 5)):
+def convolution2D(image, kernel, kernel_size=(5, 5), stride=1):
     """Apply 2D convolution on image using specific kernel from `ipfml.filters.kernels`
 
     Args:
@@ -43,13 +43,15 @@ def convolution2D(image, kernel, kernel_size=(5, 5)):
     img_diff = []
     for i in range(width):
 
-        if i >= padding_width and i < (width - padding_width):
+        if i >= padding_width and i < (
+                width - padding_width) and i % stride == 0:
 
             row_diff = []
 
             for j in range(height):
 
-                if j >= padding_height and j < (height - padding_height):
+                if j >= padding_height and j < (
+                        height - padding_height) and j % stride == 0:
 
                     # pixel in the center of kernel window size, need to extract window from img
                     window = img[int(i - padding_width):int(i + padding_width +
