@@ -79,8 +79,8 @@ def divide_in_blocks(image, block_size, pil=True):
             begin_y = j * height
 
             # getting sub block information
-            current_block = image_array[begin_x:(begin_x + width), begin_y:(
-                begin_y + height)]
+            current_block = image_array[begin_x:(begin_x + width),
+                                        begin_y:(begin_y + height)]
 
             if pil:
                 blocks.append(

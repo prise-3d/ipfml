@@ -36,8 +36,8 @@ def coefficient_of_determination(y, predicted):
     denominator_sum = 0
 
     for id_val, val in enumerate(y):
-        numerator_sum += (predicted[id_val] - y_mean) * (
-            predicted[id_val] - y_mean)
+        numerator_sum += (predicted[id_val] - y_mean) * (predicted[id_val] -
+                                                         y_mean)
         denominator_sum += (val - y_mean) * (val - y_mean)
 
     return numerator_sum / denominator_sum

@@ -398,11 +398,13 @@ def get_mscn_coefficients(image):
     imdist = imdist / 255.0
 
     # calculating MSCN coefficients
-    mu = cv2.GaussianBlur(
-        imdist, (7, 7), 7 / 6, borderType=cv2.BORDER_CONSTANT)
+    mu = cv2.GaussianBlur(imdist, (7, 7),
+                          7 / 6,
+                          borderType=cv2.BORDER_CONSTANT)
     mu_sq = mu * mu
-    sigma = cv2.GaussianBlur(
-        imdist * imdist, (7, 7), 7 / 6, borderType=cv2.BORDER_CONSTANT)
+    sigma = cv2.GaussianBlur(imdist * imdist, (7, 7),
+                             7 / 6,
+                             borderType=cv2.BORDER_CONSTANT)
     sigma = np.sqrt(abs((sigma - mu_sq)))
     structdis = (imdist - mu) / (sigma + 1)
     return structdis

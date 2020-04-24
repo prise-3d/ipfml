@@ -307,7 +307,8 @@ def mut_white_noise(image,
     max_value = 1 + (k / 2)
 
     a, b = distribution_interval
-    generator = lambda h, w: min_value + (np.random.uniform(a, b, (h, w)) * (max_value - min_value))
+    generator = lambda h, w: min_value + (np.random.uniform(a, b, (h, w)) *
+                                          (max_value - min_value))
 
     updator = lambda x, noise: x * pow(noise, n)
 
@@ -336,7 +337,6 @@ def salt_pepper_noise(image, n, identical=False, p=0.1, k=0.5):
     >>> noisy_image.shape
     (100, 100)
     """
-
     def _generator(h, w):
 
         x = w * h
