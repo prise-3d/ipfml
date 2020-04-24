@@ -7,5 +7,5 @@ scipy
 opencv-python
 scipy
 yapf
-doctest
 sphinx
+sphinx_rtd_theme

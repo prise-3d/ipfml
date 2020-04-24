@@ -106,8 +106,8 @@ def ipca(image, components, _batch_size=25):
     lab_img = transform.get_LAB_L(image)
     lab_img = np.array(lab_img, 'uint8')
 
-    transformer = IncrementalPCA(
-        n_components=components, batch_size=_batch_size)
+    transformer = IncrementalPCA(n_components=components,
+                                 batch_size=_batch_size)
 
     transformed_image = transformer.fit_transform(lab_img)
     restored_image = transformer.inverse_transform(transformed_image)

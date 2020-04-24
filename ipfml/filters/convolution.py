@@ -43,8 +43,8 @@ def convolution2D(image, kernel, kernel_size=(5, 5), stride=1):
     img_diff = []
     for i in range(width):
 
-        if i >= padding_width and i < (
-                width - padding_width) and i % stride == 0:
+        if i >= padding_width and i < (width -
+                                       padding_width) and i % stride == 0:
 
             row_diff = []
 
@@ -56,8 +56,9 @@ def convolution2D(image, kernel, kernel_size=(5, 5), stride=1):
                     # pixel in the center of kernel window size, need to extract window from img
                     window = img[int(i - padding_width):int(i + padding_width +
                                                             1),
-                                 int(j - padding_height
-                                     ):int(j + padding_height + 1)]
+                                 int(j -
+                                     padding_height):int(j + padding_height +
+                                                         1)]
 
                     diff = kernel(window)
                     row_diff.append(diff)

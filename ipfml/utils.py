@@ -40,11 +40,13 @@ def normalize_arr(arr):
     return output_arr
 
 
-def normalize_arr_with_range(arr, min, max):
+def normalize_arr_with_range(arr, min_norm=None, max_norm=None):
     '''Normalize data of 1D array shape
 
     Args:
         arr: array data of 1D shape
+        min_norm: min expected value form normalization (default min found)
+        max_norm: max expected value form normalization (default max found)
 
     Returns:
         Normalized 1D Numpy array
@@ -61,9 +63,16 @@ def normalize_arr_with_range(arr, min, max):
 
     output_arr = []
 
+    if min_norm is None:
+        min_norm = min(arr)
+
+    if max_norm is None:
+        max_norm = max(arr)
+
     for v in arr:
         # add of epsilon value in order to avoid Zero Division
-        output_arr.append((v - min) / (max - min + sys.float_info.epsilon))
+        output_arr.append(
+            (v - min_norm) / (max_norm - min_norm + sys.float_info.epsilon))
 
     return output_arr
 
