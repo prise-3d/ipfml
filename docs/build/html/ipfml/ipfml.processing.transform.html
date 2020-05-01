@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipfml.processing.transform &mdash; ipfml v0.5.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../examples.html" />
+    <link rel="prev" title="ipfml.processing.segmentation" href="ipfml.processing.segmentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ipfml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../description.html">Description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ipfml.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ipfml.metrics.html">ipfml.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipfml.utils.html">ipfml.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ipfml.exceptions.html">ipfml.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-filters">ipfml.filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ipfml.html#ipfml-iqa">ipfml.iqa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ipfml.html#ipfml-processing">ipfml.processing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.compression.html">ipfml.processing.compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.movement.html">ipfml.processing.movement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.reconstruction.html">ipfml.processing.reconstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfml.processing.segmentation.html">ipfml.processing.segmentation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ipfml.processing.transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ipfml</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../ipfml.html">Documentation</a> &raquo;</li>
+        
+      <li>ipfml.processing.transform</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/prise-3d/ipfml/blob/master/docs/source/ipfml/ipfml.processing.transform.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-ipfml.processing.transform">
+<span id="ipfml-processing-transform"></span><h1>ipfml.processing.transform<a class="headerlink" href="#module-ipfml.processing.transform" title="Permalink to this headline">¶</a></h1>
+<p>Functions which can be used to extract information from image or reduce it</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB</span></code>(image)</p></td>
+<td><p>Transforms RGB  Image into Lab</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into Lab and returns L</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD</span></code>(image)</p></td>
+<td><p>Returns Singular values from LAB L Image information</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_U</span></code>(image)</p></td>
+<td><p>Returns U SVD from L of LAB Image information</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_V</span></code>(image)</p></td>
+<td><p>Returns V SVD from L of LAB Image information</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code>(image)</p></td>
+<td><p>Returns s (Singular values) SVD from L of LAB Image information</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_a</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into LAB and returns a</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_b</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into LAB and returns b</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into XYZ</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_X</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into XYZ and returns X</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Y</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into XYZ and returns Y</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Z</span></code>(image)</p></td>
+<td><p>Transforms RGB Image into XYZ and returns Z</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bits_img</span></code>(image, interval)</p></td>
+<td><p>Returns only bits specified into the interval</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_low_bits_img</span></code>(image[, nb_bits])</p></td>
+<td><p>Returns Image or Numpy array with data information reduced using only low bits</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code>(image)</p></td>
+<td><p>Compute the Mean Substracted Constrast Normalized coefficients of an image</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gray_to_mscn</span></code>(image)</p></td>
+<td><p>Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code>(image, interval)</p></td>
+<td><p>Returns only bits from LAB L canal specified into the interval</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_low_bits</span></code>(image[, nb_bits])</p></td>
+<td><p>Convert RGB Image into Lab L channel image using only 4 low bits values</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_grey_low_bits</span></code>(image[, nb_bits])</p></td>
+<td><p>Convert RGB Image into grey image using only 4 low bits values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_mscn</span></code>(image)</p></td>
+<td><p>Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ipfml.processing.segmentation.html" class="btn btn-neutral float-left" title="ipfml.processing.segmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jérôme BUISINE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
