@@ -65,7 +65,7 @@ class CheckTestCommand(distutils.command.check.check):
 
 setup(
     name='ipfml',
-    version='0.5.1',
+    version='0.5.2',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
