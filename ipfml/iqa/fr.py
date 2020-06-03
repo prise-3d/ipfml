@@ -6,7 +6,7 @@ Full-reference Image Quality Assessment (FR-IQA) methods
 import numpy as np
 
 # computations imports
-from skimage.metrics import structural_similarity, peak_signal_noise_ratio
+from skimage.measure import compare_ssim, compare_psnr
 
 # ipfml imports
 from ipfml.exceptions import NumpyShapeComparisonException
@@ -133,7 +133,7 @@ def psnr(img_true, img_test):
 
     img_true, img_test = _prepare_arrays(img_true, img_test, 'uint8')
 
-    return peak_signal_noise_ratio(img_true, img_test)
+    return compare_psnr(img_true, img_test)
 
 
 def ssim(img_true, img_test):
@@ -159,9 +159,9 @@ def ssim(img_true, img_test):
     img_true, img_test = _prepare_arrays(img_true, img_test)
 
     if img_true.ndim == 3:
-        return structural_similarity(img_true, img_test, multichannel=True)
+        return compare_ssim(img_true, img_test, multichannel=True)
     else:
-        return structural_similarity(img_true, img_test)
+        return compare_ssim(img_true, img_test)
 
 
 def ms_ssim(img_true, img_test):
