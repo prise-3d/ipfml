@@ -1,5 +1,5 @@
-matplotlib
 numpy
+matplotlib
 Pillow
 sklearn
 scikit-image

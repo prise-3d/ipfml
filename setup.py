@@ -1,12 +1,13 @@
 from setuptools import setup
-import setuptools.command.build_py
+import distutils.command.check
 
 def readme():
     with open('README.md') as f:
         return f.read()
 
-class BuildTestCommand(setuptools.command.build_py.build_py):
-    """Custom build command."""
+
+class CheckTestCommand(distutils.command.check.check):
+    """Custom check command."""
 
     def run(self):
 
@@ -58,12 +59,13 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
         # utils 
         doctest.testmod(utils)
 
-        setuptools.command.build_py.build_py.run(self)
+        print('check done')
+        distutils.command.check.check.run(self)
 
 
 setup(
     name='ipfml',
-    version='0.5.1',
+    version='0.5.2',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
@@ -86,6 +88,6 @@ setup(
         'opencv-python',
     ],
     cmdclass={
-        'build_py': BuildTestCommand,
+        'check': CheckTestCommand,
     },
     zip_safe=False)
