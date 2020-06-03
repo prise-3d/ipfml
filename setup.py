@@ -1,11 +1,6 @@
 from setuptools import setup
 import distutils.command.check
 
-def readme():
-    with open('README.md') as f:
-        return f.read()
-
-
 class TestCommand(distutils.command.check.check):
     """Custom check command."""
 
@@ -65,9 +60,10 @@ class TestCommand(distutils.command.check.check):
 
 setup(
     name='ipfml',
-    version='0.5.3',
+    version='0.5.4',
     description='Image Processing For Machine Learning',
-    long_description=readme(),
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
