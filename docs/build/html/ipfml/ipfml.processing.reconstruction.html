@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing.reconstruction &mdash; ipfml v0.5.0 documentation</title>
+  <title>ipfml.processing.reconstruction &mdash; ipfml v0.5.1 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -183,17 +183,99 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fast_ica</span></code>(image, components)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.reconstruction.fast_ica" title="ipfml.processing.reconstruction.fast_ica"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fast_ica</span></code></a>(image, components)</p></td>
 <td><p>Reconstruct an image from Fast ICA compression using specific number of components to use</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipca</span></code>(image, components[, _batch_size])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.reconstruction.ipca" title="ipfml.processing.reconstruction.ipca"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipca</span></code></a>(image, components[, _batch_size])</p></td>
 <td><p>Reconstruct an image from IPCA compression using specific number of components to use and batch size</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">svd</span></code>(image, interval)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.reconstruction.svd" title="ipfml.processing.reconstruction.svd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svd</span></code></a>(image, interval)</p></td>
 <td><p>Reconstruct an image from SVD compression using specific interval of Singular Values</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.processing.reconstruction.fast_ica">
+<code class="sig-prename descclassname">ipfml.processing.reconstruction.</code><code class="sig-name descname">fast_ica</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">components</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/reconstruction.html#fast_ica"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.reconstruction.fast_ica" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from Fast ICA compression using specific number of components to use</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – PIL Image, Numpy array or path of 3D image</p></li>
+<li><p><strong>components</strong> – Number of components used for reconstruction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Reconstructed image</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">reconstruction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="o">.</span><span class="n">fast_ica</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.reconstruction.ipca">
+<code class="sig-prename descclassname">ipfml.processing.reconstruction.</code><code class="sig-name descname">ipca</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">components</em>, <em class="sig-param">_batch_size=25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/reconstruction.html#ipca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.reconstruction.ipca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from IPCA compression using specific number of components to use and batch size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – PIL Image, Numpy array or path of 3D image</p></li>
+<li><p><strong>components</strong> – Number of components used for reconstruction</p></li>
+<li><p><strong>batch_size</strong> – Batch size used for learn (default 25)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Reconstructed image</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">reconstruction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="o">.</span><span class="n">ipca</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.reconstruction.svd">
+<code class="sig-prename descclassname">ipfml.processing.reconstruction.</code><code class="sig-name descname">svd</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/reconstruction.html#svd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.reconstruction.svd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct an image from SVD compression using specific interval of Singular Values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – PIL Image, Numpy array or path of 3D image</p></li>
+<li><p><strong>interval</strong> – Interval used for reconstruction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Reconstructed image</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">reconstruction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">image_values</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 
 

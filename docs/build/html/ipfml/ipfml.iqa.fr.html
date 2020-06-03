@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.iqa.fr &mdash; ipfml v0.5.0 documentation</title>
+  <title>ipfml.iqa.fr &mdash; ipfml v0.5.1 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -179,29 +179,185 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mae</span></code>(img_true, img_test)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.iqa.fr.mae" title="ipfml.iqa.fr.mae"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mae</span></code></a>(img_true, img_test)</p></td>
 <td><p>Returns Mean Absolute Error between two Numpy arrays</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ms_ssim</span></code>(img_true, img_test)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.iqa.fr.ms_ssim" title="ipfml.iqa.fr.ms_ssim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ms_ssim</span></code></a>(img_true, img_test)</p></td>
 <td><p>Implemented later..</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mse</span></code>(img_true, img_test)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.iqa.fr.mse" title="ipfml.iqa.fr.mse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mse</span></code></a>(img_true, img_test)</p></td>
 <td><p>Returns Mean-Squared Error score between two Numpy arrays</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">psnr</span></code>(img_true, img_test)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.iqa.fr.psnr" title="ipfml.iqa.fr.psnr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psnr</span></code></a>(img_true, img_test)</p></td>
 <td><p>Returns the computed Peak Signal to Noise Ratio (PSNR) between two images</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmse</span></code>(img_true, img_test)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.iqa.fr.rmse" title="ipfml.iqa.fr.rmse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmse</span></code></a>(img_true, img_test)</p></td>
 <td><p>Returns Root Mean-Squared Error score between two Numpy arrays</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ssim</span></code>(img_true, img_test)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.iqa.fr.ssim" title="ipfml.iqa.fr.ssim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ssim</span></code></a>(img_true, img_test)</p></td>
 <td><p>Returns the computed Structural Similarity (SSIM) between two images</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vif</span></code>(img_true, img_test)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.iqa.fr.vif" title="ipfml.iqa.fr.vif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vif</span></code></a>(img_true, img_test)</p></td>
 <td><p>Implemented later..</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.iqa.fr.mae">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">mae</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#mae"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.mae" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Mean Absolute Error between two Numpy arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_true</strong> – Image, numpy array of any dimension</p></li>
+<li><p><strong>img_test</strong> – Image, numpy array of any dimension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Computed MAE score</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ipfml.exceptions.html#ipfml.exceptions.NumpyShapeComparisonException" title="ipfml.exceptions.NumpyShapeComparisonException"><strong>NumpyShapeComparisonException</strong></a> – if shape of images are not the same</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="kn">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mae_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">mae</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mae_score</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.ms_ssim">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">ms_ssim</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#ms_ssim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.ms_ssim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implemented later..</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.mse">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">mse</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#mse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.mse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Mean-Squared Error score between two Numpy arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_true</strong> – Image, numpy array of any dimension</p></li>
+<li><p><strong>img_test</strong> – Image, numpy array of any dimension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Computed MSE score</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ipfml.exceptions.html#ipfml.exceptions.NumpyShapeComparisonException" title="ipfml.exceptions.NumpyShapeComparisonException"><strong>NumpyShapeComparisonException</strong></a> – if shape of images are not the same</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="kn">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mse_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mse_score</span>
+<span class="go">25.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.psnr">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">psnr</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#psnr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.psnr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the computed Peak Signal to Noise Ratio (PSNR) between two images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_true</strong> – Image, numpy array of any dimension</p></li>
+<li><p><strong>img_test</strong> – Image, numpy array of any dimension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Computed PSNR score</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="kn">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psnr_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">psnr</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">psnr_score</span><span class="p">)</span>
+<span class="go">34</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.rmse">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">rmse</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Root Mean-Squared Error score between two Numpy arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_true</strong> – Image, numpy array of any dimension</p></li>
+<li><p><strong>img_test</strong> – Image, numpy array of any dimension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Computed RMSE score</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ipfml.exceptions.html#ipfml.exceptions.NumpyShapeComparisonException" title="ipfml.exceptions.NumpyShapeComparisonException"><strong>NumpyShapeComparisonException</strong></a> – if shape of images are not the same</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="kn">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rmse_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">rmse</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rmse_score</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.ssim">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">ssim</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#ssim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.ssim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the computed Structural Similarity (SSIM) between two images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_true</strong> – Image, numpy array of any dimension</p></li>
+<li><p><strong>img_test</strong> – Image, numpy array of any dimension</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Computed SSIM score</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.iqa</span> <span class="kn">import</span> <span class="n">fr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssim_score</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">ssim</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">ssim_score</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.iqa.fr.vif">
+<code class="sig-prename descclassname">ipfml.iqa.fr.</code><code class="sig-name descname">vif</code><span class="sig-paren">(</span><em class="sig-param">img_true</em>, <em class="sig-param">img_test</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/iqa/fr.html#vif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.iqa.fr.vif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implemented later..</p>
+</dd></dl>
+
 </div>
 
 

@@ -1,8 +1,10 @@
 Image Processing For Machine Learning
 =====================================
 
+![](https://github.com/prise-3d/ipfml/workflows/build/badge.svg) ![](https://github.com/prise-3d/ipfml/workflows/pypi/badge.svg)
+
 <p align="center">
-    <img src="https://github.com/prise-3d/ipfml/blob/master/ipfml_logo.png" width="40%">
+    <img src="https://github.com/prise-3d/ipfml/blob/master/ipfml_logo.png" alt="" width="40%">
 </p>
 
 Installation

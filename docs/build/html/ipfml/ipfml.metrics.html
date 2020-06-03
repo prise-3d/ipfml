@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.metrics &mdash; ipfml v0.5.0 documentation</title>
+  <title>ipfml.metrics &mdash; ipfml v0.5.1 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -176,11 +176,38 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coefficient_of_determination</span></code>(y, predicted)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.metrics.coefficient_of_determination" title="ipfml.metrics.coefficient_of_determination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coefficient_of_determination</span></code></a>(y, predicted)</p></td>
 <td><p>Returns the coefficient of determination between <cite>y</cite> and <cite>y_predicted</cite> values</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.metrics.coefficient_of_determination">
+<code class="sig-prename descclassname">ipfml.metrics.</code><code class="sig-name descname">coefficient_of_determination</code><span class="sig-paren">(</span><em class="sig-param">y</em>, <em class="sig-param">predicted</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/metrics.html#coefficient_of_determination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.metrics.coefficient_of_determination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficient of determination between <cite>y</cite> and <cite>y_predicted</cite> values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> – array of reference values</p></li>
+<li><p><strong>predicted</strong> – array of predicted values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coefficient of determination</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coeff</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">coefficient_of_determination</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 
 

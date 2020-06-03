@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing.transform &mdash; ipfml v0.5.0 documentation</title>
+  <title>ipfml.processing.transform &mdash; ipfml v0.5.1 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -183,68 +183,562 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB" title="ipfml.processing.transform.get_LAB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB</span></code></a>(image)</p></td>
 <td><p>Transforms RGB  Image into Lab</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_L" title="ipfml.processing.transform.get_LAB_L"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into Lab and returns L</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_L_SVD" title="ipfml.processing.transform.get_LAB_L_SVD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD</span></code></a>(image)</p></td>
 <td><p>Returns Singular values from LAB L Image information</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_U</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_L_SVD_U" title="ipfml.processing.transform.get_LAB_L_SVD_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_U</span></code></a>(image)</p></td>
 <td><p>Returns U SVD from L of LAB Image information</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_V</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_L_SVD_V" title="ipfml.processing.transform.get_LAB_L_SVD_V"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_V</span></code></a>(image)</p></td>
 <td><p>Returns V SVD from L of LAB Image information</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_L_SVD_s" title="ipfml.processing.transform.get_LAB_L_SVD_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_L_SVD_s</span></code></a>(image)</p></td>
 <td><p>Returns s (Singular values) SVD from L of LAB Image information</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_a</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_a" title="ipfml.processing.transform.get_LAB_a"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_a</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into LAB and returns a</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_b</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_LAB_b" title="ipfml.processing.transform.get_LAB_b"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LAB_b</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into LAB and returns b</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_XYZ" title="ipfml.processing.transform.get_XYZ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into XYZ</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_X</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_XYZ_X" title="ipfml.processing.transform.get_XYZ_X"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_X</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into XYZ and returns X</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Y</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_XYZ_Y" title="ipfml.processing.transform.get_XYZ_Y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Y</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into XYZ and returns Y</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Z</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_XYZ_Z" title="ipfml.processing.transform.get_XYZ_Z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_XYZ_Z</span></code></a>(image)</p></td>
 <td><p>Transforms RGB Image into XYZ and returns Z</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bits_img</span></code>(image, interval)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_bits_img" title="ipfml.processing.transform.get_bits_img"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bits_img</span></code></a>(image, interval)</p></td>
 <td><p>Returns only bits specified into the interval</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_low_bits_img</span></code>(image[, nb_bits])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_low_bits_img" title="ipfml.processing.transform.get_low_bits_img"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_low_bits_img</span></code></a>(image[, nb_bits])</p></td>
 <td><p>Returns Image or Numpy array with data information reduced using only low bits</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.get_mscn_coefficients" title="ipfml.processing.transform.get_mscn_coefficients"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mscn_coefficients</span></code></a>(image)</p></td>
 <td><p>Compute the Mean Substracted Constrast Normalized coefficients of an image</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gray_to_mscn</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.gray_to_mscn" title="ipfml.processing.transform.gray_to_mscn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gray_to_mscn</span></code></a>(image)</p></td>
 <td><p>Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code>(image, interval)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.rgb_to_LAB_L_bits" title="ipfml.processing.transform.rgb_to_LAB_L_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_bits</span></code></a>(image, interval)</p></td>
 <td><p>Returns only bits from LAB L canal specified into the interval</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_low_bits</span></code>(image[, nb_bits])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.rgb_to_LAB_L_low_bits" title="ipfml.processing.transform.rgb_to_LAB_L_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_LAB_L_low_bits</span></code></a>(image[, nb_bits])</p></td>
 <td><p>Convert RGB Image into Lab L channel image using only 4 low bits values</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_grey_low_bits</span></code>(image[, nb_bits])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.transform.rgb_to_grey_low_bits" title="ipfml.processing.transform.rgb_to_grey_low_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_grey_low_bits</span></code></a>(image[, nb_bits])</p></td>
 <td><p>Convert RGB Image into grey image using only 4 low bits values</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_mscn</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.transform.rgb_to_mscn" title="ipfml.processing.transform.rgb_to_mscn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_to_mscn</span></code></a>(image)</p></td>
 <td><p>Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB  Image into Lab</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Lab information</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Lab</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Lab</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_L">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_L</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_L"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into Lab and returns L</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The L chanel from Lab information</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_L_SVD">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_L_SVD</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_L_SVD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_L_SVD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Singular values from LAB L Image information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – PIL Image or Numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>U, s, V information obtained from SVD compression using Lab</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L_SVD</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_L_SVD_U">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_L_SVD_U</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_L_SVD_U"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_L_SVD_U" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns U SVD from L of LAB Image information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – PIL Image or Numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>U matrix of SVD compression</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L_SVD_U</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_L_SVD_V">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_L_SVD_V</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_L_SVD_V"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_L_SVD_V" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns V SVD from L of LAB Image information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – PIL Image or Numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>V matrix of SVD compression</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L_SVD_V</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_L_SVD_s">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_L_SVD_s</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_L_SVD_s"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_L_SVD_s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns s (Singular values) SVD from L of LAB Image information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – PIL Image or Numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>vector of singular values</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L_SVD_s</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">200</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_a">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_a</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_a"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into LAB and returns a</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The a chanel from Lab information</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_a</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_LAB_b">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_LAB_b</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_LAB_b"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_LAB_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into LAB and returns b</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The b chanel from Lab information</p>
+</dd>
+</dl>
+<p>Usage :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_b</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_XYZ">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_XYZ</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_XYZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_XYZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into XYZ</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>XYZ information obtained from transformation</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span><span class="o">.</span><span class="n">get_XYZ</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_XYZ_X">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_XYZ_X</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_XYZ_X"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_XYZ_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into XYZ and returns X</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The X chanel from XYZ information</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_XYZ_X</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_XYZ_Y">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_XYZ_Y</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_XYZ_Y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_XYZ_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into XYZ and returns Y</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Y chanel from XYZ information</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_XYZ_Y</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_XYZ_Z">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_XYZ_Z</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_XYZ_Z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_XYZ_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms RGB Image into XYZ and returns Z</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Z chanel from XYZ information</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <cite>nb_bits</cite> has unexpected value. <cite>nb_bits</cite> needs to be in interval [1, 8].</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_XYZ_Z</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_bits_img">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_bits_img</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_bits_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_bits_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns only bits specified into the interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – image to convert using this interval of bits value to keep</p></li>
+<li><p><strong>interval</strong> – (begin, end) of bits values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Numpy array with reduced values</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If min value from interval is not &gt;= 1.</p></li>
+<li><p><strong>ValueError</strong> – If max value from interval is not &lt;= 8.</p></li>
+<li><p><strong>ValueError</strong> – If min value from interval &gt;= max value.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bits_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_bits_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bits_img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_low_bits_img">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_low_bits_img</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">nb_bits=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_low_bits_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_low_bits_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Image or Numpy array with data information reduced using only low bits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – image to convert</p></li>
+<li><p><strong>nb_bits</strong> – optional parameter which indicates the number of bits to keep</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Numpy array with reduced values</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_low_bits_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.get_mscn_coefficients">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">get_mscn_coefficients</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#get_mscn_coefficients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.get_mscn_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Mean Substracted Constrast Normalized coefficients of an image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – PIL Image, Numpy array or path of image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>MSCN coefficients</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If <cite>image</cite> is set as str path and image was not found</p></li>
+<li><p><strong>ValueError</strong> – If <cite>image</cite> numpy shape are not correct</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_values</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mscn_coefficients</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_mscn_coefficients</span><span class="p">(</span><span class="n">image_values</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mscn_coefficients</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.gray_to_mscn">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">gray_to_mscn</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#gray_to_mscn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.gray_to_mscn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Grayscale Image into Mean Subtracted Contrast Normalized (MSCN)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – grayscale image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>MSCN matrix obtained from transformation</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">get_LAB_L</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">gray_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.rgb_to_LAB_L_bits">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">rgb_to_LAB_L_bits</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#rgb_to_LAB_L_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.rgb_to_LAB_L_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns only bits from LAB L canal specified into the interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – image to convert using this interval of bits value to keep</p></li>
+<li><p><strong>interval</strong> – (begin, end) of bits values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D Numpy array with reduced values</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bits_Lab_l_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_LAB_L_bits</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bits_Lab_l_img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.rgb_to_LAB_L_low_bits">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">rgb_to_LAB_L_low_bits</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">nb_bits=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#rgb_to_LAB_L_low_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.rgb_to_LAB_L_low_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert RGB Image into Lab L channel image using only 4 low bits values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – 3D RGB image Numpy array or PIL RGB image</p></li>
+<li><p><strong>nb_bits</strong> – optional parameter which indicates the number of bits to keep (default 4)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D Numpy array with low bits information kept</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_Lab_l_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_LAB_L_low_bits</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_Lab_l_img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.rgb_to_grey_low_bits">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">rgb_to_grey_low_bits</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">nb_bits=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#rgb_to_grey_low_bits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.rgb_to_grey_low_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert RGB Image into grey image using only 4 low bits values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – 3D RGB image Numpy array or PIL RGB image</p></li>
+<li><p><strong>nb_bits</strong> – optional parameter which indicates the number of bits to keep (default 4)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D Numpy array with low bits information kept</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_grey_img</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_grey_low_bits</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_bits_grey_img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.transform.rgb_to_mscn">
+<code class="sig-prename descclassname">ipfml.processing.transform.</code><code class="sig-name descname">rgb_to_mscn</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/transform.html#rgb_to_mscn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.transform.rgb_to_mscn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert RGB Image into Mean Subtracted Contrast Normalized (MSCN)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – 3D RGB image Numpy array or PIL RGB image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D Numpy array with MSCN information</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">rgb_to_mscn</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img_mscn</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 
 

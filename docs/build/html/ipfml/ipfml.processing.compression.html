@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.processing.compression &mdash; ipfml v0.5.0 documentation</title>
+  <title>ipfml.processing.compression &mdash; ipfml v0.5.1 documentation</title>
   
 
   
@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -183,20 +183,116 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.compression.get_SVD" title="ipfml.processing.compression.get_SVD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD</span></code></a>(image)</p></td>
 <td><p>Transforms Image using SVD compression</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_U</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.compression.get_SVD_U" title="ipfml.processing.compression.get_SVD_U"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_U</span></code></a>(image)</p></td>
 <td><p>Transforms Image into SVD and returns only ‘U’ part</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_V</span></code>(image)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ipfml.processing.compression.get_SVD_V" title="ipfml.processing.compression.get_SVD_V"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_V</span></code></a>(image)</p></td>
 <td><p>Transforms Image into SVD and returns only ‘V’ part</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_s</span></code>(image)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipfml.processing.compression.get_SVD_s" title="ipfml.processing.compression.get_SVD_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_SVD_s</span></code></a>(image)</p></td>
 <td><p>Transforms Image into SVD and returns only ‘s’ part</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="function">
+<dt id="ipfml.processing.compression.get_SVD">
+<code class="sig-prename descclassname">ipfml.processing.compression.</code><code class="sig-name descname">get_SVD</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/compression.html#get_SVD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.compression.get_SVD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms Image using SVD compression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert into SVD compression</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>U, s, V obtained from SVD compression</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">compression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">compression</span><span class="o">.</span><span class="n">get_SVD</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 3, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.compression.get_SVD_U">
+<code class="sig-prename descclassname">ipfml.processing.compression.</code><code class="sig-name descname">get_SVD_U</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/compression.html#get_SVD_U"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.compression.get_SVD_U" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms Image into SVD and returns only ‘U’ part</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>U matrix from SVD compression</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">compression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">compression</span><span class="o">.</span><span class="n">get_SVD_U</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 200, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.compression.get_SVD_V">
+<code class="sig-prename descclassname">ipfml.processing.compression.</code><code class="sig-name descname">get_SVD_V</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/compression.html#get_SVD_V"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.compression.get_SVD_V" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms Image into SVD and returns only ‘V’ part</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>V matrix obtained from SVD compression</p>
+</dd>
+</dl>
+<p>Usage :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">compression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span> <span class="o">=</span> <span class="n">compression</span><span class="o">.</span><span class="n">get_SVD_V</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 3, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipfml.processing.compression.get_SVD_s">
+<code class="sig-prename descclassname">ipfml.processing.compression.</code><code class="sig-name descname">get_SVD_s</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ipfml/processing/compression.html#get_SVD_s"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ipfml.processing.compression.get_SVD_s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms Image into SVD and returns only ‘s’ part</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – image to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>vector of singular values obtained from SVD compression</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ipfml.processing</span> <span class="kn">import</span> <span class="n">compression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/test_img.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">compression</span><span class="o">.</span><span class="n">get_SVD_s</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">200</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 
 

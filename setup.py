@@ -2,7 +2,7 @@ from setuptools import setup
 import setuptools.command.build_py
 
 def readme():
-    with open('README.rst') as f:
+    with open('README.md') as f:
         return f.read()
 
 class BuildTestCommand(setuptools.command.build_py.build_py):
@@ -63,7 +63,7 @@ class BuildTestCommand(setuptools.command.build_py.build_py):
 
 setup(
     name='ipfml',
-    version='0.5.0',
+    version='0.5.1',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
