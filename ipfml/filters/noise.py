@@ -3,8 +3,8 @@ Noise filters to apply on images
 """
 
 # main imports
-import numpy as np
 import random
+import numpy as np
 
 
 def _normalise(x):
