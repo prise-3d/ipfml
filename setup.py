@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 
-class CheckTestCommand(distutils.command.check.check):
+class TestCommand(distutils.command.check.check):
     """Custom check command."""
 
     def run(self):
@@ -65,7 +65,7 @@ class CheckTestCommand(distutils.command.check.check):
 
 setup(
     name='ipfml',
-    version='0.5.2',
+    version='0.5.3',
     description='Image Processing For Machine Learning',
     long_description=readme(),
     classifiers=[
@@ -88,6 +88,6 @@ setup(
         'opencv-python',
     ],
     cmdclass={
-        'check': CheckTestCommand,
+        'test': TestCommand,
     },
     zip_safe=False)
