@@ -1,7 +1,7 @@
 Image Processing For Machine Learning
 =====================================
 
-![](https://github.com/prise-3d/ipfml/workflows/build/badge.svg) ![](https://github.com/prise-3d/ipfml/workflows/pypi/badge.svg)
+![](https://img.shields.io/github/workflow/status/prise-3d/ipfml/build?style=flat-square) ![](https://img.shields.io/pypi/v/ipfml?style=flat-square) ![](https://img.shields.io/pypi/dm/ipfml?style=flat-square)
 
 <p align="center">
     <img src="https://github.com/prise-3d/ipfml/blob/master/ipfml_logo.png" alt="" width="40%">

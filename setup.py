@@ -60,7 +60,7 @@ class TestCommand(distutils.command.check.check):
 
 setup(
     name='ipfml',
-    version='0.5.4',
+    version='1.0.0',
     description='Image Processing For Machine Learning',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
