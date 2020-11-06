@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; ipfml v1.0.1 documentation</title>
+  <title>ipfml.utils &mdash; ipfml v1.0.2 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.0.1
+                1.0.2
               </div>
             
           
@@ -386,7 +386,8 @@
     <span class="n">v</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">eigen_values</span><span class="p">:</span>
-        <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="n">sum_eigen_values</span><span class="p">)</span>
+        <span class="c1"># avoid dividing by zero error</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="p">(</span><span class="n">sum_eigen_values</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">))</span>
 
     <span class="n">entropy</span> <span class="o">=</span> <span class="mi">0</span>
 
