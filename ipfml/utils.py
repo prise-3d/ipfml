@@ -233,7 +233,8 @@ def get_entropy(arr):
     v = []
 
     for val in eigen_values:
-        v.append(val / sum_eigen_values)
+        # avoid dividing by zero error
+        v.append(val / (sum_eigen_values + sys.float_info.epsilon))
 
     entropy = 0
 
