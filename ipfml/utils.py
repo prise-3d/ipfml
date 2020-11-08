@@ -35,7 +35,7 @@ def normalize_arr(arr):
 
     for v in arr:
         # add of epsilon value in order to avoid Zero Division
-        output_arr.append(v / sum_value)
+        output_arr.append(v / (sum_value + sys.float_info.epsilon))
 
     return output_arr
 

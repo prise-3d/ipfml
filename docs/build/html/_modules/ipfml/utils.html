@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.utils &mdash; ipfml v1.0.2 documentation</title>
+  <title>ipfml.utils &mdash; ipfml v1.0.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.0.2
+                1.0.3
               </div>
             
           
@@ -188,7 +188,7 @@
 
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
         <span class="c1"># add of epsilon value in order to avoid Zero Division</span>
-        <span class="n">output_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span> <span class="o">/</span> <span class="n">sum_value</span><span class="p">)</span>
+        <span class="n">output_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span> <span class="o">/</span> <span class="p">(</span><span class="n">sum_value</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">output_arr</span></div>
 
