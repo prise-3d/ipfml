@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipfml.filters.kernels &mdash; ipfml v1.0.3 documentation</title>
+  <title>ipfml.filters.kernels &mdash; ipfml v1.0.4 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.0.3
+                1.0.4
               </div>
             
           
@@ -163,6 +163,7 @@
     <span class="sd">&quot;&quot;&quot;Calculate the Gini coefficient of a numpy array.&quot;&quot;&quot;</span>
     <span class="c1"># based on bottom eq: http://www.statsdirect.com/help/content/image/stat0206_wmf.gif</span>
     <span class="c1"># from: http://www.statsdirect.com/help/default.htm#nonparametric_methods/gini.htm</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
     <span class="n">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1">#all values are treated equally, arrays must be 1d</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">array</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="c1">#values cannot be negative</span>
