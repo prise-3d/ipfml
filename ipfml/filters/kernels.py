@@ -6,6 +6,39 @@ Kernel to apply on images using convolution
 import numpy as np
 import sys
 
+def __gini(array):
+    """Calculate the Gini coefficient of a numpy array."""
+    # based on bottom eq: http://www.statsdirect.com/help/content/image/stat0206_wmf.gif
+    # from: http://www.statsdirect.com/help/default.htm#nonparametric_methods/gini.htm
+    array = np.array(array, 'float32')
+    array = array.flatten() #all values are treated equally, arrays must be 1d
+    if np.amin(array) < 0:
+        array -= np.amin(array) #values cannot be negative
+    array += 0.0000001 #values cannot be 0
+    array = np.sort(array) #values must be sorted
+    index = np.arange(1,array.shape[0]+1) #index per array element
+    n = array.shape[0]#number of array elements
+    return ((np.sum((2 * index - n  - 1) * array)) / (n * np.sum(array))) #Gini coefficient
+
+def gini(window):
+    """Apply gini other current selected window
+
+    Args:
+        window: the window part to use from image
+
+    Returns:
+        Gini obtained values on window pixel values
+
+    Example:
+
+    >>> from ipfml.filters.kernels import gini
+    >>> import numpy as np
+    >>> window = np.arange(9).reshape([3, 3])
+    >>> result = gini(window)
+    >>> (result > 0 and result < 1)
+    True
+    """
+    return __gini(window)
 
 def plane_mean(window):
     """Plane mean kernel to use with convolution process on image
