@@ -159,6 +159,38 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
+<span class="k">def</span> <span class="nf">__gini</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the Gini coefficient of a numpy array.&quot;&quot;&quot;</span>
+    <span class="c1"># based on bottom eq: http://www.statsdirect.com/help/content/image/stat0206_wmf.gif</span>
+    <span class="c1"># from: http://www.statsdirect.com/help/default.htm#nonparametric_methods/gini.htm</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1">#all values are treated equally, arrays must be 1d</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">array</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="c1">#values cannot be negative</span>
+    <span class="n">array</span> <span class="o">+=</span> <span class="mf">0.0000001</span> <span class="c1">#values cannot be 0</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="c1">#values must be sorted</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#index per array element</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="c1">#number of array elements</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">index</span> <span class="o">-</span> <span class="n">n</span>  <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">array</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">array</span><span class="p">)))</span> <span class="c1">#Gini coefficient</span>
+
+<div class="viewcode-block" id="gini"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.gini">[docs]</a><span class="k">def</span> <span class="nf">gini</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply gini other current selected window</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        window: the window part to use from image</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Gini obtained values on window pixel values</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ipfml.filters.kernels import gini</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; window = np.arange(9).reshape([3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; result = gini(window)</span>
+<span class="sd">    &gt;&gt;&gt; (result &gt; 0 and result &lt; 1)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">__gini</span><span class="p">(</span><span class="n">window</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="plane_mean"><a class="viewcode-back" href="../../../ipfml/ipfml.filters.kernels.html#ipfml.filters.kernels.plane_mean">[docs]</a><span class="k">def</span> <span class="nf">plane_mean</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plane mean kernel to use with convolution process on image</span>
